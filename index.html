@@ -3009,7 +3009,9 @@ class Component extends DCLogic {
   // Live Investment Insights charts, built from the numbers in content(). Each element animates in when its chart enters the screen.
   chartVals(c, on, idx) {
     const E = 'cubic-bezier(0.22, 1, 0.36, 1)';
-    const tr = (prop, ms, delay) => (on ? prop + ' ' + ms + 'ms ' + E + ' ' + Math.round(delay || 0) + 'ms' : 'none');
+    const K = 1.4; // chart pace: 1 = original speed, higher = slower
+    const M = (n) => Math.round(n * K) + 'ms';
+    const tr = (prop, ms, delay) => (on ? prop + ' ' + M(ms) + ' ' + E + ' ' + M(delay || 0) : 'none');
     const pc = (n) => (Math.round(n * 1000) / 1000) + '%';
     const base = {
       title: c.title, aria: c.aria || c.title, subtitle: c.subtitle || '', hasSub: !!c.subtitle,
@@ -3044,7 +3046,7 @@ class Component extends DCLogic {
           sc: on ? 1 : 0, op: on ? 1 : 0, t: tr('transform', 1100, 300 + k * 160), t2: tr('opacity', 600, 900 + k * 160)
         })),
         hasProj: !!c.proj, proj: c.proj ? { pts: pts(c.proj.points), color: c.proj.color, off: on ? 0 : 1, t: tr('stroke-dashoffset', 700, draw + 150) } : {},
-        dots: (c.dots || []).map((d, k) => ({ left: pc(X(d.x)), top: pc(Y(d.y)), color: d.color, sc: on ? 1 : 0, t: on ? 'transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1) ' + (draw + 200 + k * 520) + 'ms' : 'none' })),
+        dots: (c.dots || []).map((d, k) => ({ left: pc(X(d.x)), top: pc(Y(d.y)), color: d.color, sc: on ? 1 : 0, t: on ? 'transform ' + M(420) + ' cubic-bezier(0.34, 1.56, 0.64, 1) ' + M(draw + 200 + k * 520) : 'none' })),
         ann: (c.ann || []).map((n) => {
           const l = X(n.x);
           return {
@@ -3059,7 +3061,7 @@ class Component extends DCLogic {
     const yt = (c.ticks || []).map((t) => ({ bottom: pc((t / c.max) * 100), label: c.kind === 'bars' && c.unit ? (t === c.max ? t + ' ' + c.unit : String(t)) : fmt(t).replace('.00', ''), line: t === 0 ? '#9DB8AF' : '#E3EBE8' }));
     const bar = (v, color, k, extra) => Object.assign({
       h: pc((v / c.max) * 100), color: color, val: fmt(v), sc: on ? 1 : 0, op: on ? 1 : 0, ty: on ? '0' : '6px',
-      t: tr('transform', 900, 150 + k * 90), t2: tr('opacity', 400, 700 + k * 90) + (on ? ', transform 400ms ' + E + ' ' + (700 + k * 90) + 'ms' : '')
+      t: tr('transform', 900, 150 + k * 90), t2: tr('opacity', 400, 700 + k * 90) + (on ? ', transform ' + M(400) + ' ' + E + ' ' + M(700 + k * 90) : '')
     }, extra || {});
     if (c.kind === 'bars') {
       return Object.assign(base, {
@@ -3079,7 +3081,7 @@ class Component extends DCLogic {
       return Object.assign(base, {
         stat: c.stat || {}, hasStat: !!c.stat, note: c.note || '', hasNote: !!c.note,
         tags: (c.tags || []).map((t) => ({ label: t[0], color: t[1] })), hasTags: !!(c.tags && c.tags.length),
-        hasTop: !!(c.stat || c.note || c.tags), t2: tr('opacity', 600, 100) + (on ? ', transform 600ms ' + E + ' 100ms' : ''),
+        hasTop: !!(c.stat || c.note || c.tags), t2: tr('opacity', 600, 100) + (on ? ', transform ' + M(600) + ' ' + E + ' ' + M(100) : ''),
         lists: c.lists.map((L) => ({
           title: L.title || '', hasTitle: !!L.title, rank: !!L.rank,
           cols: (L.rank ? '24px ' : '') + (L.big ? 'minmax(110px, 1fr) minmax(0, 2.4fr) auto' : 'minmax(0, 1.25fr) minmax(0, 1fr) auto'),
@@ -3103,7 +3105,7 @@ class Component extends DCLogic {
       let start = 0;
       const n = c.segments.length;
       return Object.assign(base, {
-        centre: c.centre, centreLabel: c.centreLabel, t2: tr('opacity', 600, 500) + (on ? ', transform 600ms ' + E + ' 500ms' : ''),
+        centre: c.centre, centreLabel: c.centreLabel, t2: tr('opacity', 600, 500) + (on ? ', transform ' + M(600) + ' ' + E + ' ' + M(500) : ''),
         segs: c.segments.map((g, k) => {
           const len = Math.max(0, g[1] - 0.35), off = -start;
           start += g[1];
@@ -3112,10 +3114,10 @@ class Component extends DCLogic {
           return {
             label: g[0], val: g[1].toFixed(1) + '%', color: g[2],
             dash: (on ? len : 0) + ' 100', offset: off, sw: hot ? 40 : 32,
-            t: on ? 'stroke-dasharray 520ms ' + E + ' ' + delay + 'ms, stroke-width 200ms ease' : 'stroke-width 200ms ease',
+            t: on ? 'stroke-dasharray ' + M(520) + ' ' + E + ' ' + M(delay) + ', stroke-width 200ms ease' : 'stroke-width 200ms ease',
             bg: hot || (!hover && k === 0) ? 'rgba(0, 230, 119, 0.14)' : 'transparent', fw: hot || k === 0 ? 700 : 500,
             op: on ? 1 : 0, tx: on ? '0' : '12px',
-            t2: on ? 'opacity 400ms ' + E + ' ' + (300 + k * 70) + 'ms, transform 400ms ' + E + ' ' + (300 + k * 70) + 'ms, background-color 200ms ease' : 'background-color 200ms ease',
+            t2: on ? 'opacity ' + M(400) + ' ' + E + ' ' + M(300 + k * 70) + ', transform ' + M(400) + ' ' + E + ' ' + M(300 + k * 70) + ', background-color 200ms ease' : 'background-color 200ms ease',
             enter: () => this.setState({ donutHover: { i: idx, k: k } }), leave: () => this.setState({ donutHover: null })
           };
         })
