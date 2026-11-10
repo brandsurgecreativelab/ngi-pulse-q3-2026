@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/pulse-logo-heritage.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<style>body{margin:0} html{scroll-behavior:smooth} @media (max-width: 640px){.pc-hide-sm{display:none}} .ut-row{display:grid;grid-template-columns:minmax(180px,1.2fr) minmax(220px,2fr) 216px;align-items:center;gap:8px 28px;padding:12px 12px;border-bottom:1px solid #E3EBE8;border-radius:10px} .ut-head{padding-top:0;padding-bottom:10px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#407A68} .ut-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:right} .ut-mini small{display:block;font-size:11px;font-weight:600;color:#407A68} .ut-mini b{display:block;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums} .ut-sep{margin:18px 0 4px;padding:0 12px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#10A867} @media (max-width: 760px){.ut-row{grid-template-columns:1fr;gap:10px}.ut-head{display:none}.ut-mini{text-align:left}} @media (min-width: 761px){.ut-row:not(.ut-head) .ut-mini small{display:none}} .pc-pillar img{transition:transform 700ms cubic-bezier(0.22,1,0.36,1)} .pc-pillar:hover img{transform:scale(1.06)} @media (max-width: 640px){.pc-chiprow{flex-wrap:nowrap!important;overflow-x:auto;margin-left:-16px!important;margin-right:-16px!important;padding:2px 16px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.pc-chiprow::-webkit-scrollbar{display:none}.pc-chiprow>*{flex:none}} .pc-flip{transition:transform 200ms ease} .pc-flip:hover{transform:translateY(-3px)} .pc-flip:focus-visible{outline:3px solid #00E677;outline-offset:4px;border-radius:22px} @media (prefers-reduced-motion: reduce){.pc-flip span{transition:none!important}} @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}</style>
+<style>body{margin:0} html{scroll-behavior:smooth} @media (max-width: 640px){.pc-hide-sm{display:none}} .ut-row{display:grid;grid-template-columns:minmax(180px,1.2fr) minmax(220px,2fr) 216px;align-items:center;gap:8px 28px;padding:12px 12px;border-bottom:1px solid #E3EBE8;border-radius:10px} .ut-head{padding-top:0;padding-bottom:10px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#407A68} .ut-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:right} .ut-mini small{display:block;font-size:11px;font-weight:600;color:#407A68} .ut-mini b{display:block;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums} .ut-sep{margin:18px 0 4px;padding:0 12px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#10A867} @media (max-width: 760px){.ut-row{grid-template-columns:1fr;gap:10px}.ut-head{display:none}.ut-mini{text-align:left}} @media (min-width: 761px){.ut-row:not(.ut-head) .ut-mini small{display:none}} .pc-pillar img{transition:transform 700ms cubic-bezier(0.22,1,0.36,1)} .pc-pillar:hover img{transform:scale(1.06)} @media (max-width: 640px){.pc-chiprow{flex-wrap:nowrap!important;overflow-x:auto;margin-left:-16px!important;margin-right:-16px!important;padding:2px 16px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.pc-chiprow::-webkit-scrollbar{display:none}.pc-chiprow>*{flex:none}} .pc-cards{grid-template-columns:repeat(4,minmax(0,1fr))} @media (max-width: 1100px){.pc-cards{grid-template-columns:repeat(2,minmax(0,1fr))}} @media (max-width: 560px){.pc-cards{grid-template-columns:minmax(0,1fr)}} .pc-navscroll{scrollbar-width:none}.pc-navscroll::-webkit-scrollbar{display:none} @media (max-width: 760px){.pc-quiltscroll{overflow-x:auto;margin:-48px -16px 0;padding:48px 16px 8px;width:auto!important;scrollbar-width:thin}.pc-quiltscroll>div{min-width:860px}} .pc-flip{transition:transform 200ms ease} .pc-flip:hover{transform:translateY(-3px)} .pc-flip:focus-visible{outline:3px solid #00E677;outline-offset:4px;border-radius:22px} @media (prefers-reduced-motion: reduce){.pc-flip span{transition:none!important}} @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}</style>
 </head>
 <body>
 <div id="app"></div>
@@ -54,7 +54,7 @@
 
 <div ref="{{anchorRef}}" style="height: 0"></div>
 <sc-if value="{{showHero}}" hint-placeholder-val="{{ true }}">
-<nav aria-label="Pulse sections" aria-hidden="{{floatHidden}}" style="position: fixed; top: 14px; left: 50%; z-index: 50; max-width: calc(100% - 24px); box-sizing: border-box; display: flex; align-items: center; gap: 4px; padding: 6px 6px 6px 18px; border-radius: 30px; background: rgba(255, 255, 255, 0.62); border: 1px solid rgba(255, 255, 255, 0.75); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 0 0.5px rgba(0, 58, 41, 0.06), 0 10px 36px rgba(0, 30, 20, 0.12); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); overflow-x: auto; white-space: nowrap; opacity: {{float.o}}; transform: translate(-50%, {{float.y}}); pointer-events: {{float.pe}}; transition: opacity 250ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1)">
+<nav class="pc-navscroll" aria-label="Pulse sections" aria-hidden="{{floatHidden}}" style="position: fixed; top: 14px; left: 50%; z-index: 50; max-width: calc(100% - 24px); box-sizing: border-box; display: flex; align-items: center; gap: 4px; padding: 6px 6px 6px 18px; border-radius: 30px; background: rgba(255, 255, 255, 0.62); border: 1px solid rgba(255, 255, 255, 0.75); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 0 0.5px rgba(0, 58, 41, 0.06), 0 10px 36px rgba(0, 30, 20, 0.12); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); overflow-x: auto; white-space: nowrap; opacity: {{float.o}}; transform: translate(-50%, {{float.y}}); pointer-events: {{float.pe}}; transition: opacity 250ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1)">
 <button onClick="{{toTop}}" tabIndex="{{float.tab}}" aria-label="Pulse, back to the cover" style="flex: none; border: 0; background: transparent; padding: 0 14px 0 0; margin-right: 4px; border-right: 1px solid rgba(0, 58, 41, 0.14); cursor: pointer; min-height: 40px; display: flex; align-items: center"><img src="assets/pulse-logo-heritage.svg" alt="" style="display: block; width: 84px; height: auto"></button>
 <sc-for list="{{floatTabs}}" as="f" hint-placeholder-count="5">
 <a href="{{f.href}}" onMouseEnter="{{f.enter}}" onMouseLeave="{{f.leave}}" onFocus="{{f.enter}}" onBlur="{{f.leave}}" tabIndex="{{float.tab}}" aria-current="{{f.current}}" style="flex: none; border: 0; cursor: pointer; font-family: inherit; font-size: 15px; font-weight: {{f.fw}}; color: {{f.fg}}; background: {{f.bg}}; transition: background 200ms ease, color 200ms ease; padding: 10px 18px; border-radius: 999px; min-height: 44px; text-decoration: none; display: inline-flex; align-items: center; box-sizing: border-box">{{f.label}}</a>
@@ -121,33 +121,30 @@
 <sc-for list="{{returnGroups}}" as="g" hint-placeholder-count="2">
 <div>
 <h4 style="margin: 0 0 16px; color: #004D36; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; padding: 0 4px">{{g.label}}</h4>
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(max(260px, calc(50% - 10px)), 1fr)); gap: 20px">
+<div class="pc-cards" style="display: grid; gap: 20px">
 <sc-for list="{{g.cards}}" as="c" hint-placeholder-count="4">
 <button class="pc-flip" onClick="{{c.toggle}}" aria-pressed="{{c.expanded}}" style="display: grid; padding: 0; margin: 0; border: 0; background: none; font-family: inherit; color: inherit; text-align: left; cursor: pointer; perspective: 1400px; -webkit-tap-highlight-color: transparent">
 <span style="display: grid; min-height: {{cardH}}; transform-style: preserve-3d; transform: rotateY({{c.rot}}); transition: transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1)">
-<span style="grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; min-height: 168px; box-sizing: border-box; padding: 20px; border-radius: 20px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06), 0 10px 30px rgba(0, 40, 28, 0.07); backface-visibility: hidden; -webkit-backface-visibility: hidden">
+<span style="grid-area: 1 / 1; position: relative; display: flex; flex-direction: column; gap: 16px; min-height: 200px; box-sizing: border-box; padding: 24px 24px 26px; border-radius: 20px; overflow: hidden; background: #F4F8F6; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.05), 0 8px 24px rgba(0, 40, 28, 0.06); backface-visibility: hidden; -webkit-backface-visibility: hidden">
 <span style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
-<span style="font-size: 15px; font-weight: 600; color: #407A68">{{c.name}}</span>
-<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; color: #10A867"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4.5h-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 19px; font-weight: 700; letter-spacing: -0.01em; color: #003A29">{{c.name}}</span><span style="font-size: 13px; color: #407A68">{{c.region}}</span></span>
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; color: #7FB1A0"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4.5h-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 </span>
-<span style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
-<span style="font-size: 14px; color: #407A68">{{c.quarter}}</span>
-<span style="display: flex; align-items: center; gap: 10px; font-size: clamp(26px, 2.4vw, 32px); font-weight: 600; letter-spacing: -0.02em; color: #004D36; font-variant-numeric: tabular-nums">{{c.val}}
-<sc-if value="{{c.up}}" hint-placeholder-val="{{ true }}"><svg width="22" height="18" viewBox="0 0 22 18" role="img" aria-label="Up"><path d="M11 0 L22 18 L0 18 Z" fill="#10A867"></path></svg></sc-if>
-<sc-if value="{{c.down}}" hint-placeholder-val="{{ false }}"><svg width="22" height="18" viewBox="0 0 22 18" role="img" aria-label="Down"><path d="M0 0 L22 0 L11 18 Z" fill="#EA6759"></path></svg></sc-if>
-</span>
-</span>
-<span style="font-size: 12px; font-weight: 600; color: #10A867">Flip for detail</span>
+<span style="margin-top: auto; font-size: clamp(48px, 4.2vw, 68px); line-height: 0.95; font-weight: 800; letter-spacing: -0.045em; color: {{c.numColor}}; font-variant-numeric: tabular-nums">{{c.val}}</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #407A68">
+<sc-if value="{{c.up}}" hint-placeholder-val="{{ true }}"><svg width="11" height="9" viewBox="0 0 22 18" role="img" aria-label="Up"><path d="M11 0 L22 18 L0 18 Z" fill="#10A867"></path></svg></sc-if>
+<sc-if value="{{c.down}}" hint-placeholder-val="{{ false }}"><svg width="11" height="9" viewBox="0 0 22 18" role="img" aria-label="Down"><path d="M0 0 L22 0 L11 18 Z" fill="#EA6759"></path></svg></sc-if>{{c.quarter}} return</span>
+<span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: {{c.barColor}}"></span>
 </span>
 <span style="grid-area: 1 / 1; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; padding: 20px; border-radius: 20px; background: #004D36; color: #FFFFFF; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.1), 0 14px 34px rgba(0, 40, 28, 0.18); transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden">
-<span data-back-inner="1" style="display: flex; flex-direction: column; gap: 14px">
+<span data-back-inner="1" style="display: flex; flex-direction: column; gap: 12px">
 <span style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 15px; font-weight: 700">{{c.name}}</span><span style="font-size: 15px; font-weight: 700; color: #00F5A6; font-variant-numeric: tabular-nums">{{c.val}}</span></span>
 <span style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.18); border-bottom: 1px solid rgba(255, 255, 255, 0.18)">
-<span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">1 year</span><span style="display: block; margin-top: 2px; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.y1}}</span></span>
-<span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">3 years</span><span style="display: block; margin-top: 2px; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.y3}}</span></span>
-<span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">LT average</span><span style="display: block; margin-top: 2px; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.lt}}</span></span>
+<span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">1 year</span><span style="display: block; margin-top: 2px; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.y1}}</span></span>
+<span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">3 years</span><span style="display: block; margin-top: 2px; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.y3}}</span></span>
+<span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">LT average</span><span style="display: block; margin-top: 2px; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.lt}}</span></span>
 </span>
-<span style="font-size: 14px; line-height: 1.55; color: rgba(255, 255, 255, 0.92)">{{c.comment}}</span>
+<span style="font-size: 13px; line-height: 1.5; color: rgba(255, 255, 255, 0.92)">{{c.comment}}</span>
 </span>
 </span>
 </span>
@@ -260,7 +257,7 @@
 <button onClick="{{l.pin}}" onMouseEnter="{{l.enter}}" onMouseLeave="{{clearHover}}" onFocus="{{l.enter}}" onBlur="{{clearHover}}" aria-pressed="{{l.pressed}}" style="display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; font-family: inherit; font-size: 14px; font-weight: 600; padding: 0 16px 0 10px; min-height: 40px; cursor: pointer; background: {{l.chipBg}}; color: {{l.chipFg}}; box-shadow: {{l.chipRing}}; transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 50%; background: {{l.bg}}; box-shadow: inset 0 0 0 1px rgba(0, 58, 41, 0.18), 0 0 0 2px {{l.dotRing}}"></span>{{l.name}}</button>
 </sc-for>
 </div>
-<div style="width: 100%">
+<div class="pc-quiltscroll" style="width: 100%">
 <div style="width: 100%; padding: 4px 0">
 <div style="display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); column-gap: clamp(3px, 0.6vw, 8px); margin-bottom: 6px">
 <sc-for list="{{years}}" as="y" hint-placeholder-count="13">
@@ -396,12 +393,12 @@
 <sc-if value="{{a.c.hasProj}}" hint-placeholder-val="{{ false }}"><polyline points="{{a.c.proj.pts}}" fill="none" stroke="{{a.c.proj.color}}" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="1" stroke-dasharray="1 1" style="stroke-dashoffset: {{a.c.proj.off}}; transition: {{a.c.proj.t}}"></polyline></sc-if>
 </svg>
 <sc-for list="{{a.c.dots}}" as="d" hint-placeholder-count="2"><span style="position: absolute; left: {{d.left}}; top: {{d.top}}; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: {{d.color}}; box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 5px {{d.color}}; transform: scale({{d.sc}}); transition: {{d.t}}"></span></sc-for>
-<sc-for list="{{a.c.ann}}" as="n" hint-placeholder-count="2"><div style="position: absolute; left: {{n.left}}; top: {{n.top}}; width: 0; height: 0; opacity: {{n.op}}; transition: {{n.t}}">
+<sc-for list="{{a.c.ann}}" as="n" hint-placeholder-count="2"><div class="{{n.cls}}" style="position: absolute; left: {{n.left}}; top: {{n.top}}; width: 0; height: 0; opacity: {{n.op}}; transition: {{n.t}}">
 <span style="position: absolute; left: -0.5px; bottom: 8px; width: 1px; height: 26px; background: #7FB1A0"></span>
 <span style="position: absolute; bottom: 38px; left: {{n.l}}; right: {{n.r}}; transform: {{n.tf}}; text-align: {{n.al}}; width: max-content; font-size: 12px; line-height: 1.3; font-weight: 700; color: #004D36">{{n.label}}<span style="display: block; font-weight: 500; color: #407A68">{{n.sub}}</span></span>
 </div></sc-for>
 </div>
-<sc-for list="{{a.c.xt}}" as="x" hint-placeholder-count="4"><span style="position: absolute; bottom: 0; left: {{x.left}}; transform: translateX(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: #407A68; font-variant-numeric: tabular-nums">{{x.label}}</span></sc-for>
+<sc-for list="{{a.c.xt}}" as="x" hint-placeholder-count="4"><span class="{{x.cls}}" style="position: absolute; bottom: 0; left: {{x.left}}; transform: translateX(-50%); white-space: nowrap; font-size: 12px; font-weight: 600; color: #407A68; font-variant-numeric: tabular-nums">{{x.label}}</span></sc-for>
 </div>
 </sc-if>
 
@@ -418,7 +415,7 @@
 </div>
 </div>
 <div style="display: flex; gap: clamp(6px, 1.4vw, 20px); padding: 10px clamp(4px, 1vw, 16px) 0; margin-left: 52px">
-<sc-for list="{{a.c.bars}}" as="b" hint-placeholder-count="4"><div style="flex: 1 1 0; min-width: 0; text-align: center; font-size: clamp(11px, 1vw, 13px); line-height: 1.3; font-weight: 600; color: #004D36">{{b.label}}<sc-if value="{{b.hasSub}}" hint-placeholder-val="{{ false }}"><span style="display: block; font-weight: 500; color: #407A68">{{b.sub}}</span></sc-if></div></sc-for>
+<sc-for list="{{a.c.bars}}" as="b" hint-placeholder-count="4"><div style="flex: 1 1 0; min-width: 0; text-align: center; font-size: clamp(11px, 1vw, 13px); line-height: 1.3; font-weight: 600; color: #004D36">{{b.label}}<sc-if value="{{b.hasSub}}" hint-placeholder-val="{{ false }}"><span class="pc-hide-sm" style="display: block; font-weight: 500; color: #407A68">{{b.sub}}</span></sc-if></div></sc-for>
 </div>
 <sc-if value="{{a.c.hasCallout}}" hint-placeholder-val="{{ false }}"><p style="margin: 20px 0 0 52px; align-self: flex-start; padding: 8px 14px; border-radius: 999px; background: #004D36; color: #FFFFFF; font-size: 13px; font-weight: 600; opacity: {{a.c.op}}; transition: {{a.c.t2}}">{{a.c.callout}}</p></sc-if>
 </div>
@@ -2826,6 +2823,13 @@ class Component extends DCLogic {
   }
 
   componentDidUpdate() {
+    const act = this.state && this.state.active;
+    if (act !== this._lastActive) {
+      this._lastActive = act;
+      const nav = typeof document !== 'undefined' && document.querySelector('.pc-navscroll');
+      const cur = nav && nav.querySelector('[aria-current="true"]');
+      if (nav && cur && nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: Math.max(0, cur.offsetLeft - (nav.clientWidth - cur.offsetWidth) / 2), behavior: 'smooth' });
+    }
     if (this._drawLine && this._quiltLine && this._quiltLine.animate && !this._reduce) {
       this._drawLine = false;
       this._quiltLine.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
@@ -2945,7 +2949,7 @@ class Component extends DCLogic {
       const bandLeft = b ? X(b.from) : 0, bandW = b ? X(b.to) - X(b.from) : 0;
       return Object.assign(base, {
         yt: c.yTicks.map((t) => ({ top: pc(Y(t[0])), label: t[1] })),
-        xt: c.xTicks.map((t) => ({ left: pc(X(t[0])), label: t[1] })),
+        xt: c.xTicks.map((t, k) => ({ left: pc(X(t[0])), label: t[1], cls: c.xTicks.length > 5 && k % 2 ? 'pc-hide-sm' : '' })),
         pts: pts(c.points), color: c.color, off: c.wipe ? 0 : on ? 0 : 1, t: c.wipe ? 'none' : tr('stroke-dashoffset', draw, 200), lw: c.lineWidth || 3,
         clip: c.wipe ? (on ? 'inset(-60px -60px -60px 0)' : 'inset(-60px 100% -60px 0)') : 'none', ct: c.wipe ? tr('clip-path', draw + 400, 200) : 'none',
         hasAreas: !!c.areas, posColor: c.areas ? c.areas.pos : '', negColor: c.areas ? c.areas.neg : '',
@@ -2967,7 +2971,7 @@ class Component extends DCLogic {
         ann: (c.ann || []).map((n) => {
           const l = X(n.x);
           return {
-            left: pc(l), top: pc(Y(n.y)), label: n.label, sub: n.sub || '', op: on ? 1 : 0,
+            left: pc(l), top: pc(Y(n.y)), label: n.label, sub: n.sub || '', op: on ? 1 : 0, cls: l < 12 ? 'pc-hide-sm' : '',
             t: tr('opacity', 500, 200 + (l / 100) * draw),
             l: l < 12 ? '-6px' : l > 80 ? 'auto' : '0', r: l > 80 ? '-6px' : 'auto', tf: l >= 12 && l <= 80 ? 'translateX(-50%)' : 'none', al: l < 12 ? 'left' : l > 80 ? 'right' : 'center'
           };
@@ -3172,6 +3176,8 @@ class Component extends DCLogic {
         const isOpen = !!open[c.name];
         return {
           name: c.name, quarter: D.issue.quarter, tone: g.tone, val: this.fmt(c.q),
+          region: g.label.split(' ')[0] + ((g.label.match(/\(([^)]+)\)/) || [])[1] ? ' · ' + g.label.match(/\(([^)]+)\)/)[1] : ''),
+          numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', barColor: c.q < 0 ? '#D9675B' : '#10A867',
           up: c.q >= 0, down: c.q < 0,
           y1: this.minus(c.y1), y3: this.minus(c.y3), lt: this.minus(c.lt), comment: c.comment,
           open: isOpen, expanded: isOpen ? 'true' : 'false', rot: isOpen ? '180deg' : '0deg',
