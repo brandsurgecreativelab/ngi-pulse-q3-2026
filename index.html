@@ -2968,7 +2968,7 @@ class Component extends DCLogic {
   watchChart(i, el) {
     if (!this._charts) this._charts = {};
     const old = this._charts[i];
-    if (old && this._chIo) this._chIo.unobserve(old);
+    if (old && this._chIo) this._chIo.unobserve(old._watch || old);
     this._charts[i] = el || null;
     if (!el || typeof IntersectionObserver === 'undefined') return;
     const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2979,7 +2979,8 @@ class Component extends DCLogic {
     if (!this._chIo) {
       this._chIo = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
-          const t = e.target;
+          // Image charts are watched through their frame: Chrome measures a clipped image as zero size, so it would never count as visible.
+          const t = e.target._img || e.target;
           if (t.getAttribute('data-live')) {
             const k = t._chartIdx, cur = (this.state && this.state.chOn) || {};
             if (e.intersectionRatio >= 0.3 && !cur[k]) this.setState({ chOn: Object.assign({}, cur, { [k]: true }) });
@@ -3002,8 +3003,16 @@ class Component extends DCLogic {
       }, { threshold: [0, 0.3] });
     }
     el._chartIdx = i;
-    if (!el.getAttribute('data-live')) hide(el);
-    this._chIo.observe(el);
+    if (el.getAttribute('data-live')) { el._watch = el; this._chIo.observe(el); return; }
+    hide(el);
+    const attach = () => {
+      if (this._charts[i] !== el) return;
+      const watch = el.parentNode || el;
+      if (watch !== el) watch._img = el;
+      el._watch = watch;
+      this._chIo.observe(watch);
+    };
+    if (el.parentNode) attach(); else setTimeout(attach, 0);
   }
 
   // Live Investment Insights charts, built from the numbers in content(). Each element animates in when its chart enters the screen.
