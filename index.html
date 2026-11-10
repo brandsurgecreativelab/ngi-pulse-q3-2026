@@ -3481,19 +3481,19 @@ class Component extends DCLogic {
       bgX: !shown ? '1.5%' : ['2.5%', '-4%', '-2.5%', '4%'][s.bgPhase || 0],
       bgY: !shown ? '0' : ['1.5%', '-1.5%', '2.5%', '-3%'][s.bgPhase || 0],
       bgT: still || !shown ? 'none' : 'transform 6000ms cubic-bezier(0.45, 0, 0.55, 1)',
-      // Soft, eased choreography: the bar glides in first, then PULSE and the date arrive together, then the nav.
+      // PULSE fades softly into focus as the date appears; bar, date and nav keep their original timing.
       logoO: shown ? '1' : '0',
       logoY: shown ? '0' : '18px',
       logoB: shown ? '0px' : '10px',
-      logoT: still || !shown ? 'none' : 'opacity 1200ms cubic-bezier(0.33, 1, 0.68, 1) 650ms, transform 1500ms cubic-bezier(0.22, 1, 0.36, 1) 650ms, filter 1200ms cubic-bezier(0.33, 1, 0.68, 1) 650ms',
+      logoT: still || !shown ? 'none' : 'opacity 1200ms cubic-bezier(0.33, 1, 0.68, 1) 600ms, transform 1500ms cubic-bezier(0.22, 1, 0.36, 1) 600ms, filter 1200ms cubic-bezier(0.33, 1, 0.68, 1) 600ms',
       barX: shown ? '0' : '105%',
-      barT: still || !shown ? 'none' : 'transform 1300ms cubic-bezier(0.65, 0, 0.35, 1) 0ms',
+      barT: still || !shown ? 'none' : 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1) 150ms',
       textO: shown ? '1' : '0',
-      textY: shown ? '0' : '12px',
-      textT: still || !shown ? 'none' : 'opacity 1200ms cubic-bezier(0.33, 1, 0.68, 1) 700ms, transform 1500ms cubic-bezier(0.22, 1, 0.36, 1) 700ms',
+      textY: shown ? '0' : '10px',
+      textT: still || !shown ? 'none' : 'opacity 350ms ease 650ms, transform 350ms ease 650ms',
       navO: shown ? '1' : '0',
-      navY: shown ? '0' : '12px',
-      navT: still || !shown ? 'none' : 'opacity 1000ms cubic-bezier(0.33, 1, 0.68, 1) 1150ms, transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 1150ms'
+      navY: shown ? '0' : '10px',
+      navT: still || !shown ? 'none' : 'opacity 350ms ease 800ms, transform 350ms ease 800ms'
     };
 
     return {
