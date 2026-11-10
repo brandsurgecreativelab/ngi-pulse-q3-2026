@@ -2698,6 +2698,7 @@ class Component extends DCLogic {
     if (typeof IntersectionObserver === 'undefined') this._introTimer = setTimeout(() => { this.setState({ intro: true }); this.startDrift(); }, 300);
     this._spyTimer = setTimeout(() => this.watchSections(), 0);
     this.startParallax();
+    this.startHeroSnap();
     this._cardTimer = setTimeout(() => this.measureCards(), 60);
     this._revealTimer = setTimeout(() => this.setupReveal(), 150);
     if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.measureCards());
@@ -2788,6 +2789,9 @@ class Component extends DCLogic {
   componentWillUnmount() {
     clearTimeout(this._introTimer);
     clearTimeout(this._cardTimer);
+    clearTimeout(this._snapTimer);
+    clearTimeout(this._snapDone);
+    if (this._onSnapScroll) window.removeEventListener('scroll', this._onSnapScroll);
     clearTimeout(this._revealTimer);
     if (this._rvIo) this._rvIo.disconnect();
     if (this._views) Object.keys(this._views).forEach((k) => this._views[k] && this._views[k].disconnect());
@@ -2842,6 +2846,32 @@ class Component extends DCLogic {
 
   // Parallax as you scroll off the cover: the photo moves at under half speed and the cover type drifts and fades,
   // so the content below appears to slide up over it. Writes transforms straight to two layers, no re-render.
+  // Magnetic cover: if the reader stops scrolling while the cover is only partly on screen,
+  // it settles on the cover when they were heading up, or on the first section when heading down.
+  startHeroSnap() {
+    if (typeof window === 'undefined') return;
+    let lastY = window.scrollY || 0, dir = 0;
+    this._onSnapScroll = () => {
+      const y = window.scrollY || 0;
+      if (y !== lastY) dir = y < lastY ? -1 : 1;
+      lastY = y;
+      clearTimeout(this._snapTimer);
+      if (this._snapping) return;
+      this._snapTimer = setTimeout(() => {
+        const hero = this.heroEl;
+        if (!hero || (this.state && this.state.menu)) return;
+        const h = hero.offsetHeight, cy = window.scrollY || 0;
+        if (cy <= 2 || cy >= h - 2) return;
+        const target = dir < 0 ? 0 : h;
+        this._snapping = true;
+        window.scrollTo({ top: target, behavior: this._reduce ? 'auto' : 'smooth' });
+        clearTimeout(this._snapDone);
+        this._snapDone = setTimeout(() => { this._snapping = false; }, 900);
+      }, 140);
+    };
+    window.addEventListener('scroll', this._onSnapScroll, { passive: true });
+  }
+
   startParallax() {
     if (typeof window === 'undefined' || this._reduce) return;
     const step = () => {
