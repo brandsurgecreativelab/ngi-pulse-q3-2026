@@ -2699,41 +2699,45 @@ class Component extends DCLogic {
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
     const E = 'cubic-bezier(0.22, 1, 0.36, 1)';
-    const vh = window.innerHeight || 800;
     if (this._rvIo) this._rvIo.disconnect();
+    const hide = (el) => { if (el._rv) { el._rv.pause(); el._rv.currentTime = 0; } el._shown = false; };
     this._rvIo = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (!e.isIntersecting) return;
         const el = e.target;
-        this._rvIo.unobserve(el);
-        if (el._rv) el._rv.play();
-        el.querySelectorAll('[data-count]').forEach((n, k) => this.countUp(n, 250 + k * 120));
+        if (e.isIntersecting && !el._shown) {
+          el._shown = true;
+          if (el._rv) { el._rv.currentTime = 0; el._rv.play(); }
+          el.querySelectorAll('[data-count]').forEach((n, k) => this.countUp(n, 250 + k * 120));
+        } else if (!e.isIntersecting && el._shown) hide(el);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
     document.querySelectorAll('[data-reveal]').forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.top < vh * 0.9 && r.bottom > 0) { el.querySelectorAll('[data-count]').forEach((n, k) => this.countUp(n, 300 + k * 120)); return; }
       const sibs = el.parentNode ? Array.prototype.filter.call(el.parentNode.children, (c) => c.hasAttribute && c.hasAttribute('data-reveal')) : [];
       const idx = Math.min(Math.max(0, sibs.indexOf(el)), 5);
+      if (el._rv) el._rv.cancel();
       el._rv = el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 900, easing: E, delay: idx * 70, fill: 'both' });
-      el._rv.pause();
-      el._rv.currentTime = 0;
+      hide(el);
       this._rvIo.observe(el);
     });
   }
 
+  // Every scroll into view replays this, so each number counts up again.
   countUp(el, delay) {
     const to = parseFloat(el.getAttribute('data-count'));
     if (!isFinite(to)) return;
     const pre = el.getAttribute('data-prefix') || '', suf = el.getAttribute('data-suffix') || '', dec = parseInt(el.getAttribute('data-dec') || '0', 10);
-    const final = el.textContent;
+    if (el._cuFinal === undefined) el._cuFinal = el.textContent;
+    const final = el._cuFinal;
+    const token = (el._cuToken || 0) + 1;
+    el._cuToken = token;
     const t0 = performance.now() + (delay || 0), dur = 1300;
     const ease = (t) => 1 - Math.pow(1 - t, 3);
     el.textContent = pre + (0).toFixed(dec) + suf;
     const tick = (now) => {
+      if (el._cuToken !== token) return;
       const p = Math.min(1, Math.max(0, (now - t0) / dur));
       el.textContent = p >= 1 ? final : pre + (to * ease(p)).toFixed(dec) + suf;
-      if (p < 1) window.requestAnimationFrame(tick);
+      if (p < 1 && el._cuToken === token) window.requestAnimationFrame(tick);
     };
     window.requestAnimationFrame(tick);
   }
