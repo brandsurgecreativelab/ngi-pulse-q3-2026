@@ -22,8 +22,12 @@
 <sc-if value="{{showHero}}" hint-placeholder-val="{{ true }}">
 <header ref="{{heroRef}}" class="pc-hero" style="position: relative; overflow: hidden; background: #003A29; width: 100%; height: 100vh; min-height: 620px; max-height: 1100px">
 <div ref="{{parallaxBgRef}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; will-change: transform">
+<sc-if value="{{heroVideo}}" hint-placeholder-val="{{ true }}">
+<video ref="{{videoRef}}" src="assets/hero-loop.mp4" poster="assets/hero-poster.jpg" autoplay="" muted="" loop="" playsinline="" preload="auto" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block"></video>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 58, 41, 0.62) 0%, rgba(0, 58, 41, 0.38) 55%, rgba(0, 58, 41, 0.2) 100%)"></div>
+</sc-if>
 <sc-if value="{{heroPhoto}}" hint-placeholder-val="{{ false }}"><img src="{{issue.cover}}" alt="{{issue.coverAlt}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 62% 40%; transform: scale({{intro.bgS}}) translate({{intro.bgX}}, {{intro.bgY}}); transition: {{intro.bgT}}"></sc-if>
-<sc-if value="{{heroSpectral}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{heroSpectral}}" hint-placeholder-val="{{ false }}">
 <div class="pc-spectral" aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden; background: #003A29">
 <svg width="0" height="0" style="position: absolute"><filter id="pcCA" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0032 0.0055" numOctaves="2" seed="11" result="noise"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="noise" scale="64" xChannelSelector="R" yChannelSelector="B" result="dR"></feDisplacementMap><feDisplacementMap in="SourceGraphic" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="B" result="dG"></feDisplacementMap><feDisplacementMap in="SourceGraphic" in2="noise" scale="76" xChannelSelector="R" yChannelSelector="B" result="dB"></feDisplacementMap><feColorMatrix in="dR" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="r"></feColorMatrix><feColorMatrix in="dG" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="g"></feColorMatrix><feColorMatrix in="dB" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="b"></feColorMatrix><feBlend in="r" in2="g" mode="screen" result="rg"></feBlend><feBlend in="rg" in2="b" mode="screen"></feBlend></filter><filter id="pcMetal" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="22" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40 -18" result="shape"></feColorMatrix><feGaussianBlur in="shape" stdDeviation="16" result="height"></feGaussianBlur><feDiffuseLighting in="height" surfaceScale="22" diffuseConstant="1.05" lighting-color="#12C98E" result="diff"><feDistantLight azimuth="235" elevation="42"></feDistantLight></feDiffuseLighting><feSpecularLighting in="height" surfaceScale="22" specularConstant="1.25" specularExponent="34" lighting-color="#F2FFF9" result="spec"><feDistantLight azimuth="235" elevation="36"></feDistantLight></feSpecularLighting><feSpecularLighting in="height" surfaceScale="22" specularConstant="0.7" specularExponent="18" lighting-color="#7FE7FF" result="rim"><feDistantLight azimuth="60" elevation="22"></feDistantLight></feSpecularLighting><feComposite in="diff" in2="spec" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="lit"></feComposite><feComposite in="lit" in2="rim" operator="arithmetic" k1="0" k2="1" k3="0.8" k4="0" result="lit2"></feComposite><feComposite in="lit2" in2="shape" operator="in"></feComposite></filter><filter id="pcGoo" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="b"></feGaussianBlur><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 36 -14" result="g"></feColorMatrix><feGaussianBlur in="g" stdDeviation="5"></feGaussianBlur></filter></svg>
 <div class="pc-refract" style="position: absolute; inset: -6%; background: #003A29">
@@ -2791,6 +2795,7 @@ class Component extends DCLogic {
     clearTimeout(this._cardTimer);
     clearTimeout(this._snapTimer);
     clearTimeout(this._snapDone);
+    if (this._vidIo) this._vidIo.disconnect();
     if (this._onSnapScroll) window.removeEventListener('scroll', this._onSnapScroll);
     clearTimeout(this._revealTimer);
     if (this._rvIo) this._rvIo.disconnect();
@@ -2848,6 +2853,23 @@ class Component extends DCLogic {
   // so the content below appears to slide up over it. Writes transforms straight to two layers, no re-render.
   // Magnetic cover: if the reader stops scrolling while the cover is only partly on screen,
   // it settles on the cover when they were heading up, or on the first section when heading down.
+  // Cover video: always muted and inline so phones autoplay it; paused for reduced motion and while the cover is off screen.
+  watchVideo(el) {
+    if (this._vidIo) { this._vidIo.disconnect(); this._vidIo = null; }
+    if (!el) return;
+    el.muted = true;
+    el.setAttribute('muted', '');
+    el.playsInline = true;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { el.removeAttribute('autoplay'); el.pause(); return; }
+    const play = () => { const p = el.play(); if (p && p.catch) p.catch(() => {}); };
+    play();
+    if (typeof IntersectionObserver !== 'undefined') {
+      this._vidIo = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) play(); else el.pause(); }), { threshold: 0 });
+      this._vidIo.observe(el);
+    }
+  }
+
   startHeroSnap() {
     if (typeof window === 'undefined') return;
     let lastY = window.scrollY || 0, dir = 0;
@@ -3474,7 +3496,7 @@ class Component extends DCLogic {
 
     return {
       cartoon: D.cartoon,
-      showHero: showHero, noHero: !showHero, heroSpectral: (this.props.heroBackground ?? 'spectral') === 'spectral', lavaCls: (this.props.lavaStyle ?? 'metal') === 'metal' ? 'pc-metal' : '', heroPhoto: (this.props.heroBackground ?? 'spectral') === 'photo', anchorRef: this._anchorRef, heroRef: this._heroRef, heroNavRef: this._heroNavRef, ringRef: this._ringRef, sharesRef: this._sharesRef, chevRef: this._chevRef, parallaxBgRef: this._pxBgRef, parallaxFgRef: this._pxFgRef, cueWrapRef: this._cueWrapRef, cue: cue, intro: intro,
+      showHero: showHero, noHero: !showHero, heroSpectral: (this.props.heroBackground ?? 'video') === 'spectral', heroVideo: (this.props.heroBackground ?? 'video') === 'video', videoRef: this._videoRef || (this._videoRef = (el) => this.watchVideo(el)), lavaCls: (this.props.lavaStyle ?? 'metal') === 'metal' ? 'pc-metal' : '', heroPhoto: (this.props.heroBackground ?? 'video') === 'photo', anchorRef: this._anchorRef, heroRef: this._heroRef, heroNavRef: this._heroNavRef, ringRef: this._ringRef, sharesRef: this._sharesRef, chevRef: this._chevRef, parallaxBgRef: this._pxBgRef, parallaxFgRef: this._pxFgRef, cueWrapRef: this._cueWrapRef, cue: cue, intro: intro,
       issue: D.issue, tabs: tabs, heroTabs: heroTabs, ht: ht, float: float, floatTabs: floatTabs, topScale: float.o === '1' ? '1' : '0.6', sheetTabs: sheetTabs, menuOpen: menuOpen, menuExpanded: menuOpen ? 'true' : 'false', activeLabel: actTab ? actTab.label : 'Contents', openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }), floatHidden: floatOn ? 'false' : 'true', tabLabel: tabDef.label,
       subnav: subnav, hasSubnav: subnav.length > 1,
       isMarket: tab === 'market', isAssets: tab === 'assets', isUnits: tab === 'units', isInsights: tab === 'insights', isNgi: tab === 'ngi',
@@ -3495,7 +3517,7 @@ class Component extends DCLogic {
     };
   }
 }
-PulseRuntime.mount(Component, document.getElementById('tpl').content, document.getElementById('app'), {"startTab": "market", "showHero": true, "heroBackground": "spectral", "lavaStyle": "metal"});
+PulseRuntime.mount(Component, document.getElementById('tpl').content, document.getElementById('app'), {"startTab": "market", "showHero": true, "heroBackground": "video", "lavaStyle": "metal"});
 </script>
 </body>
 </html>
