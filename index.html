@@ -146,23 +146,6 @@
 
 <section id="sec-market" data-spy="market" style="scroll-margin-top: 84px; margin-top: 80px; padding-top: 64px; border-top: 1px solid #D9E4E1">
 <h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Market Moves</h2>
-<div data-reveal="1" data-glance="1" style="margin: 0 0 56px; border-radius: 28px; background: #004D36; color: #FFFFFF; overflow: hidden; position: relative">
-<div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(120% 140% at 100% 0%, rgba(0, 245, 166, 0.16) 0%, rgba(0, 245, 166, 0) 55%)"></div>
-<div style="position: relative; padding: clamp(24px, 3vw, 40px) clamp(20px, 3vw, 44px) 12px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px">
-<p style="margin: 0; font-size: clamp(22px, 2.2vw, 30px); font-weight: 700; letter-spacing: -0.02em">The quarter at a glance</p>
-<p style="margin: 0; font-size: 14px; color: rgba(255, 255, 255, 0.72)">{{issue.quarter}}</p>
-</div>
-<div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr))">
-<sc-for list="{{glance}}" as="k" hint-placeholder-count="4">
-<a href="{{k.href}}" style="display: flex; flex-direction: column; gap: 10px; padding: clamp(20px, 2.4vw, 32px) clamp(20px, 3vw, 44px) clamp(24px, 3vw, 40px); color: inherit; text-decoration: none; border-top: 1px solid rgba(255, 255, 255, 0.14); box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.14)">
-<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7)">{{k.label}}</span>
-<span data-count="{{k.n}}" data-prefix="{{k.pre}}" data-suffix="{{k.suf}}" data-dec="{{k.dec}}" style="font-size: clamp(38px, 4vw, 56px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; color: {{k.color}}; font-variant-numeric: tabular-nums">{{k.val}}</span>
-<span style="font-size: 15px; font-weight: 600">{{k.sub}}</span>
-<span style="margin-top: auto; padding-top: 6px; font-size: 13px; color: rgba(255, 255, 255, 0.72); display: inline-flex; align-items: center; gap: 6px">{{k.cta}}<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-</a>
-</sc-for>
-</div>
-</div>
 <div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 
 <section id="mm-returns" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
