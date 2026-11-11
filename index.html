@@ -148,7 +148,7 @@
 <h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Market Moves</h2>
 <div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 
-<section id="mm-returns" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
+<section id="mm-returns" ref="{{retViewRef}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
 <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Market Moves</p>
@@ -172,11 +172,11 @@
 <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 19px; font-weight: 700; letter-spacing: -0.01em; color: #003A29">{{c.name}}</span><span style="font-size: 13px; color: #407A68">{{c.region}}</span></span>
 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; color: #7FB1A0"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4.5h-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 </span>
+<span style="display: flex; justify-content: center; padding: 4px 0 0"><svg viewBox="0 0 200 122" role="img" aria-label="{{c.gaugeLabel}}" style="display: block; width: 100%; max-width: 230px; height: auto; overflow: visible"><path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#E3EBE8" stroke-width="14" stroke-linecap="round"></path><line x1="100" y1="6" x2="100" y2="14" stroke="#9DB8AF" stroke-width="2" stroke-linecap="round"></line><path d="{{c.g.d}}" pathLength="1" fill="none" stroke="{{c.g.col}}" stroke-width="14" stroke-linecap="round" style="stroke-dasharray: {{c.g.dash}} 1; transition: {{c.g.t}}"></path><line x1="100" y1="100" x2="100" y2="34" stroke="#003A29" stroke-width="3.5" stroke-linecap="round" style="transform-origin: 100px 100px; transform: rotate({{c.g.rot}}); transition: {{c.g.t}}"></line><circle cx="100" cy="100" r="7" fill="#003A29"></circle><text x="20" y="120" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #B8483F">{{c.g.lo}}</text><text x="100" y="122" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #7FB1A0">0</text><text x="180" y="120" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #0E9A5E">{{c.g.hi}}</text></svg></span>
 <span style="margin-top: auto; font-size: clamp(48px, 4.2vw, 68px); line-height: 0.95; font-weight: 800; letter-spacing: -0.045em; color: {{c.numColor}}; font-variant-numeric: tabular-nums">{{c.val}}</span>
 <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #407A68">
 <sc-if value="{{c.up}}" hint-placeholder-val="{{ true }}"><svg width="11" height="9" viewBox="0 0 22 18" role="img" aria-label="Up"><path d="M11 0 L22 18 L0 18 Z" fill="#10A867"></path></svg></sc-if>
 <sc-if value="{{c.down}}" hint-placeholder-val="{{ false }}"><svg width="11" height="9" viewBox="0 0 22 18" role="img" aria-label="Down"><path d="M0 0 L22 0 L11 18 Z" fill="#EA6759"></path></svg></sc-if>{{c.quarter}} return</span>
-<span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: {{c.barColor}}"></span>
 </span>
 <span style="grid-area: 1 / 1; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; padding: 20px; border-radius: 20px; background: #004D36; color: #FFFFFF; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.1), 0 14px 34px rgba(0, 40, 28, 0.18); transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden">
 <span data-back-inner="1" style="display: flex; flex-direction: column; gap: 12px">
@@ -3215,6 +3215,7 @@ class Component extends DCLogic {
     if (!this._sharesRef) this._sharesRef = (el) => this.watchShares(el);
     if (!this._utViewRef) this._utViewRef = (el) => this.watchView('ut', el);
     if (!this._mmViewRef) this._mmViewRef = (el) => this.watchView('mm', el);
+    if (!this._retViewRef) this._retViewRef = (el) => this.watchView('ret', el);
     if (!this._chevRef) this._chevRef = (el) => this.nudgeChevron(el);
     if (!this._pxBgRef) this._pxBgRef = (el) => { this._pxBg = el; };
     if (!this._pxFgRef) this._pxFgRef = (el) => { this._pxFg = el; };
@@ -3281,6 +3282,20 @@ class Component extends DCLogic {
 
     // Market Moves
     const open = s.open || {};
+    // Return gauges: a semicircle from 0 at the top, sweeping left (red) for losses or right (green) for gains.
+    const retIn = !!(s.inView && s.inView.ret);
+    const gMax = Math.max(1, Math.ceil(Math.max.apply(null, D.returns.groups.reduce((a, g) => a.concat(g.cards.map((c) => Math.abs(c.q))), []))));
+    let gIdx = 0;
+    const gauge = (q) => {
+      const k = gIdx++, sg = q < 0 ? -1 : 1, th = Math.min(1, Math.abs(q) / gMax) * Math.PI / 2;
+      const x = (100 + sg * 80 * Math.sin(th)).toFixed(2), y = (100 - 80 * Math.cos(th)).toFixed(2);
+      return {
+        d: 'M 100 20 A 80 80 0 0 ' + (sg > 0 ? 1 : 0) + ' ' + x + ' ' + y, col: q < 0 ? '#D9675B' : '#10A867',
+        dash: retIn ? 1 : 0, rot: (retIn ? sg * th * 180 / Math.PI : 0).toFixed(2) + 'deg',
+        t: this._reduce ? 'none' : 'stroke-dasharray 1400ms cubic-bezier(0.22, 1, 0.36, 1) ' + (200 + k * 90) + 'ms, transform 1400ms cubic-bezier(0.22, 1, 0.36, 1) ' + (200 + k * 90) + 'ms',
+        lo: '\u2212' + gMax + '%', hi: '+' + gMax + '%'
+      };
+    };
     const returnGroups = D.returns.groups.map((g) => ({
       label: g.label,
       cards: g.cards.map((c) => {
@@ -3289,7 +3304,7 @@ class Component extends DCLogic {
           name: c.name, quarter: D.issue.quarter, tone: g.tone, val: this.fmt(c.q),
           region: g.label.split(' ')[0] + ((g.label.match(/\(([^)]+)\)/) || [])[1] ? ' · ' + g.label.match(/\(([^)]+)\)/)[1] : ''),
           numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', barColor: c.q < 0 ? '#D9675B' : '#10A867',
-          up: c.q >= 0, down: c.q < 0,
+          up: c.q >= 0, down: c.q < 0, g: gauge(c.q), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of \u2212' + gMax + '% to +' + gMax + '%',
           y1: this.minus(c.y1), y3: this.minus(c.y3), lt: this.minus(c.lt), comment: c.comment,
           open: isOpen, expanded: isOpen ? 'true' : 'false', rot: isOpen ? '180deg' : '0deg',
           toggle: () => {
@@ -3498,7 +3513,7 @@ class Component extends DCLogic {
       subnav: subnav, hasSubnav: subnav.length > 1,
       isMarket: tab === 'market', isAssets: tab === 'assets', isUnits: tab === 'units', isInsights: tab === 'insights', isNgi: tab === 'ngi',
       toTop: () => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' }); },
-      utViewRef: this._utViewRef, mmViewRef: this._mmViewRef, glance: glance, returns: D.returns, returnGroups: returnGroups, cardH: (s.cardH || 168) + 'px', fx: D.fx, fxRows: fxRows,
+      utViewRef: this._utViewRef, mmViewRef: this._mmViewRef, retViewRef: this._retViewRef, glance: glance, returns: D.returns, returnGroups: returnGroups, cardH: (s.cardH || 168) + 'px', fx: D.fx, fxRows: fxRows,
       shares: D.shares, sharesTop: sh.top.map(shareRow('t')), sharesBottom: sh.bottom.map(shareRow('b')), p3: seg('3m'), p12: seg('12m'), segThumb: period === '12m' ? '100%' : '0%',
       quiltInfo: D.quiltInfo, quiltLine: quiltLine, quiltLineRef: this._quiltLineRef, years: D.quilt.years.map((y) => ({ label: y })), quiltCells: quiltCells, legend: legend,
       clearHover: () => this.setState({ hover: null, cellHover: null }), hasPin: s.pin !== undefined && s.pin !== null,
