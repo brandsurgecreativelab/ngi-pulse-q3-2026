@@ -148,7 +148,7 @@
 <h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Market Moves</h2>
 <div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 
-<section id="mm-returns" ref="{{retViewRef}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
+<section id="mm-returns" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
 <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Market Moves</p>
@@ -162,7 +162,7 @@
 <div style="display: flex; flex-direction: column; gap: 40px">
 <p style="margin: 0 0 -16px; display: flex; align-items: center; gap: 10px; font-size: 15px; line-height: 1.4; color: #407A68"><svg width="30" height="30" viewBox="0 -960 960 960" aria-hidden="true" style="flex: none; color: #10A867"><path d="M80-480v-80h120v80H80Zm136 222-56-58 84-84 58 56-86 86Zm28-382-84-84 56-58 86 86-58 56Zm476 480L530-350l-50 150-120-400 400 120-148 52 188 188-80 80ZM400-720v-120h80v120h-80Zm236 80-58-56 86-86 56 56-84 86Z" fill="currentColor"></path></svg>Additional data &amp; comment</p>
 <sc-for list="{{returnGroups}}" as="g" hint-placeholder-count="2">
-<div>
+<div ref="{{g.vref}}" data-ret="{{g.key}}">
 <h4 style="margin: 0 0 16px; color: #004D36; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; padding: 0">{{g.label}}</h4>
 <div class="pc-cards" style="display: grid; gap: 20px">
 <sc-for list="{{g.cards}}" as="c" hint-placeholder-count="4">
@@ -2769,7 +2769,7 @@ class Component extends DCLogic {
       const cur = (this.state && this.state.inView) || {};
       if (!!cur[key] === on) return;
       this.setState({ inView: Object.assign({}, cur, { [key]: on }) });
-      if (key === 'ret' && on && !this._reduce) document.querySelectorAll('[data-gcount]').forEach((n, k) => this.countUp(n, 250 + k * 120));
+      if (/^ret\d+$/.test(key) && on && !this._reduce) document.querySelectorAll('[data-ret="' + key + '"] [data-gcount]').forEach((n, k) => this.countUp(n, 250 + k * 120));
     };
     if (typeof IntersectionObserver === 'undefined' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { set(true); return; }
     const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.intersectionRatio >= 0.15) set(true); else if (!e.isIntersecting) set(false); }), { threshold: [0, 0.15] });
@@ -3294,11 +3294,11 @@ class Component extends DCLogic {
     // Market Moves
     const open = s.open || {};
     // Return gauges: a semicircle from 0 at the top, sweeping left (red) for losses or right (green) for gains.
-    const retIn = !!(s.inView && s.inView.ret);
+    // Each row of cards is watched on its own, so a row replays whenever it scrolls back on screen, from above or below.
+    const inV = s.inView || {};
     const gMax = Math.max(1, Math.ceil(Math.max.apply(null, D.returns.groups.reduce((a, g) => a.concat(g.cards.map((c) => Math.abs(c.q))), []))));
-    let gIdx = 0;
-    const gauge = (q) => {
-      const k = gIdx++, sg = q < 0 ? -1 : 1, th = Math.min(1, Math.abs(q) / gMax) * Math.PI / 2;
+    const gauge = (q, retIn, k) => {
+      const sg = q < 0 ? -1 : 1, th = Math.min(1, Math.abs(q) / gMax) * Math.PI / 2;
       const x = (110 + sg * 90 * Math.sin(th)).toFixed(2), y = (112 - 90 * Math.cos(th)).toFixed(2);
       // Same delay, length and ease-out as the figure's count-up, so needle and number land together.
       const tm = '1300ms cubic-bezier(0.33, 1, 0.68, 1) ' + (250 + k * 120) + 'ms';
@@ -3309,15 +3309,17 @@ class Component extends DCLogic {
         lo: '−' + gMax + '%', hi: '+' + gMax + '%'
       };
     };
-    const returnGroups = D.returns.groups.map((g) => ({
-      label: g.label,
-      cards: g.cards.map((c) => {
+    if (!this._retRefs) this._retRefs = {};
+    const returnGroups = D.returns.groups.map((g, gi) => ({
+      label: g.label, key: 'ret' + gi,
+      vref: this._retRefs[gi] || (this._retRefs[gi] = (el) => this.watchView('ret' + gi, el)),
+      cards: g.cards.map((c, ci) => {
         const isOpen = !!open[c.name];
         return {
           name: c.name, quarter: D.issue.quarter, tone: g.tone, val: this.fmt(c.q),
           region: g.label.split(' ')[0] + ((g.label.match(/\(([^)]+)\)/) || [])[1] ? ' · ' + g.label.match(/\(([^)]+)\)/)[1] : ''),
           numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', barColor: c.q < 0 ? '#D9675B' : '#10A867',
-          up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
+          up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q, !!inV['ret' + gi], ci), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
           y1: this.minus(c.y1), y3: this.minus(c.y3), lt: this.minus(c.lt), comment: c.comment,
           open: isOpen, expanded: isOpen ? 'true' : 'false', rot: isOpen ? '180deg' : '0deg',
           toggle: () => {
