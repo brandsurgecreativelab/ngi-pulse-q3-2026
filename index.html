@@ -3388,7 +3388,7 @@ class Component extends DCLogic {
       name: k.name, bg: k.bg, fg: k.fg,
       pressed: s.pin === i ? 'true' : 'false',
       ring: s.pin === i ? 'inset 0 0 0 3px #004D36' : 'none',
-      chipBg: s.pin === i ? '#004D36' : (s.hover === i ? '#EAF3EF' : '#FFFFFF'), chipFg: s.pin === i ? '#FFFFFF' : '#004D36',
+      chipBg: s.pin === i ? '#006341' : (s.hover === i ? '#EAF3EF' : '#FFFFFF'), chipFg: s.pin === i ? '#FFFFFF' : '#004D36',
       chipRing: s.pin === i ? 'none' : 'inset 0 0 0 1px #CFDDD8', dotRing: s.pin === i ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
       enter: () => this.setState({ hover: i }),
       pin: () => this.setState({ pin: (this.state && this.state.pin === i) ? null : i })
@@ -3519,7 +3519,7 @@ class Component extends DCLogic {
       shares: D.shares, sharesTop: sh.top.map(shareRow('t')), sharesBottom: sh.bottom.map(shareRow('b')), p3: seg('3m'), p12: seg('12m'), segThumb: period === '12m' ? '100%' : '0%',
       quiltInfo: D.quiltInfo, quiltLine: quiltLine, quiltLineRef: this._quiltLineRef, years: D.quilt.years.map((y) => ({ label: y })), quiltCells: quiltCells, legend: legend,
       clearHover: () => this.setState({ hover: null, cellHover: null }), hasPin: s.pin !== undefined && s.pin !== null,
-      allPressed: (s.pin === undefined || s.pin === null) ? 'true' : 'false', allBg: (s.pin === undefined || s.pin === null) ? '#004D36' : '#FFFFFF', allFg: (s.pin === undefined || s.pin === null) ? '#FFFFFF' : '#004D36', allLine: (s.pin === undefined || s.pin === null) ? '#004D36' : '#CFDDD8',
+      allPressed: (s.pin === undefined || s.pin === null) ? 'true' : 'false', allBg: (s.pin === undefined || s.pin === null) ? '#006341' : '#FFFFFF', allFg: (s.pin === undefined || s.pin === null) ? '#FFFFFF' : '#004D36', allLine: (s.pin === undefined || s.pin === null) ? '#004D36' : '#CFDDD8',
       clearPin: () => this.setState({ pin: null, hover: null }),
       unitTrusts: D.unitTrusts, ut: ut, utChips: utChips,
       insAll: insAll, insCount: pad(list.length), insIndex: insIndex, art: art, prev: prev, next: next,
