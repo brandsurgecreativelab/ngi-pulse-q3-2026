@@ -3352,9 +3352,9 @@ class Component extends DCLogic {
       const edgeL = ci <= 1, edgeR = ci >= 11;
       quiltCells.push({
         v: this.minus(cell.v),
-        bg: on ? '#00F5A6' : k.bg, fg: on ? '#003A29' : k.fg, fw: on ? '700' : '400',
+        bg: k.bg, fg: k.fg, fw: on ? '700' : '400',
         op: hl === null || on ? '1' : '0.2',
-        ring: on ? '0 3px 0 #10A867, 0 8px 18px rgba(0, 58, 41, 0.22)' : 'none',
+        ring: on ? '0 0 0 2px #FFFFFF, 0 0 0 4px #003A29, 0 8px 18px rgba(0, 58, 41, 0.22)' : 'none',
         s: on ? '1.06' : '1', z: tip ? '5' : (on ? '2' : '0'),
         tip: tip, cls: k.name, year: D.quilt.years[ci], rank: ri + 1,
         tl: edgeR ? 'auto' : (edgeL ? '0' : '50%'), tr: edgeR ? '0' : 'auto', tx: (edgeL || edgeR) ? '0' : '-50%',
