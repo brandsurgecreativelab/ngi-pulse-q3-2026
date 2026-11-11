@@ -3542,7 +3542,7 @@ class Component extends DCLogic {
       subnav: subnav, hasSubnav: subnav.length > 1,
       isMarket: tab === 'market', isAssets: tab === 'assets', isUnits: tab === 'units', isInsights: tab === 'insights', isNgi: tab === 'ngi',
       toTop: () => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' }); },
-      bandColor: this.props.bandColor || '#E6EFEC',
+      bandColor: this.props.bandColor || '#f2f6f5',
       utViewRef: this._utViewRef, mmViewRef: this._mmViewRef, retViewRef: this._retViewRef, glance: glance, returns: D.returns, returnGroups: returnGroups, cardH: (s.cardH || 168) + 'px', fx: D.fx, fxRows: fxRows,
       shares: D.shares, sharesTop: sh.top.map(shareRow('t')), sharesBottom: sh.bottom.map(shareRow('b')), p3: seg('3m'), p12: seg('12m'), segThumb: period === '12m' ? '100%' : '0%',
       quiltInfo: D.quiltInfo, quiltLine: quiltLine, quiltLineRef: this._quiltLineRef, years: D.quilt.years.map((y) => ({ label: y })), quiltCells: quiltCells, legend: legend,
@@ -3559,7 +3559,7 @@ class Component extends DCLogic {
     };
   }
 }
-PulseRuntime.mount(Component, document.getElementById('tpl').content, document.getElementById('app'), {"startTab": "market", "showHero": true, "heroBackground": "video", "lavaStyle": "metal", "bandColor": "#E6EFEC"});
+PulseRuntime.mount(Component, document.getElementById('tpl').content, document.getElementById('app'), {"startTab": "market", "showHero": true, "heroBackground": "video", "lavaStyle": "metal", "bandColor": "#f2f6f5"});
 </script>
 </body>
 </html>
