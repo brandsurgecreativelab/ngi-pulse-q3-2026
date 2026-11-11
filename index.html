@@ -183,7 +183,7 @@
 </span>
 <span style="grid-area: 1 / 1; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; padding: 20px; border-radius: 20px; background: #004D36; color: #FFFFFF; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.1), 0 14px 34px rgba(0, 40, 28, 0.18); transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden">
 <span data-back-inner="1" style="display: flex; flex-direction: column; gap: 12px">
-<span style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 15px; font-weight: 700">{{c.name}}</span><span style="font-size: 15px; font-weight: 700; color: #00F5A6; font-variant-numeric: tabular-nums">{{c.val}}</span></span>
+<span style="display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 15px; font-weight: 700">{{c.name}}</span><span style="font-size: 15px; font-weight: 700; color: {{c.backColor}}; font-variant-numeric: tabular-nums">{{c.val}}</span></span>
 <span style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.18); border-bottom: 1px solid rgba(255, 255, 255, 0.18)">
 <span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">1 year</span><span style="display: block; margin-top: 2px; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.y1}}</span></span>
 <span><span style="display: block; font-size: 12px; color: rgba(255, 255, 255, 0.72)">3 years</span><span style="display: block; margin-top: 2px; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums">{{c.y3}}</span></span>
@@ -3321,7 +3321,7 @@ class Component extends DCLogic {
         return {
           name: c.name, quarter: D.issue.quarter, tone: g.tone, val: this.fmt(c.q),
           region: g.label.split(' ')[0] + ((g.label.match(/\(([^)]+)\)/) || [])[1] ? ' · ' + g.label.match(/\(([^)]+)\)/)[1] : ''),
-          numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', barColor: c.q < 0 ? '#D9675B' : '#10A867',
+          numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', backColor: c.q < 0 ? '#FF9384' : '#00F5A6', barColor: c.q < 0 ? '#D9675B' : '#10A867',
           up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q, !!inV['ret' + gi], ci, regauge[c.name]), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
           y1: this.minus(c.y1), y3: this.minus(c.y3), lt: this.minus(c.lt), comment: c.comment,
           open: isOpen, expanded: isOpen ? 'true' : 'false', rot: isOpen ? '180deg' : '0deg',
