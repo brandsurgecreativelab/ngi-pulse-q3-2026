@@ -174,7 +174,7 @@
 </span>
 <span style="margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
 <svg viewBox="0 0 220 130" role="img" aria-label="{{c.gaugeLabel}}" style="display: block; width: 100%; max-width: 250px; height: auto; overflow: visible"><defs><linearGradient id="pcGP" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B9E9D2"></stop><stop offset="1" stop-color="#10A867"></stop></linearGradient><linearGradient id="pcGN" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#F5C4BD"></stop><stop offset="1" stop-color="#D9675B"></stop></linearGradient></defs><line x1="7.0" y1="112.0" x2="1.0" y2="112.0" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="10.5" y1="85.3" x2="4.7" y2="83.8" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="20.8" y1="60.5" x2="15.6" y2="57.5" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="37.2" y1="39.2" x2="32.9" y2="34.9" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="58.5" y1="22.8" x2="55.5" y2="17.6" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="83.3" y1="12.5" x2="81.8" y2="6.7" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="110.0" y1="11.0" x2="110.0" y2="1.0" stroke="#004D36" stroke-width="2.5" stroke-linecap="round"></line><line x1="136.7" y1="12.5" x2="138.2" y2="6.7" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="161.5" y1="22.8" x2="164.5" y2="17.6" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="182.8" y1="39.2" x2="187.1" y2="34.9" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="199.2" y1="60.5" x2="204.4" y2="57.5" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="209.5" y1="85.3" x2="215.3" y2="83.8" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><line x1="213.0" y1="112.0" x2="219.0" y2="112.0" stroke="#004D36" stroke-width="1.5" stroke-linecap="round"></line><path d="M 20 112 A 90 90 0 0 1 200 112" fill="none" stroke="#DCE7E2" stroke-width="18"></path><path d="{{c.g.d}}" pathLength="1" fill="none" stroke="{{c.g.grad}}" stroke-width="18" style="stroke-dasharray: {{c.g.dash}} 1; transition: {{c.g.t}}"></path><polygon points="106.5,112 113.5,112 110,36" fill="#003A29" style="transform-origin: 110px 112px; transform: rotate({{c.g.rot}}); transition: {{c.g.t}}"></polygon><circle cx="110" cy="112" r="9" fill="#003A29"></circle><circle cx="110" cy="112" r="3.5" fill="#FFFFFF"></circle><text x="20" y="129" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #B8483F">{{c.g.lo}}</text><text x="200" y="129" text-anchor="middle" style="font-size: 11px; font-weight: 600; fill: #0E9A5E">{{c.g.hi}}</text></svg>
-<span data-gcount="{{c.n}}" data-prefix="{{c.pre}}" data-suffix="%" data-dec="1" style="margin-top: 4px; font-size: clamp(44px, 3.8vw, 60px); line-height: 0.95; font-weight: 800; letter-spacing: -0.04em; color: {{c.numColor}}; font-variant-numeric: tabular-nums">{{c.val}}</span>
+<span data-gcount="{{c.n}}" data-gname="{{c.name}}" data-prefix="{{c.pre}}" data-suffix="%" data-dec="1" style="margin-top: 4px; font-size: clamp(44px, 3.8vw, 60px); line-height: 0.95; font-weight: 800; letter-spacing: -0.04em; color: {{c.numColor}}; font-variant-numeric: tabular-nums">{{c.val}}</span>
 <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 500; color: #407A68">
 <sc-if value="{{c.up}}" hint-placeholder-val="{{ true }}"><svg width="13" height="11" viewBox="0 0 22 18" role="img" aria-label="Up"><path d="M11 0 L22 18 L0 18 Z" fill="#10A867"></path></svg></sc-if>
 <sc-if value="{{c.down}}" hint-placeholder-val="{{ false }}"><svg width="13" height="11" viewBox="0 0 22 18" role="img" aria-label="Down"><path d="M0 0 L22 0 L11 18 Z" fill="#EA6759"></path></svg></sc-if>{{c.quarter}} return</span>
@@ -3297,7 +3297,10 @@ class Component extends DCLogic {
     // Each row of cards is watched on its own, so a row replays whenever it scrolls back on screen, from above or below.
     const inV = s.inView || {};
     const gMax = Math.max(1, Math.ceil(Math.max.apply(null, D.returns.groups.reduce((a, g) => a.concat(g.cards.map((c) => Math.abs(c.q))), []))));
-    const gauge = (q, retIn, k) => {
+    const regauge = s.regauge || {};
+    const gauge = (q, retIn, k, phase) => {
+      // phase 'hold' snaps the gauge to 0 while the card shows its back; 'go' replays it as the front turns back into view.
+      if (phase === 'hold') retIn = false;
       const sg = q < 0 ? -1 : 1, th = Math.min(1, Math.abs(q) / gMax) * Math.PI / 2;
       const x = (110 + sg * 90 * Math.sin(th)).toFixed(2), y = (112 - 90 * Math.cos(th)).toFixed(2);
       // Same delay, length and ease-out as the figure's count-up, so needle and number land together.
@@ -3305,7 +3308,7 @@ class Component extends DCLogic {
       return {
         d: 'M 110 22 A 90 90 0 0 ' + (sg > 0 ? 1 : 0) + ' ' + x + ' ' + y, grad: q < 0 ? 'url(#pcGN)' : 'url(#pcGP)',
         dash: retIn ? 1 : 0, rot: (retIn ? sg * th * 180 / Math.PI : 0).toFixed(2) + 'deg',
-        t: this._reduce ? 'none' : 'stroke-dasharray ' + tm + ', transform ' + tm,
+        t: (this._reduce || phase === 'hold') ? 'none' : phase === 'go' ? 'stroke-dasharray 1300ms cubic-bezier(0.33, 1, 0.68, 1) 150ms, transform 1300ms cubic-bezier(0.33, 1, 0.68, 1) 150ms' : 'stroke-dasharray ' + tm + ', transform ' + tm,
         lo: '−' + gMax + '%', hi: '+' + gMax + '%'
       };
     };
@@ -3319,12 +3322,23 @@ class Component extends DCLogic {
           name: c.name, quarter: D.issue.quarter, tone: g.tone, val: this.fmt(c.q),
           region: g.label.split(' ')[0] + ((g.label.match(/\(([^)]+)\)/) || [])[1] ? ' · ' + g.label.match(/\(([^)]+)\)/)[1] : ''),
           numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', barColor: c.q < 0 ? '#D9675B' : '#10A867',
-          up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q, !!inV['ret' + gi], ci), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
+          up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q, !!inV['ret' + gi], ci, regauge[c.name]), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
           y1: this.minus(c.y1), y3: this.minus(c.y3), lt: this.minus(c.lt), comment: c.comment,
           open: isOpen, expanded: isOpen ? 'true' : 'false', rot: isOpen ? '180deg' : '0deg',
           toggle: () => {
             const cur = (this.state && this.state.open) || {};
-            this.setState({ open: Object.assign({}, cur, { [c.name]: !cur[c.name] }) });
+            const closing = !!cur[c.name];
+            if (!closing || this._reduce) { this.setState({ open: Object.assign({}, cur, { [c.name]: !cur[c.name] }) }); return; }
+            // Turning back to the front: reset the gauge while it faces away, then replay needle and figure as it comes round.
+            const rg = (ph) => this.setState({ regauge: Object.assign({}, (this.state && this.state.regauge) || {}, { [c.name]: ph }) });
+            this.setState({ open: Object.assign({}, cur, { [c.name]: false }), regauge: Object.assign({}, (this.state && this.state.regauge) || {}, { [c.name]: 'hold' }) });
+            clearTimeout((this._rgT = this._rgT || {})[c.name]);
+            this._rgT[c.name] = setTimeout(() => {
+              rg('go');
+              const n = document.querySelector('[data-gname="' + c.name + '"]');
+              if (n) this.countUp(n, 150);
+              this._rgT[c.name] = setTimeout(() => rg(undefined), 1700);
+            }, 220);
           }
         };
       })
