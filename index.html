@@ -541,19 +541,14 @@
 <sc-if value="{{a.c.isHub}}" hint-placeholder-val="{{ false }}">
 <div aria-hidden="true" class="pc-hub" style="position: relative; width: 100%; max-width: 1180px; aspect-ratio: 1290 / 700; margin: 0 auto">
 <svg class="pc-hub-lines" viewBox="0 0 1290 700" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible">
-<sc-for list="{{a.c.hub}}" as="h" hint-placeholder-count="9"><line x1="{{h.x1}}" y1="{{h.y1}}" x2="{{h.x2}}" y2="{{h.y2}}" stroke="{{h.lc}}" stroke-width="{{h.lw}}" stroke-linecap="round" pathLength="1" style="stroke-dasharray: 1 1; stroke-dashoffset: {{h.off}}; transition: {{h.lt}}"></line><polygon points="{{h.ah}}" fill="{{h.lc}}" style="opacity: {{h.aop}}; transition: {{h.at}}"></polygon></sc-for>
+<sc-for list="{{a.c.hub}}" as="h" hint-placeholder-count="9"><line x1="{{h.x1}}" y1="{{h.y1}}" x2="{{h.x2}}" y2="{{h.y2}}" stroke="{{h.lc}}" stroke-width="{{h.lw}}" stroke-linecap="round" pathLength="1" style="stroke-dasharray: 1 1; stroke-dashoffset: {{h.off}}; transition: {{h.lt}}"></line><circle cx="{{h.x1}}" cy="{{h.y1}}" r="{{h.nr}}" fill="{{h.lc}}" style="opacity: {{h.aop}}; transition: {{h.at}}"></circle><circle cx="{{h.ex}}" cy="{{h.ey}}" r="{{h.nr}}" fill="{{h.lc}}" style="opacity: {{h.eop}}; transition: {{h.et}}"></circle></sc-for>
 </svg>
 <div class="pc-hub-globe" style="position: absolute; left: 50%; top: 50.7%; width: 25.7%; aspect-ratio: 1; transform: translate(-50%, -50%) scale({{a.c.gsc}}); opacity: {{a.c.gop}}; transition: {{a.c.gt}}">
 <div style="position: absolute; inset: 3%; border-radius: 50%; overflow: hidden; background: #006341; box-shadow: inset 0 0 0 1px rgba(0, 58, 41, 0.2)">
 <div class="pc-hub-spin" style="position: absolute; top: 0; left: 0; width: 400%; height: 100%; background: url({{a.c.globe}}) repeat-x 0 0 / 50% 100%; transform: translateX({{a.c.gx}}); transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1)">
 <svg viewBox="0 0 1440 360" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%"><sc-for list="{{a.c.geo}}" as="q" hint-placeholder-count="10"><path d="{{q.d}}" fill="{{q.f}}" style="transition: fill 300ms ease"></path><path d="{{q.d}}" transform="translate(720 0)" fill="{{q.f}}" style="transition: fill 300ms ease"></path></sc-for></svg>
 </div>
-<div style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 42%), radial-gradient(circle at 50% 50%, rgba(0, 40, 28, 0.12) 0%, rgba(0, 40, 28, 0.22) 60%, rgba(0, 30, 20, 0.55) 100%)"></div>
-<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #FFFFFF; text-shadow: 0 1px 8px rgba(0, 30, 20, 0.5)">
-<span style="font-size: clamp(16px, 2vw, 28px); font-weight: 600; line-height: 1.1">{{a.c.centre.name}}</span>
-<span style="font-size: clamp(30px, 4.4vw, 58px); font-weight: 600; letter-spacing: 0.01em; line-height: 1.05">{{a.c.centre.value}}</span>
-<span style="margin-top: 4px; font-size: clamp(11px, 1.1vw, 15px); font-weight: 500">{{a.c.centre.label}}</span>
-</div>
+<div style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 42%), radial-gradient(circle at 50% 50%, rgba(0, 40, 28, 0) 0%, rgba(0, 40, 28, 0.08) 60%, rgba(0, 30, 20, 0.45) 100%)"></div>
 </div>
 </div>
 <sc-for list="{{a.c.hub}}" as="h" hint-placeholder-count="9"><div class="pc-hub-card" onMouseEnter="{{h.enter}}" onMouseLeave="{{h.leave}}" style="position: absolute; left: {{h.x}}; top: {{h.y}}; width: 17.8%; transform: translate(-50%, -50%) scale({{h.sc}}); opacity: {{h.op}}; transition: {{h.ct}}">
@@ -3215,7 +3210,7 @@ class Component extends DCLogic {
     }
     if (c.kind === 'hub') {
       // Hub-and-spoke: the globe settles in, then arrows draw out to each partner in order of size (largest first),
-      // and each card pops in as its arrow arrives. China has its own card (no arrow) and is the resting state.
+      // and each card pops in as its line arrives. China has its own card (linked first) and is the resting state.
       // Once everything is in, the chart tours the cards on its own (China, then partners largest first, then round again),
       // turning the globe to each country. Hovering a card takes over; letting go resumes the tour.
       const W = 1290, H = 700, C = [645, 355], R = 166, hw = W * 0.089 + 8, hh = 52;
@@ -3252,19 +3247,20 @@ class Component extends DCLogic {
           const x = it[4], y = it[5], dx = x - C[0], dy = y - C[1], len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len;
           const sx = C[0] + ux * R, sy = C[1] + uy * R;
           const sEdge = Math.min(Math.abs(ux) > 1e-6 ? hw / Math.abs(ux) : 1e9, Math.abs(uy) > 1e-6 ? hh / Math.abs(uy) : 1e9);
-          const ex = x - ux * (sEdge + 6), ey = y - uy * (sEdge + 6);
+          const ex = x - ux * (sEdge + 2), ey = y - uy * (sEdge + 2);
           const bx = ex - ux * 14, by = ey - uy * 14, px = -uy * 7, py = ux * 7;
-          const d0 = isHome ? 300 : 700 + ranks.indexOf(k) * 170;
+          const d0 = isHome ? 520 : 700 + (ranks.indexOf(k) + 1) * 170;
           const hot = k === actK;
           return {
             name: it[0], val: it[2], flag: it[3], x: pc((x / W) * 100), y: pc((y / H) * 100),
-            x1: sx.toFixed(1), y1: sy.toFixed(1), x2: (isHome ? sx : bx).toFixed(1), y2: (isHome ? sy : by).toFixed(1),
-            ah: isHome ? '0,0 0,0 0,0' : ex.toFixed(1) + ',' + ey.toFixed(1) + ' ' + (bx + px).toFixed(1) + ',' + (by + py).toFixed(1) + ' ' + (bx - px).toFixed(1) + ',' + (by - py).toFixed(1),
+            x1: sx.toFixed(1), y1: sy.toFixed(1), x2: ex.toFixed(1), y2: ey.toFixed(1), ex: ex.toFixed(1), ey: ey.toFixed(1), nr: hot ? 5 : 4,
+            ah: ex.toFixed(1) + ',' + ey.toFixed(1) + ' ' + (bx + px).toFixed(1) + ',' + (by + py).toFixed(1) + ' ' + (bx - px).toFixed(1) + ',' + (by - py).toFixed(1),
             off: on ? 0 : 1, lt: (on ? 'stroke-dashoffset ' + M(460) + ' ' + E + ' ' + M(d0) + ', ' : '') + 'stroke 200ms ease, stroke-width 200ms ease',
-            aop: on && !isHome ? 1 : 0, at: (on ? 'opacity ' + M(160) + ' ease ' + M(d0 + 400) + ', ' : '') + 'fill 200ms ease',
+            aop: on ? 1 : 0, at: (on ? 'opacity ' + M(160) + ' ease ' + M(d0) + ', ' : '') + 'fill 200ms ease, r 200ms ease',
+            eop: on ? 1 : 0, et: (on ? 'opacity ' + M(160) + ' ease ' + M(d0 + 420) + ', ' : '') + 'fill 200ms ease, r 200ms ease',
             op: on ? 1 : 0, sc: on ? 1 : 0.86,
             ct: on ? 'opacity ' + M(360) + ' ease ' + M(d0 + 330) + ', transform ' + M(520) + ' cubic-bezier(0.34, 1.56, 0.64, 1) ' + M(d0 + 330) : 'none',
-            lc: hot && !isHome ? '#10A867' : '#006341', lw: isHome ? 0 : hot ? 3 : 2, bc: hot ? '#10A867' : '#CFDDD8',
+            lc: hot ? '#10A867' : '#006341', lw: hot ? 3 : 2, bc: hot ? '#10A867' : '#CFDDD8',
             lift: hot ? 'translateY(-3px)' : 'none', sh: hot ? '0 8px 20px rgba(0, 40, 28, 0.12)' : '0 1px 2px rgba(0, 40, 28, 0.05)',
             enter: () => this.setState({ hubHover: { i: idx, k: k } }), leave: () => this.setState({ hubHover: null })
           };
