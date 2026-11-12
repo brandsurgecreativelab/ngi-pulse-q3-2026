@@ -425,11 +425,11 @@
 <sc-if value="{{a.isImg}}" hint-placeholder-val="{{ false }}"><img ref="{{a.ref}}" src="{{a.img}}" alt="{{a.alt}}" style="display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06), 0 10px 30px rgba(0, 40, 28, 0.07)"></sc-if>
 <sc-if value="{{a.isLive}}" hint-placeholder-val="{{ true }}">
 <div ref="{{a.ref}}" data-live="1" role="img" aria-label="{{a.c.aria}}" style="border-radius: 16px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06), 0 10px 30px rgba(0, 40, 28, 0.07); box-sizing: border-box; padding: clamp(20px, 3vw, 36px)">
-<div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 28px">
+<div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px">
 <p style="margin: 0; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; color: #004D36">{{a.c.title}}</p>
 <sc-if value="{{a.c.hasSub}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 14px; color: #407A68">{{a.c.subtitle}}</p></sc-if>
 </div>
-<sc-if value="{{a.c.hasLegend}}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="display: flex; flex-wrap: wrap; gap: 8px 20px; margin: -12px 0 24px">
+<sc-if value="{{a.c.hasLegend}}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="display: flex; flex-wrap: wrap; gap: 12px 28px; margin: -4px 0 36px">
 <sc-for list="{{a.c.legend}}" as="g" hint-placeholder-count="2"><span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #004D36"><span style="width: 12px; height: 12px; border-radius: 4px; background: {{g.color}}"></span>{{g.label}}</span></sc-for>
 </div></sc-if>
 
