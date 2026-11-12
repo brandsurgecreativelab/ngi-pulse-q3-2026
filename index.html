@@ -3070,8 +3070,13 @@ class Component extends DCLogic {
           vl: r.valAt === 'start' ? '0' : 'auto', vr: r.valAt === 'start' ? 'auto' : '0', vt: r.valAt === 'start' ? '-13px' : '-26px',
           vp: r.valAt === 'start' ? '3px 10px' : '0', vbg: r.valAt === 'start' ? (r.valBg || r.color) : 'transparent',
           sc: on ? 1 : 0, op: on ? 1 : 0,
-          // On a timed chart each reference line grows at the same steady pace as the black line's sweep, staying level with it.
-          t: timed ? (on ? 'transform ' + M((X(r.to) - X(r.from)) / 100 * draw) + ' linear ' + M(200 + X(r.from) / 100 * draw) : 'none') : tr('transform', 1100, 300 + k * 160),
+          // On a timed chart each reference line grows with the black line's sweep. One that runs past the end of the black line
+          // (the floor) slows to finish exactly as the projection meets it, so the two arrive together.
+          t: timed ? (on ? (() => {
+            const start = 200 + X(r.from) / 100 * draw;
+            const end = c.proj && r.to > c.points[c.points.length - 1][0] + 0.01 ? lineEnd + 450 + 900 : 200 + X(r.to) / 100 * draw;
+            return 'transform ' + M(end - start) + ' linear ' + M(start);
+          })() : 'none') : tr('transform', 1100, 300 + k * 160),
           t2: tr('opacity', 600, 900 + k * 160)
         })),
         hasProj: !!c.proj, proj: c.proj ? (timed
