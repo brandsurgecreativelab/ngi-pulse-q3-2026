@@ -548,7 +548,7 @@
 <sc-for list="{{a.c.routes}}" as="h" hint-placeholder-count="9"><path class="{{h.cls}}" d="{{h.d}}" fill="none" stroke="#006341" stroke-width="{{h.lw}}" stroke-linecap="round" pathLength="1" style="pointer-events: none; stroke-dasharray: 1 1; stroke-dashoffset: 1"></path><circle cx="{{h.ex}}" cy="{{h.ey}}" r="5" fill="#006341" stroke="#FFFFFF" stroke-width="2" style="pointer-events: none; opacity: {{h.mop}}; transition: {{h.mt}}"></circle></sc-for>
 <circle cx="{{a.c.ox}}" cy="{{a.c.oy}}" r="7" fill="#EA6759" stroke="#FFFFFF" stroke-width="2.5" style="pointer-events: none; opacity: {{a.c.cop}}; transition: {{a.c.ct0}}"></circle>
 </svg>
-<sc-for list="{{a.c.spots}}" as="t" hint-placeholder-count="9"><button type="button" class="pc-flow-spot" onClick="{{t.go}}" aria-label="{{t.aria}}" style="position: absolute; left: {{t.x}}; top: {{t.y}}; opacity: {{t.op}}; pointer-events: {{t.pe}}; transition: {{t.tr}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="currentColor" stroke="#006341" stroke-width="2"></circle><path d="M12 7.5v9M7.5 12h9" stroke="#006341" stroke-width="2.2" stroke-linecap="round"></path></svg></button></sc-for>
+<sc-for list="{{a.c.spots}}" as="t" hint-placeholder-count="9"><button type="button" class="pc-flow-spot" onClick="{{t.go}}" onMouseLeave="{{t.out}}" aria-label="{{t.aria}}" style="position: absolute; left: {{t.x}}; top: {{t.y}}; opacity: {{t.op}}; pointer-events: {{t.pe}}; cursor: {{t.cur}}; transition: {{t.tr}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="currentColor" stroke="#006341" stroke-width="2"></circle><path d="M12 7.5v9M7.5 12h9" stroke="#006341" stroke-width="2.2" stroke-linecap="round"></path></svg></button></sc-for>
 </div>
 <sc-for list="{{a.c.labels}}" as="g" hint-placeholder-count="10"><div class="pc-flow-card{{g.cls}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" style="position: absolute; left: {{g.x}}; top: {{g.y}}; order: {{g.ord}}; pointer-events: {{g.pe}}; transform: translate(-50%, -50%) scale({{g.sc}}); opacity: {{g.op}}; transition: {{g.ct}}">
 <div style="display: flex; align-items: center; gap: clamp(6px, 0.7vw, 10px); padding: clamp(5px, 0.6vw, 8px) clamp(8px, 0.9vw, 12px); background: #FFFFFF; border: 1.5px solid {{g.bc}}; border-radius: 12px; box-shadow: {{g.sh}}; white-space: nowrap">
@@ -3256,22 +3256,24 @@ class Component extends DCLogic {
       const actK = hovK !== null ? hovK : fs >= 0 ? order[fs % n] : null;
       const LAND = '1100ms';
       const hoverK = (k) => () => this.setState({ flowHover: { i: idx, k: k } });
-      // A plus marker on each partner jumps the tour to that country; the tour carries on from there after a full beat.
+      // A plus marker on each partner jumps the tour to that country. While the pointer stays on that spot (or on the
+      // country's label) the tour holds; moving away resumes it from that country after a full beat.
+      const restart = () => {
+        const t = tour[idx];
+        if (t) { clearTimeout(t.t0); clearInterval(t.iv); t.iv = this._reduce ? null : setInterval(t.step, 3200); }
+      };
       const jump = (k) => () => {
         const st = this.state || {};
         const cur = st.flowStep && st.flowStep.i === idx ? st.flowStep.s : -1, pos = order.indexOf(k);
         const t = tour[idx];
-        if (t) { clearTimeout(t.t0); clearInterval(t.iv); if (!this._reduce) t.iv = setInterval(t.step, 3200); }
-        this.setState({ flowHover: null, flowStep: { i: idx, s: cur < 0 ? pos : cur - (cur % n) + pos } });
+        if (t) { clearTimeout(t.t0); clearInterval(t.iv); t.iv = null; }
+        this.setState({ flowHover: { i: idx, k: k }, flowStep: { i: idx, s: cur < 0 ? pos : cur - (cur % n) + pos } });
       };
-      const unhover = () => {
+      const release = () => {
         const st = this.state || {};
-        const k = st.flowHover && st.flowHover.i === idx ? st.flowHover.k : null;
-        const pos = k !== null ? order.indexOf(k) : -1;
-        const cur = st.flowStep && st.flowStep.i === idx ? st.flowStep.s : -1;
-        // resume the tour from the country that was hovered
-        const next = pos < 0 ? cur : cur < 0 ? pos : cur - (cur % n) + pos;
-        this.setState({ flowHover: null, flowStep: { i: idx, s: next } });
+        if (!(st.flowHover && st.flowHover.i === idx)) return;
+        this.setState({ flowHover: null });
+        restart();
       };
       const routes = order.map((k, r) => {
         const it = c.items[k], q = P[it[0]];
@@ -3302,8 +3304,8 @@ class Component extends DCLogic {
         spots: order.map((k) => {
           const it = c.items[k], q = P[it[0]], hot = k === actK;
           return {
-            x: pc((q[0] / W) * 100), y: pc((q[1] / H) * 100), go: jump(k), aria: 'Show exports to ' + it[0],
-            op: on && !hot ? 1 : 0, pe: on && !hot ? 'auto' : 'none',
+            x: pc((q[0] / W) * 100), y: pc((q[1] / H) * 100), go: jump(k), out: release, aria: 'Show exports to ' + it[0],
+            op: on && !hot ? 1 : 0, pe: on ? 'auto' : 'none', cur: hot ? 'default' : 'pointer',
             tr: on ? (hot ? 'opacity 150ms ease' : 'opacity 300ms ease 300ms') : 'none'
           };
         }),
@@ -3318,7 +3320,7 @@ class Component extends DCLogic {
               : show ? 'opacity 300ms ease ' + LAND + ', transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1) ' + LAND : 'opacity 150ms ease, transform 150ms ease',
             lt: show && !isHome ? 'opacity 200ms ease ' + LAND : 'opacity 150ms ease',
             bc: hot ? '#10A867' : '#CFDDD8', sh: hot ? '0 8px 20px rgba(0, 40, 28, 0.16)' : '0 1px 2px rgba(0, 40, 28, 0.08)',
-            enter: isHome ? () => {} : hoverK(k), leave: isHome ? () => {} : unhover
+            enter: isHome ? () => {} : hoverK(k), leave: isHome ? () => {} : release
           };
         })
       });
