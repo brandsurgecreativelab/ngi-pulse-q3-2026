@@ -3271,7 +3271,8 @@ class Component extends DCLogic {
         go: () => this.setTab(t.id, true)
       };
     });
-    const floatOn = showHero && !!s.pastHero;
+    // The floating nav normally appears once you scroll past the cover. The showFloatNav Tweak pins it on so it can be seen and edited on the canvas.
+    const floatOn = (showHero && !!s.pastHero) || !!this.props.showFloatNav;
     const float = { o: floatOn ? '1' : '0', y: floatOn ? '0' : '-140%', pe: floatOn ? 'auto' : 'none', tab: floatOn ? 0 : -1 };
     const floatTabs = D.tabs.map((t) => {
       const cur = t.id === s.active;
@@ -3582,7 +3583,7 @@ class Component extends DCLogic {
     };
   }
 }
-PulseRuntime.mount(Component, document.getElementById('tpl').content, document.getElementById('app'), {"startTab": "market", "showHero": true, "heroBackground": "video", "lavaStyle": "metal", "bandColor": "#f2f6f5"});
+PulseRuntime.mount(Component, document.getElementById('tpl').content, document.getElementById('app'), {"startTab": "market", "showHero": true, "showFloatNav": false, "heroBackground": "video", "lavaStyle": "metal", "bandColor": "#f2f6f5"});
 </script>
 </body>
 </html>
