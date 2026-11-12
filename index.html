@@ -358,15 +358,14 @@
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{unitTrusts.title}}</h3>
 </div>
 <div style="min-width: 0">
-<p style="margin: 0 0 16px; font-size: 18px; line-height: 1.55; color: #407A68">{{unitTrusts.takeaway}}</p>
-<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #407A68; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="padding: 2px 9px; border-radius: 999px; background: #00E677; color: #003A29; font-size: 11px; font-weight: 700">Nedgroup</span>marks Nedgroup Investments funds.</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #407A68">{{unitTrusts.takeaway}}</p>
 </div>
 </div>
 <div data-reveal="1" style="min-width: 0; box-sizing: border-box; padding: 0">
 <p style="margin: 0 0 12px; font-size: 14px; font-weight: 500; color: #407A68">Choose a peer category</p>
 <div class="pc-chiprow pc-utgrid" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px">
 <sc-for list="{{utChips}}" as="c" hint-placeholder-count="9">
-<button onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="border: 1px solid #004D36; background: {{c.bg}}; color: {{c.fg}}; font-family: inherit; font-size: 14px; font-weight: 500; padding: 10px 16px; min-height: 48px; border-radius: 999px; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 10px"><span aria-hidden="true" style="flex: none; width: 10px; height: 10px; border-radius: 50%; background: {{c.cap}}; box-shadow: 0 0 0 1px rgba(0, 77, 54, 0.22)"></span>{{c.name}}</button>
+<button onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="border: 1px solid #004D36; background: {{c.bg}}; color: {{c.fg}}; font-family: inherit; font-size: 14px; font-weight: 500; padding: 10px 20px; min-height: 48px; border-radius: 999px; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: flex-start; text-align: left; gap: 10px"><span aria-hidden="true" style="flex: none; width: 10px; height: 10px; border-radius: 50%; background: {{c.cap}}; box-shadow: 0 0 0 1px rgba(0, 77, 54, 0.22)"></span>{{c.name}}</button>
 </sc-for>
 </div>
 <div style="background: #FFFFFF; border-radius: 20px; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06), 0 10px 30px rgba(0, 40, 28, 0.07); overflow: hidden">
