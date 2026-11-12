@@ -476,11 +476,11 @@
 <path d="M12.6 12 L14.6 6.6 H25.4 L27.4 12 Z" fill="#CFE6EE"></path>
 <rect x="6" y="20" width="6" height="6" rx="1.6" fill="#1E2B26"></rect><rect x="28" y="20" width="6" height="6" rx="1.6" fill="#1E2B26"></rect>
 <rect x="3.5" y="12" width="33" height="10.5" rx="4.5" fill="{{b.body}}" stroke="#003A29" stroke-width="1.2"></rect>
-<circle cx="9" cy="16.8" r="2.2" fill="{{b.lamp}}"></circle><circle cx="31" cy="16.8" r="2.2" fill="{{b.lamp}}"></circle>
+<circle cx="9" cy="16.8" r="2.3" fill="{{b.lamp}}" stroke="#003A29" stroke-width="0.9"></circle><circle cx="31" cy="16.8" r="2.3" fill="{{b.lamp}}" stroke="#003A29" stroke-width="0.9"></circle>
 <rect x="15.5" y="16" width="9" height="2.2" rx="1.1" fill="#003A29" opacity="0.45"></rect>
 </svg>
 </span>
-<div style="position: relative; width: 100%; max-width: 96px; height: {{b.hh}}; border-radius: 8px 8px 2px 2px; background: linear-gradient(180deg, {{b.color}} 0%, {{b.color}} 45%, {{b.color2}} 100%); overflow: hidden; transition: {{b.t}}">
+<div style="position: relative; width: 100%; max-width: 96px; height: {{b.hh}}; border-radius: 8px 8px 2px 2px; background: {{b.color}}; overflow: hidden; transition: {{b.t}}">
 <span aria-hidden="true" style="position: absolute; left: 50%; top: 11px; bottom: 3px; width: 2px; margin-left: -1px; background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0 6px, transparent 6px 11px)"></span>
 </div>
 </div></sc-for>
@@ -2417,7 +2417,7 @@ class Component extends DCLogic {
    "paras": [
     "Owning a car costs around $0.77 per mile, while Tesla targets robotaxi operating costs of $0.25 per mile and Cybercab costs of just $0.20. These targets are substantially below current taxi and ride-hailing fares. If achieved at scale, autonomous services could offer lower prices while improving operators’ profit margins."
    ],
-   "chart": {"kind": "bars", "title": "Per-mile economics: what riders pay today vs. what robotaxis target", "subtitle": "US dollars per mile", "aria": "Bar chart of per-mile costs: NYC yellow taxi $3.50, Waymo $3.16, US ride-hail $2.80, personal car $0.77, China ride-hail $0.50, Tesla robotaxi $0.25 and Cybercab $0.20.", "max": 4, "ticks": [0, 1, 2, 3, 4], "fmt": "${v2}", "legend": [{"label": "Incumbent paid transport (price to rider)", "color": "#006341"}, {"label": "Reference points", "color": "#669486"}, {"label": "Tesla robotaxi / Cybercab targets", "color": "#10A867"}], "bars": [{"label": "NYC yellow taxi", "sub": "metered rate", "v": 3.5, "color": "#006341", "icon": "taxi", "pill": "#006341", "pillFg": "#FFFFFF"}, {"label": "Waymo", "sub": "rider price, est.", "v": 3.16, "color": "#006341", "icon": "waymo", "pill": "#006341", "pillFg": "#FFFFFF"}, {"label": "US ride-hail", "sub": "Uber/Lyft", "v": 2.8, "color": "#006341", "icon": "car", "pill": "#006341", "pillFg": "#FFFFFF"}, {"label": "Personal car", "sub": "all-in ownership", "v": 0.77, "color": "#669486", "icon": "grey"}, {"label": "China ride-hail", "sub": "human driven", "v": 0.5, "color": "#669486", "icon": "grey"}, {"label": "Tesla robotaxi", "sub": "ARK, at scale", "v": 0.25, "color": "#10A867", "icon": "robo", "pill": "#D9FBEB"}, {"label": "Cybercab op.", "sub": "Musk target", "v": 0.2, "color": "#10A867", "icon": "robo", "pill": "#D9FBEB"}]},
+   "chart": {"kind": "bars", "title": "Per-mile economics: what riders pay today vs. what robotaxis target", "subtitle": "US dollars per mile", "aria": "Bar chart of per-mile costs: NYC yellow taxi $3.50, Waymo $3.16, US ride-hail $2.80, personal car $0.77, China ride-hail $0.50, Tesla robotaxi $0.25 and Cybercab $0.20.", "max": 4, "ticks": [0, 1, 2, 3, 4], "fmt": "${v2}", "legend": [{"label": "Incumbent paid transport (price to rider)", "color": "#006341"}, {"label": "Reference points", "color": "#009288"}, {"label": "Tesla robotaxi / Cybercab targets", "color": "#10A867"}], "bars": [{"label": "NYC yellow taxi", "sub": "metered rate", "v": 3.5, "color": "#006341", "icon": "taxi", "pill": "#006341", "pillFg": "#FFFFFF"}, {"label": "Waymo", "sub": "rider price, est.", "v": 3.16, "color": "#006341", "icon": "waymo", "pill": "#006341", "pillFg": "#FFFFFF"}, {"label": "US ride-hail", "sub": "Uber/Lyft", "v": 2.8, "color": "#006341", "icon": "car", "pill": "#006341", "pillFg": "#FFFFFF"}, {"label": "Personal car", "sub": "all-in ownership", "v": 0.77, "color": "#009288", "icon": "grey"}, {"label": "China ride-hail", "sub": "human driven", "v": 0.5, "color": "#009288", "icon": "grey"}, {"label": "Tesla robotaxi", "sub": "ARK, at scale", "v": 0.25, "color": "#10A867", "icon": "robo", "pill": "#D9FBEB"}, {"label": "Cybercab op.", "sub": "Musk target", "v": 0.2, "color": "#10A867", "icon": "robo", "pill": "#D9FBEB"}]},
    "img": "assets/insight-15.png",
    "alt": "Bar chart of per-mile costs, from $3.50 for a New York yellow taxi down to $0.20 for the Cybercab target",
    "source": "CIB Weekly charts | September 2026."
@@ -3148,7 +3148,7 @@ class Component extends DCLogic {
             pillBg: b.pill || '#E6EFEB', pillFg: b.pillFg || '#004D36',
             sign: icon === 'taxi', dome: icon === 'waymo',
             body: icon === 'taxi' ? '#F7C600' : icon === 'robo' ? '#E4FFF0' : icon === 'grey' ? '#E3EAE7' : '#FFFFFF',
-            lamp: icon === 'robo' ? '#00E677' : '#FFF3B0'
+            lamp: icon === 'robo' ? '#00E677' : '#FFFFFF'
           });
         }),
         callout: c.callout || '', hasCallout: !!c.callout, t2: tr('opacity', 500, 700 + c.bars.length * 90),
