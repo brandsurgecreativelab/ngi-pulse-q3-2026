@@ -407,10 +407,10 @@
 <div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 <sc-for list="{{insAll}}" as="a" hint-placeholder-count="11">
 <section id="{{a.id}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
-<div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
+<div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0">
 <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Investment Insights<sc-if value="{{a.hasKicker}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="margin: 0 10px; color: #8CAFA5">/</span>{{a.kicker}}</sc-if></p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{a.title}}</h3>
-<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #407A68">{{a.takeaway}}</p>
+<p style="margin: 0; max-width: 880px; font-size: 18px; line-height: 1.55; color: #407A68">{{a.takeaway}}</p>
 </div>
 <div data-reveal="1" style="min-width: 0; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; gap: 32px">
 <div>
