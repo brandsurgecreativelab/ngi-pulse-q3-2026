@@ -545,7 +545,7 @@
 <sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><circle onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" cx="100" cy="100" r="74" fill="none" stroke="{{g.stroke}}" stroke-width="{{g.sw}}" pathLength="100" style="cursor: pointer; pointer-events: stroke; stroke-dasharray: {{g.dash}}; stroke-dashoffset: {{g.offset}}; transform: translate({{g.dx}}px, {{g.dy}}px); transition: {{g.t}}"></circle></sc-for>
 </svg>
 <div style="position: absolute; inset: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: {{a.c.op}}; transform: scale({{a.c.csc}}); transition: {{a.c.t2}}">
-<sc-if value="{{a.c.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{a.c.cImg}}" alt="" style="display: block; height: {{a.c.imgH}}; width: auto; margin-bottom: 12px; border-radius: {{a.c.imgR}}; box-shadow: {{a.c.imgS}}; animation: pcZoomIn 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both"></sc-if>
+<sc-if value="{{a.c.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{a.c.cImg}}" alt="" style="display: block; width: {{a.c.imgW}}; height: {{a.c.imgH}}; margin-bottom: 12px; border-radius: {{a.c.imgR}}; box-shadow: {{a.c.imgS}}; animation: pcZoomIn 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both"></sc-if>
 <span style="font-size: clamp(34px, 4.6vw, 54px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; color: #004D36">{{a.c.cBig}}</span>
 <span style="margin-top: 8px; max-width: 180px; font-size: clamp(12px, 1.2vw, 15px); line-height: 1.3; font-weight: 600; color: #004D36">{{a.c.cSmall}}</span>
 </div>
@@ -3201,7 +3201,8 @@ class Component extends DCLogic {
       return Object.assign(base, {
         centre: c.centre, centreLabel: c.centreLabel, cBig: sg ? sg[1].toFixed(1) + '%' : c.centre, cSmall: sg ? sg[0] : c.centreLabel,
         // The isolated region shows its flag, or a Google globe icon for multi-country regions (Rest of World: 'language').
-        hasImg: !!(sg && sg[3]), cImg: sg && sg[3] ? sg[3] : '', imgH: sg && sg[4] === 'flag' ? 'clamp(24px, 2.8vw, 34px)' : 'clamp(32px, 3.8vw, 46px)',
+        hasImg: !!(sg && sg[3]), cImg: sg && sg[3] ? sg[3] : '', // Flags all share one width (their heights follow their own proportions); icons are a fixed square.
+        imgW: sg && sg[4] === 'flag' ? 'clamp(38px, 4.2vw, 54px)' : 'clamp(32px, 3.8vw, 46px)', imgH: sg && sg[4] === 'flag' ? 'auto' : 'clamp(32px, 3.8vw, 46px)',
         imgR: sg && sg[4] === 'flag' ? '4px' : '0', imgS: sg && sg[4] === 'flag' ? '0 1px 2px rgba(0, 30, 20, 0.18), 0 4px 12px rgba(0, 30, 20, 0.12)' : 'none', t2: tr('opacity', 600, 500) + (on ? ', transform ' + M(600) + ' ' + E + ' ' + M(500) : ''),
         segs: c.segments.map((g, k) => {
           const len = Math.max(0, g[1] - 0.35), off = -start;
