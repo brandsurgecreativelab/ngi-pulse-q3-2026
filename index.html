@@ -3201,8 +3201,8 @@ class Component extends DCLogic {
       return Object.assign(base, {
         centre: c.centre, centreLabel: c.centreLabel, cBig: sg ? sg[1].toFixed(1) + '%' : c.centre, cSmall: sg ? sg[0] : c.centreLabel,
         // The isolated region shows its flag, or a Google globe icon for multi-country regions (Rest of World: 'language').
-        hasImg: !!(sg && sg[3]), cImg: sg && sg[3] ? sg[3] : '', // Flags all share one width (their heights follow their own proportions); icons are a fixed square.
-        imgW: sg && sg[4] === 'flag' ? 'clamp(38px, 4.2vw, 54px)' : 'clamp(32px, 3.8vw, 46px)', imgH: sg && sg[4] === 'flag' ? 'auto' : 'clamp(32px, 3.8vw, 46px)',
+        hasImg: !!(sg && sg[3]), cImg: sg && sg[3] ? sg[3] : '', // Flags all share one width, gauged on Australia's wide 2:1 flag; heights follow each flag's own proportions. Icons are a fixed square.
+        imgW: sg && sg[4] === 'flag' ? 'clamp(52px, 5.4vw, 72px)' : 'clamp(32px, 3.8vw, 46px)', imgH: sg && sg[4] === 'flag' ? 'auto' : 'clamp(32px, 3.8vw, 46px)',
         imgR: sg && sg[4] === 'flag' ? '4px' : '0', imgS: sg && sg[4] === 'flag' ? '0 1px 2px rgba(0, 30, 20, 0.18), 0 4px 12px rgba(0, 30, 20, 0.12)' : 'none', t2: tr('opacity', 600, 500) + (on ? ', transform ' + M(600) + ' ' + E + ' ' + M(500) : ''),
         segs: c.segments.map((g, k) => {
           const len = Math.max(0, g[1] - 0.35), off = -start;
@@ -3217,7 +3217,7 @@ class Component extends DCLogic {
             dash: (on ? len : 0) + ' 100', offset: off, sw: picked ? 40 : 32,
             dx: picked ? (Math.cos(ang) * 9).toFixed(2) : 0, dy: picked ? (Math.sin(ang) * 9).toFixed(2) : 0,
             t: on ? 'stroke-dasharray ' + M(520) + ' ' + E + ' ' + M(delay) + ', ' + fx : fx,
-            bg: picked ? 'rgba(0, 230, 119, 0.16)' : locked === k ? 'rgba(0, 58, 41, 0.05)' : 'transparent', fw: picked || locked === k ? 700 : 500, pressed: locked === k ? 'true' : 'false',
+            bg: picked ? 'rgba(0, 230, 119, 0.16)' : locked === k ? 'rgba(0, 58, 41, 0.05)' : 'transparent', fw: picked || locked === k || k === 0 ? 700 : 500, pressed: locked === k ? 'true' : 'false',
             pick: () => this.setState({ donutSel: locked === k ? null : { i: idx, k: k } }),
             op: on ? 1 : 0, tx: on ? '0' : '12px',
             t2: on ? 'opacity ' + M(400) + ' ' + E + ' ' + M(300 + k * 70) + ', transform ' + M(400) + ' ' + E + ' ' + M(300 + k * 70) + ', background-color 200ms ease' : 'background-color 200ms ease',
