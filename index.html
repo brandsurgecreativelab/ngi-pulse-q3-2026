@@ -303,10 +303,11 @@
 </section>
 
 <section id="sec-assets" data-spy="assets" style="scroll-margin-top: 84px; margin-top: 80px; padding-top: 64px; border-top: 1px solid #D9E4E1">
-<h2 style="margin: 0 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #407A68"><span style="color: #10A867">Asset Classes</span></h2>
+<h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Asset Classes</h2>
 <section id="ac-quilt" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Asset Classes</p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{quiltInfo.title}}</h3>
 <p style="margin: 8px 0 0; font-size: 22px; line-height: 1.3; color: #407A68">{{quiltInfo.sub}}</p>
 </div>
@@ -351,10 +352,11 @@
 </section>
 
 <section id="sec-units" data-spy="units" style="scroll-margin-top: 84px; margin-top: 80px; padding-top: 64px; border-top: 1px solid #D9E4E1">
-<h2 style="margin: 0 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #407A68"><span style="color: #10A867">Unit Trusts</span></h2>
+<h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Unit Trusts</h2>
 <section id="ut-peers" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Unit Trusts</p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{unitTrusts.title}}</h3>
 </div>
 <div style="min-width: 0">
@@ -401,12 +403,12 @@
 </section>
 
 <section id="sec-insights" data-spy="insights" style="scroll-margin-top: 84px; margin-top: 80px; padding-top: 64px; border-top: 1px solid #D9E4E1">
-<h2 style="margin: 0 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #407A68"><span style="color: #10A867">Investment Insights</span></h2>
-<div style="display: flex; flex-direction: column; gap: 72px">
+<h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Investment Insights</h2>
+<div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 <sc-for list="{{insAll}}" as="a" hint-placeholder-count="11">
 <section id="{{a.id}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
-<sc-if value="{{a.hasKicker}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">{{a.kicker}}</p></sc-if>
+<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Investment Insights<sc-if value="{{a.hasKicker}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="margin: 0 10px; color: #8CAFA5">/</span>{{a.kicker}}</sc-if></p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{a.title}}</h3>
 <p style="margin: 0; font-size: 18px; line-height: 1.55; color: #407A68">{{a.takeaway}}</p>
 </div>
@@ -550,12 +552,13 @@
 </section>
 
 <section id="sec-ngi" data-spy="ngi" style="scroll-margin-top: 84px; margin-top: 80px; padding-top: 64px; border-top: 1px solid #D9E4E1">
-<h2 style="margin: 0 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #407A68"><span style="color: #10A867">Nedgroup Investments</span></h2>
-<div style="display: flex; flex-direction: column; gap: 48px">
+<h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Nedgroup Investments</h2>
+<div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 
 <section id="ngi-mm" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Nedgroup Investments</p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{mm.title}}</h3>
 <p style="margin: 8px 0 0; font-size: 20px; color: #407A68">{{mm.sub}}</p>
 </div>
@@ -596,6 +599,7 @@
 <section id="ngi-about" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Nedgroup Investments</p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{about.title}}</h3>
 </div>
 <div style="min-width: 0">
@@ -626,6 +630,7 @@
 <section id="ngi-info" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Nedgroup Investments</p>
 <h3 style="margin: 0; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; color: #004D36">{{other.title}}</h3>
 </div>
 </div>
