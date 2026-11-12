@@ -3377,7 +3377,7 @@ class Component extends DCLogic {
     const flagSlices = Array.from({ length: FLAG_N }, (_, i) => ({ x: (-i * 100) + '%', d: (-(FLAG_N - i) * 0.065).toFixed(2) + 's' }));
     const fxRows = D.fx.rows.map((r) => ({ cur: r.cur, sym: r.sym, rate: r.rate, n: parseFloat(String(r.rate).replace(/[^0-9.]/g, '')), unit: r.cur.split(' ').pop(), chg: this.fmt(r.chg), up: r.chg >= 0, down: r.chg < 0, pillBg: r.chg >= 0 ? '#E6FBF1' : '#FDECEA', pillFg: r.chg >= 0 ? '#0B7A4B' : '#752E35', text: r.text,
       // Waving flag: the flag is cut into thin vertical slices that bob out of step, like cloth in a breeze.
-      flag: /dollar/i.test(r.cur) ? 'assets/flag-us.svg' : /pound/i.test(r.cur) ? 'assets/flag-uk.svg' : 'assets/flag-eu-wide.svg',
+      flag: /dollar/i.test(r.cur) ? 'assets/flag-us.svg' : /pound/i.test(r.cur) ? 'assets/flag-uk.svg' : 'assets/flag-eu-wide2.svg',
       sw: (FLAG_N * 100) + '%', slices: flagSlices }));
 
     const period = s.period || '3m';
