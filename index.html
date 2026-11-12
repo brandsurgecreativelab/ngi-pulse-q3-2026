@@ -539,7 +539,7 @@
 </sc-if>
 
 <sc-if value="{{a.c.isDonut}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(24px, 5vw, 80px); align-items: center">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(24px, 5vw, 80px); align-items: center; max-width: 1040px; margin: 0 auto">
 <div aria-hidden="true" style="position: relative; flex: 1 1 440px; min-width: 240px; max-width: 560px; margin: 0 auto">
 <svg viewBox="0 0 200 200" style="display: block; width: 100%; height: auto; transform: rotate(-90deg)">
 <sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><circle cx="100" cy="100" r="74" fill="none" stroke="{{g.color}}" stroke-width="{{g.sw}}" pathLength="100" style="stroke-dasharray: {{g.dash}}; stroke-dashoffset: {{g.offset}}; transition: {{g.t}}"></circle></sc-for>
