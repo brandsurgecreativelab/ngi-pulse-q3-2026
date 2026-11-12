@@ -549,7 +549,7 @@
 <span style="margin-top: 8px; max-width: 180px; font-size: clamp(12px, 1.2vw, 15px); line-height: 1.3; font-weight: 600; color: #004D36">{{a.c.centreLabel}}</span>
 </div>
 </div>
-<ul style="flex: 1 1 320px; min-width: 0; list-style: none; margin: 0; padding: 0; border-top: 2px solid #004D36">
+<ul style="flex: 1 1 320px; min-width: 0; list-style: none; margin: 0; padding: 0">
 <sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><li onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" style="display: grid; grid-template-columns: 16px 1fr auto; gap: 14px; align-items: center; padding: 11px 12px; border-bottom: 1px solid #E3EBE8; border-radius: 10px; background: {{g.bg}}; font-size: 15px; color: #004D36; opacity: {{g.op}}; transform: translateX({{g.tx}}); transition: {{g.t2}}">
 <span style="width: 16px; height: 16px; border-radius: 50%; background: {{g.color}}"></span><span style="font-weight: {{g.fw}}">{{g.label}}</span><span style="font-weight: {{g.fw}}; font-variant-numeric: tabular-nums">{{g.val}}</span>
 </li></sc-for>
