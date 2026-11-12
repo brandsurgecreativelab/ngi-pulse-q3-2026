@@ -411,9 +411,9 @@
 <p style="margin: 0; font-size: 18px; line-height: 1.55; color: #407A68">{{a.takeaway}}</p>
 </div>
 <div data-reveal="1" style="min-width: 0; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; gap: 32px">
-<div style="max-width: 880px">
+<div>
 <sc-if value="{{a.hasLead}}" hint-placeholder-val="{{ true }}"><p style="margin: 0 0 20px; font-size: 17px; line-height: 1.6; font-weight: 600; color: #004D36">{{a.lead}}</p></sc-if>
-<div style="columns: 2 380px; column-gap: 40px">
+<div>
 <sc-for list="{{a.paras}}" as="p" hint-placeholder-count="2">
 <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.65; break-inside: avoid">{{p.t}}</p>
 </sc-for>
