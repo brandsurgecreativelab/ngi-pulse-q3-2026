@@ -3202,7 +3202,7 @@ class Component extends DCLogic {
       const locked = selAll && selAll.i === idx ? selAll.k : null;
       const hov = hover && hover.i === idx ? hover.k : null;
       // While the chart is on screen it tours the regions on its own, South Africa through to Rest of World and round
-      // again, one every ~2.4s after the ring has drawn. Hovering or locking a region pauses the tour; it picks up again
+      // again, one every 1.5s after the ring has drawn. Hovering or locking a region pauses the tour; it picks up again
       // once the reader lets go. Leaving the screen (or reduced motion) stops it.
       if (!this._donutTour) this._donutTour = {};
       const tour = this._donutTour;
@@ -3213,7 +3213,7 @@ class Component extends DCLogic {
           const cur = st.donutAuto && st.donutAuto.i === idx ? st.donutAuto.k : -1;
           this.setState({ donutAuto: { i: idx, k: (cur + 1) % n } });
         };
-        tour[idx] = { t0: setTimeout(() => { step(); tour[idx].iv = setInterval(step, 2400); }, 2200) };
+        tour[idx] = { t0: setTimeout(() => { step(); tour[idx].iv = setInterval(step, 1500); }, 2200) };
       } else if (!on && tour[idx]) {
         clearTimeout(tour[idx].t0); clearInterval(tour[idx].iv); tour[idx] = null;
         if (this.state && this.state.donutAuto && this.state.donutAuto.i === idx) setTimeout(() => this.setState({ donutAuto: null }), 0);
