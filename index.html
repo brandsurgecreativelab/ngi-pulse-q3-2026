@@ -3075,10 +3075,16 @@ class Component extends DCLogic {
         dots: (c.dots || []).map((d, k) => ({ left: pc(X(d.x)), top: pc(Y(d.y)), color: d.color, sc: on ? 1 : 0, t: on ? 'transform ' + M(timed ? 480 : 420) + ' cubic-bezier(0.34, 1.56, 0.64, 1) ' + M(timed ? (k === 0 ? lineEnd : lineEnd + 450 + 900) : draw + 200 + k * 520) : 'none' })),
         ann: (c.ann || []).map((n) => {
           const l = X(n.x);
-          // The leader runs from the label down to the line itself, ending in an arrow tip just above it.
+          // The leader runs from the label down towards the line and ends in an arrow tip just above it. It stops above the
+          // highest point of the line across the arrow's width, so a steep stretch beside it never touches the tip.
           const P = c.points;
-          let ly = P[P.length - 1][1];
-          for (let k = 1; k < P.length; k++) if (P[k][0] >= n.x) { const a = P[k - 1], z = P[k], f = z[0] === a[0] ? 1 : (n.x - a[0]) / (z[0] - a[0]); ly = a[1] + (z[1] - a[1]) * Math.max(0, Math.min(1, f)); break; }
+          const at = (x) => { for (let k = 1; k < P.length; k++) if (P[k][0] >= x) { const a = P[k - 1], z = P[k], f = z[0] === a[0] ? 1 : (x - a[0]) / (z[0] - a[0]); return a[1] + (z[1] - a[1]) * Math.max(0, Math.min(1, f)); } return P[P.length - 1][1]; };
+          const host = this._charts && this._charts[idx];
+          const sv = host && host.querySelector ? host.querySelector('svg[viewBox="0 0 1000 1000"]') : null;
+          const cw = (sv && sv.getBoundingClientRect().width) || 1220;
+          const win = (c.x[1] - c.x[0]) * (9 / cw); // about 9px either side of the arrow, whatever the screen width
+          let ly = Math.max(at(n.x - win), at(n.x), at(n.x + win));
+          P.forEach((q) => { if (q[0] >= n.x - win && q[0] <= n.x + win) ly = Math.max(ly, q[1]); });
           return {
             left: pc(l), top: pc(Y(n.y)), h: pc(Math.max(0, Y(ly) - Y(n.y))), label: n.label, sub: n.sub || '', op: on ? 1 : 0, cls: l < 12 ? 'pc-hide-sm' : '',
             ty: on ? '0px' : (n.pop ? '18px' : '6px'),
