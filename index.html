@@ -232,9 +232,9 @@
 <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 30, 20, 0.08) 0%, rgba(0, 30, 20, 0.12) 45%, rgba(0, 30, 20, 0.62) 100%)"></div>
 <div style="position: absolute; left: 20px; right: 20px; bottom: 16px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
 <span style="display: inline-flex; align-items: center; gap: 12px"><span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; color: #004D36; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; box-shadow: 0 2px 8px rgba(0, 20, 14, 0.25)">{{r.sym}}</span><span style="font-size: 20px; font-weight: 700; color: #FFFFFF; text-shadow: 0 1px 6px rgba(0, 20, 14, 0.55)">{{r.cur}}</span></span>
-<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: {{r.pillBg}}; color: {{r.pillFg}}; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 2px 8px rgba(0, 20, 14, 0.2)">
+<span data-pop="1" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: {{r.pillBg}}; color: {{r.pillFg}}; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: 0 2px 8px rgba(0, 20, 14, 0.2)">
 <sc-if value="{{r.up}}" hint-placeholder-val="{{ true }}"><svg width="12" height="10" viewBox="0 0 22 18" role="img" aria-label="Up"><path d="M11 0 L22 18 L0 18 Z" fill="currentColor"></path></svg></sc-if>
-<sc-if value="{{r.down}}" hint-placeholder-val="{{ false }}"><svg width="12" height="10" viewBox="0 0 22 18" role="img" aria-label="Down"><path d="M0 0 L22 0 L11 18 Z" fill="currentColor"></path></svg></sc-if>{{r.chg}}</span>
+<sc-if value="{{r.down}}" hint-placeholder-val="{{ false }}"><svg width="12" height="10" viewBox="0 0 22 18" role="img" aria-label="Down"><path d="M0 0 L22 0 L11 18 Z" fill="currentColor"></path></svg></sc-if><span data-count="{{r.chgN}}" data-prefix="{{r.chgSign}}" data-suffix="%" data-dec="1">{{r.chg}}</span></span>
 </div>
 </div>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 18px">
@@ -2721,6 +2721,7 @@ class Component extends DCLogic {
           el._shown = true;
           if (el._rv) { el._rv.currentTime = 0; el._rv.play(); }
           el.querySelectorAll('[data-count]').forEach((n, k) => this.countUp(n, 250 + k * 120));
+          el.querySelectorAll('[data-pop]').forEach((n, k) => n.animate([{ opacity: 0, transform: 'scale(0.6)' }, { opacity: 1, transform: 'scale(1.08)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 350 + k * 140, easing: E, fill: 'backwards' }));
         } else if (!e.isIntersecting && el._shown) hide(el);
       });
     }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
@@ -3376,7 +3377,7 @@ class Component extends DCLogic {
     ];
     const FLAG_N = 36;
     const flagSlices = Array.from({ length: FLAG_N }, (_, i) => ({ x: (-i * 100) + '%', d: (-(FLAG_N - i) * 0.065).toFixed(2) + 's' }));
-    const fxRows = D.fx.rows.map((r) => ({ cur: r.cur, sym: r.sym, rate: r.rate, n: parseFloat(String(r.rate).replace(/[^0-9.]/g, '')), unit: r.cur.split(' ').pop(), chg: this.fmt(r.chg), up: r.chg >= 0, down: r.chg < 0, pillBg: r.chg >= 0 ? '#E6FBF1' : '#FDECEA', pillFg: r.chg >= 0 ? '#0B7A4B' : '#752E35', text: r.text,
+    const fxRows = D.fx.rows.map((r) => ({ cur: r.cur, sym: r.sym, rate: r.rate, n: parseFloat(String(r.rate).replace(/[^0-9.]/g, '')), unit: r.cur.split(' ').pop(), chg: this.fmt(r.chg), chgN: Math.abs(r.chg), chgSign: r.chg < 0 ? '−' : '', up: r.chg >= 0, down: r.chg < 0, pillBg: r.chg >= 0 ? '#E6FBF1' : '#FDECEA', pillFg: r.chg >= 0 ? '#0B7A4B' : '#752E35', text: r.text,
       // Waving flag: the flag is cut into thin vertical slices that bob out of step, like cloth in a breeze.
       flag: /dollar/i.test(r.cur) ? 'assets/flag-us.svg' : /pound/i.test(r.cur) ? 'assets/flag-uk.svg' : 'assets/flag-eu-wide2.svg',
       sw: (FLAG_N * 100) + '%', slices: flagSlices }));
