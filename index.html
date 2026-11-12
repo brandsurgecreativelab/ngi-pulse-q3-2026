@@ -440,7 +440,7 @@
 <div style="height: {{r.th}}; margin-top: -1.5px; border-radius: 3px; background: {{r.bg}}; transform: scaleX({{r.sc}}); transform-origin: left center; transition: {{r.t}}"></div>
 <div style="position: absolute; top: 10px; left: {{r.labelLeft}}; max-width: 300px; opacity: {{r.op}}; transition: {{r.t2}}"><p style="margin: 0; font-size: 13px; font-weight: 700; color: #004D36">{{r.label}}</p><sc-if value="{{r.hasSub}}" hint-placeholder-val="{{ false }}"><p class="pc-hide-sm" style="margin: 2px 0 0; font-size: 12px; line-height: 1.35; color: #407A68">{{r.sub}}</p></sc-if></div>
 <sc-if value="{{r.hasNote}}" hint-placeholder-val="{{ false }}"><span class="pc-hide-sm" style="position: absolute; right: 8px; top: 8px; font-size: 11px; color: #407A68; opacity: {{r.op}}; transition: {{r.t2}}">{{r.note}}</span></sc-if>
-<span style="position: absolute; right: 0; top: -26px; font-size: 15px; font-weight: 700; color: #004D36; opacity: {{r.op}}; transition: {{r.t2}}">{{r.val}}</span>
+<span style="position: absolute; left: {{r.vl}}; right: {{r.vr}}; top: {{r.vt}}; padding: {{r.vp}}; border-radius: 999px; background: {{r.vbg}}; line-height: 1.2; font-size: 15px; font-weight: 700; color: #004D36; font-variant-numeric: tabular-nums; opacity: {{r.op}}; transition: {{r.t2}}">{{r.val}}</span>
 </div></sc-for>
 <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; clip-path: {{a.c.clip}}; transition: {{a.c.ct}}">
 <sc-if value="{{a.c.hasAreas}}" hint-placeholder-val="{{ false }}"><polygon points="{{a.c.posPts}}" fill="{{a.c.posColor}}"></polygon><polygon points="{{a.c.negPts}}" fill="{{a.c.negColor}}"></polygon></sc-if>
@@ -448,7 +448,7 @@
 <sc-if value="{{a.c.hasProj}}" hint-placeholder-val="{{ false }}"><polyline points="{{a.c.proj.pts}}" fill="none" stroke="{{a.c.proj.color}}" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="1" stroke-dasharray="1 1" style="stroke-dashoffset: {{a.c.proj.off}}; transition: {{a.c.proj.t}}"></polyline></sc-if>
 </svg>
 <sc-for list="{{a.c.dots}}" as="d" hint-placeholder-count="2"><span style="position: absolute; left: {{d.left}}; top: {{d.top}}; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: {{d.color}}; box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 5px {{d.color}}; transform: scale({{d.sc}}); transition: {{d.t}}"></span></sc-for>
-<sc-for list="{{a.c.ann}}" as="n" hint-placeholder-count="2"><div class="{{n.cls}}" style="position: absolute; left: {{n.left}}; top: {{n.top}}; width: 0; height: 0; opacity: {{n.op}}; transition: {{n.t}}">
+<sc-for list="{{a.c.ann}}" as="n" hint-placeholder-count="2"><div class="{{n.cls}}" style="position: absolute; left: {{n.left}}; top: {{n.top}}; width: 0; height: 0; opacity: {{n.op}}; transform: translateY({{n.ty}}); transition: {{n.t}}">
 <span style="position: absolute; left: -0.5px; bottom: 8px; width: 1px; height: 26px; background: #7FB1A0"></span>
 <span style="position: absolute; bottom: 38px; left: {{n.l}}; right: {{n.r}}; transform: {{n.tf}}; text-align: {{n.al}}; width: max-content; font-size: 12px; line-height: 1.3; font-weight: 700; color: #004D36">{{n.label}}<span style="display: block; font-weight: 500; color: #407A68">{{n.sub}}</span></span>
 </div></sc-for>
@@ -2386,7 +2386,7 @@ class Component extends DCLogic {
     "A 4% reduction in global oil supply may sound modest, but it is comparable in scale to the disruptions experienced during the 1973 OPEC oil embargo and the 1979 Iranian oil crisis, both of which were followed by significant economic downturns. In oil markets, even relatively small supply imbalances can have outsized effects on prices, inflation, and growth.",
     "Compounding the risk is the continued drawdown in global oil inventories. Data shows that crude oil held in floating storage has fallen sharply, suggesting that physical supply is being absorbed faster than expected and that the spot market is becoming increasingly tight. Lower inventories reduce the market’s ability to absorb supply disruptions, leaving oil prices more vulnerable to geopolitical shocks."
    ],
-   "chart": {"kind": "line", "title": "Total visible oil inventories, in billions of barrels", "aria": "Line chart of total visible oil inventories from 2019 to 2026, peaking near 9 billion barrels in 2020, falling from about 8.3 billion in February 2026 and estimated to reach the 7.6 billion stress level by June and the 6.8 billion floor by September 2026.", "color": "#003A29", "x": [2019, 2027], "y": [6, 9], "yTicks": [[6, "6.0"], [7, "7.0"], [8, "8.0"], [9, "9.0B"]], "xTicks": [[2020, "2020"], [2022, "2022"], [2024, "2024"], [2026, "2026"]], "points": [[2019.006, 8.043], [2019.075, 8.064], [2019.173, 8.054], [2019.256, 8.022], [2019.423, 8.111], [2019.512, 8.007], [2019.59, 8.049], [2019.673, 7.981], [2019.757, 7.965], [2019.847, 8.007], [2020.104, 8.237], [2020.188, 8.456], [2020.188, 8.535], [2020.25, 8.838], [2020.341, 8.88], [2020.438, 8.775], [2020.494, 8.739], [2020.584, 8.749], [2020.674, 8.681], [2020.758, 8.556], [2020.925, 8.503], [2021.008, 8.503], [2021.092, 8.488], [2021.251, 8.294], [2021.349, 8.279], [2021.439, 8.179], [2021.578, 8.085], [2021.669, 7.96], [2021.745, 7.928], [2021.829, 7.902], [2021.919, 7.813], [2021.995, 7.839], [2022.072, 7.813], [2022.176, 7.813], [2022.239, 7.834], [2022.343, 7.824], [2022.413, 7.777], [2022.496, 7.798], [2022.579, 7.813], [2022.663, 7.803], [2022.739, 7.824], [2022.837, 7.902], [2022.927, 7.876], [2022.997, 7.933], [2023.087, 7.933], [2023.163, 7.897], [2023.247, 7.923], [2023.309, 7.897], [2023.414, 7.876], [2023.49, 7.897], [2023.587, 7.829], [2023.657, 7.834], [2023.831, 7.803], [2023.914, 7.944], [2024.005, 7.907], [2024.165, 8.007], [2024.255, 8.033], [2024.324, 8.064], [2024.47, 7.993], [2024.665, 7.918], [2024.749, 7.855], [2024.839, 7.839], [2025.006, 7.86], [2025.187, 7.937], [2025.326, 8.028], [2025.423, 8.007], [2025.479, 8.097], [2025.576, 8.127], [2025.652, 8.2], [2025.75, 8.211], [2025.91, 8.31], [2026.076, 8.326], [2026.243, 8.075], [2026.403, 7.597]], "band": {"from": 2026.27, "to": 2026.85, "label": "Estimates from May 2026, assuming no resolution"}, "refs": [{"v": 7.6, "from": 2019, "to": 2026.4, "color": "#D4DE7E", "label": "Operational stress level", "note": "Reached by June 2026", "val": "7.6"}, {"v": 6.8, "from": 2019, "to": 2026.65, "color": "#F89686", "label": "Operational floor level", "note": "Reached by September", "sub": "The minimum level required to keep pipelines functioning and refineries operating", "val": "6.8"}], "proj": {"points": [[2026.403, 7.6], [2026.65, 6.8]], "color": "#C5CF6A"}, "dots": [{"x": 2026.403, "y": 7.6, "color": "#D4DE7E"}, {"x": 2026.65, "y": 6.8, "color": "#F89686"}], "ann": [{"x": 2020.17, "y": 8.95, "label": "March 2020", "sub": "Covid-19"}, {"x": 2026.07, "y": 8.36, "label": "Feb. 2026", "sub": "Iran war"}]},
+   "chart": {"kind": "line", "draw": 4200, "title": "Total visible oil inventories, in billions of barrels", "aria": "Line chart of total visible oil inventories from 2019 to 2026, peaking near 9 billion barrels in 2020, falling from about 8.3 billion in February 2026 and estimated to reach the 7.6 billion stress level by June and the 6.8 billion floor by September 2026.", "color": "#003A29", "x": [2019, 2027], "y": [6, 9], "yTicks": [[6, "6.0"], [7, "7.0"], [8, "8.0"], [9, "9.0B"]], "xTicks": [[2020, "2020"], [2022, "2022"], [2024, "2024"], [2026, "2026"]], "points": [[2019.006, 8.043], [2019.075, 8.064], [2019.173, 8.054], [2019.256, 8.022], [2019.423, 8.111], [2019.512, 8.007], [2019.59, 8.049], [2019.673, 7.981], [2019.757, 7.965], [2019.847, 8.007], [2020.104, 8.237], [2020.188, 8.456], [2020.188, 8.535], [2020.25, 8.838], [2020.341, 8.88], [2020.438, 8.775], [2020.494, 8.739], [2020.584, 8.749], [2020.674, 8.681], [2020.758, 8.556], [2020.925, 8.503], [2021.008, 8.503], [2021.092, 8.488], [2021.251, 8.294], [2021.349, 8.279], [2021.439, 8.179], [2021.578, 8.085], [2021.669, 7.96], [2021.745, 7.928], [2021.829, 7.902], [2021.919, 7.813], [2021.995, 7.839], [2022.072, 7.813], [2022.176, 7.813], [2022.239, 7.834], [2022.343, 7.824], [2022.413, 7.777], [2022.496, 7.798], [2022.579, 7.813], [2022.663, 7.803], [2022.739, 7.824], [2022.837, 7.902], [2022.927, 7.876], [2022.997, 7.933], [2023.087, 7.933], [2023.163, 7.897], [2023.247, 7.923], [2023.309, 7.897], [2023.414, 7.876], [2023.49, 7.897], [2023.587, 7.829], [2023.657, 7.834], [2023.831, 7.803], [2023.914, 7.944], [2024.005, 7.907], [2024.165, 8.007], [2024.255, 8.033], [2024.324, 8.064], [2024.47, 7.993], [2024.665, 7.918], [2024.749, 7.855], [2024.839, 7.839], [2025.006, 7.86], [2025.187, 7.937], [2025.326, 8.028], [2025.423, 8.007], [2025.479, 8.097], [2025.576, 8.127], [2025.652, 8.2], [2025.75, 8.211], [2025.91, 8.31], [2026.076, 8.326], [2026.243, 8.075], [2026.403, 7.597]], "band": {"from": 2026.27, "to": 2026.85, "label": "Estimates from May 2026, assuming no resolution"}, "refs": [{"v": 7.6, "from": 2019, "to": 2026.4, "color": "#D4DE7E", "label": "Operational stress level", "note": "Reached by June 2026", "val": "7.6", "valAt": "start"}, {"v": 6.8, "from": 2019, "to": 2026.65, "color": "#F89686", "label": "Operational floor level", "note": "Reached by September", "sub": "The minimum level required to keep pipelines functioning and refineries operating", "val": "6.8", "valAt": "start"}], "proj": {"points": [[2026.403, 7.6], [2026.65, 6.8]], "color": "#C5CF6A"}, "dots": [{"x": 2026.403, "y": 7.6, "color": "#D4DE7E"}, {"x": 2026.65, "y": 6.8, "color": "#F89686"}], "ann": [{"x": 2020.17, "y": 8.95, "label": "March 2020", "sub": "Covid-19"}, {"x": 2026.07, "y": 8.36, "label": "Feb. 2026", "sub": "Iran war", "pop": true}]},
    "img": "assets/insight-12.png",
    "alt": "Line chart of total visible oil inventories in billions of barrels from 2020 to 2026, falling towards the operational floor level",
    "source": "CIB Weekly charts | September 2026."
@@ -3062,13 +3062,21 @@ class Component extends DCLogic {
       const X = (v) => ((v - c.x[0]) / (c.x[1] - c.x[0])) * 100;
       const Y = (v) => (1 - (v - c.y[0]) / (c.y[1] - c.y[0])) * 100;
       const pts = (list) => list.map((q) => (X(q[0]) * 10).toFixed(1) + ',' + (Y(q[1]) * 10).toFixed(1)).join(' ');
-      const draw = 2000;
+      const draw = c.draw || 2000;
+      const timed = !!c.draw;
+      // Where the drawn line reaches a given x, as a fraction of its length (viewBox units, as pathLength measures it).
+      const vb = c.points.map((q) => [X(q[0]) * 10, Y(q[1]) * 10]);
+      const cum = [0];
+      for (let k = 1; k < vb.length; k++) cum.push(cum[k - 1] + Math.hypot(vb[k][0] - vb[k - 1][0], vb[k][1] - vb[k - 1][1]));
+      const total = cum[cum.length - 1] || 1;
+      const reach = (x) => { let k = 0; while (k < c.points.length - 1 && c.points[k][0] < x) k++; return cum[k] / total; };
+      const lineEnd = 200 + draw;
       const b = c.band;
       const bandLeft = b ? X(b.from) : 0, bandW = b ? X(b.to) - X(b.from) : 0;
       return Object.assign(base, {
         yt: c.yTicks.map((t) => ({ top: pc(Y(t[0])), label: t[1] })),
         xt: c.xTicks.map((t, k) => ({ left: pc(X(t[0])), label: t[1], cls: c.xTicks.length > 5 && k % 2 ? 'pc-hide-sm' : '' })),
-        pts: pts(c.points), color: c.color, off: c.wipe ? 0 : on ? 0 : 1, t: c.wipe ? 'none' : tr('stroke-dashoffset', draw, 200), lw: c.lineWidth || 3,
+        pts: pts(c.points), color: c.color, off: c.wipe ? 0 : on ? 0 : 1, t: c.wipe ? 'none' : timed ? (on ? 'stroke-dashoffset ' + M(draw) + ' linear ' + M(200) : 'none') : tr('stroke-dashoffset', draw, 200), lw: c.lineWidth || 3,
         clip: c.wipe ? (on ? 'inset(-60px -60px -60px 0)' : 'inset(-60px 100% -60px 0)') : 'none', ct: c.wipe ? tr('clip-path', draw + 400, 200) : 'none',
         hasAreas: !!c.areas, posColor: c.areas ? c.areas.pos : '', negColor: c.areas ? c.areas.neg : '',
         posPts: c.areas ? (X(c.points[0][0]) * 10).toFixed(1) + ',' + (Y(0) * 10).toFixed(1) + ' ' + pts(c.points.map((q) => [q[0], Math.max(0, q[1])])) + ' ' + (X(c.points[c.points.length - 1][0]) * 10).toFixed(1) + ',' + (Y(0) * 10).toFixed(1) : '',
@@ -3082,15 +3090,22 @@ class Component extends DCLogic {
           bg: r.dash ? 'repeating-linear-gradient(90deg, ' + r.color + ' 0 6px, transparent 6px 11px)' : r.color, th: r.dash ? '2px' : '3px',
           label: r.label, sub: r.sub || '', hasSub: !!r.sub, note: r.note || '', hasNote: !!r.note, val: r.val,
           labelLeft: X(r.from) > 30 ? '8px' : '12%',
+          vl: r.valAt === 'start' ? '0' : 'auto', vr: r.valAt === 'start' ? 'auto' : '0', vt: r.valAt === 'start' ? '-13px' : '-26px',
+          vp: r.valAt === 'start' ? '3px 10px' : '0', vbg: r.valAt === 'start' ? r.color : 'transparent',
           sc: on ? 1 : 0, op: on ? 1 : 0, t: tr('transform', 1100, 300 + k * 160), t2: tr('opacity', 600, 900 + k * 160)
         })),
-        hasProj: !!c.proj, proj: c.proj ? { pts: pts(c.proj.points), color: c.proj.color, off: on ? 0 : 1, t: tr('stroke-dashoffset', 700, draw + 150) } : {},
-        dots: (c.dots || []).map((d, k) => ({ left: pc(X(d.x)), top: pc(Y(d.y)), color: d.color, sc: on ? 1 : 0, t: on ? 'transform ' + M(420) + ' cubic-bezier(0.34, 1.56, 0.64, 1) ' + M(draw + 200 + k * 520) : 'none' })),
+        hasProj: !!c.proj, proj: c.proj ? { pts: pts(c.proj.points), color: c.proj.color, off: on ? 0 : 1, t: timed ? (on ? 'stroke-dashoffset ' + M(900) + ' linear ' + M(lineEnd + 450) : 'none') : tr('stroke-dashoffset', 700, draw + 150) } : {},
+        dots: (c.dots || []).map((d, k) => ({ left: pc(X(d.x)), top: pc(Y(d.y)), color: d.color, sc: on ? 1 : 0, t: on ? 'transform ' + M(timed ? 480 : 420) + ' cubic-bezier(0.34, 1.56, 0.64, 1) ' + M(timed ? (k === 0 ? lineEnd : lineEnd + 450 + 900) : draw + 200 + k * 520) : 'none' })),
         ann: (c.ann || []).map((n) => {
           const l = X(n.x);
           return {
             left: pc(l), top: pc(Y(n.y)), label: n.label, sub: n.sub || '', op: on ? 1 : 0, cls: l < 12 ? 'pc-hide-sm' : '',
-            t: tr('opacity', 500, 200 + (l / 100) * draw),
+            ty: on ? '0px' : (n.pop ? '18px' : '6px'),
+            t: (() => {
+              if (!on) return 'none';
+              const at = c.wipe ? 200 + (l / 100) * draw : 200 + reach(n.x) * draw;
+              return 'opacity ' + M(n.pop ? 260 : 450) + ' ' + E + ' ' + M(at) + ', transform ' + M(n.pop ? 560 : 600) + ' ' + (n.pop ? 'cubic-bezier(0.34, 1.56, 0.64, 1)' : E) + ' ' + M(at);
+            })(),
             l: l < 12 ? '-6px' : l > 80 ? 'auto' : '0', r: l > 80 ? '-6px' : 'auto', tf: l >= 12 && l <= 80 ? 'translateX(-50%)' : 'none', al: l < 12 ? 'left' : l > 80 ? 'right' : 'center'
           };
         })
