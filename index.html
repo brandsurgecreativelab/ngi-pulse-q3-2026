@@ -3069,7 +3069,10 @@ class Component extends DCLogic {
           labelLeft: X(r.from) > 30 ? '8px' : '12%',
           vl: r.valAt === 'start' ? '0' : 'auto', vr: r.valAt === 'start' ? 'auto' : '0', vt: r.valAt === 'start' ? '-13px' : '-26px',
           vp: r.valAt === 'start' ? '3px 10px' : '0', vbg: r.valAt === 'start' ? (r.valBg || r.color) : 'transparent',
-          sc: on ? 1 : 0, op: on ? 1 : 0, t: tr('transform', 1100, 300 + k * 160), t2: tr('opacity', 600, 900 + k * 160)
+          sc: on ? 1 : 0, op: on ? 1 : 0,
+          // On a timed chart each reference line grows at the same steady pace as the black line's sweep, staying level with it.
+          t: timed ? (on ? 'transform ' + M((X(r.to) - X(r.from)) / 100 * draw) + ' linear ' + M(200 + X(r.from) / 100 * draw) : 'none') : tr('transform', 1100, 300 + k * 160),
+          t2: tr('opacity', 600, 900 + k * 160)
         })),
         hasProj: !!c.proj, proj: c.proj ? (timed
           // Timed charts sweep the projection in with its own steady wipe, so its end dot pops the instant the line arrives.
