@@ -542,7 +542,7 @@
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(24px, 5vw, 80px); align-items: center; max-width: 1040px; margin: 0 auto">
 <div aria-hidden="true" style="position: relative; flex: 1 1 460px; min-width: 260px; max-width: 600px; margin: 0 auto">
 <svg viewBox="-14 -14 228 228" style="display: block; width: 100%; height: auto; overflow: visible; transform: rotate(-90deg)">
-<sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><circle onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" cx="100" cy="100" r="74" fill="none" stroke="{{g.stroke}}" stroke-width="{{g.sw}}" pathLength="100" style="cursor: pointer; pointer-events: stroke; stroke-dasharray: {{g.dash}}; stroke-dashoffset: {{g.offset}}; transform: translate({{g.dx}}px, {{g.dy}}px); transition: {{g.t}}"></circle></sc-for>
+<sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><circle data-donut-hit="1" onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" cx="100" cy="100" r="74" fill="none" stroke="{{g.stroke}}" stroke-width="{{g.sw}}" pathLength="100" style="cursor: pointer; pointer-events: stroke; stroke-dasharray: {{g.dash}}; stroke-dashoffset: {{g.offset}}; transform: translate({{g.dx}}px, {{g.dy}}px); transition: {{g.t}}"></circle></sc-for>
 </svg>
 <div style="position: absolute; inset: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: {{a.c.op}}; transform: scale({{a.c.csc}}); transition: {{a.c.t2}}">
 <sc-if value="{{a.c.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{a.c.cImg}}" alt="" style="display: block; width: {{a.c.imgW}}; height: {{a.c.imgH}}; margin-bottom: 12px; border-radius: {{a.c.imgR}}; box-shadow: {{a.c.imgS}}; animation: pcZoomIn 380ms cubic-bezier(0.34, 1.56, 0.64, 1) both"></sc-if>
@@ -551,7 +551,7 @@
 </div>
 </div>
 <ul style="flex: 0 1 380px; min-width: min(100%, 280px); max-width: 400px; list-style: none; margin: 0; padding: 0">
-<sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><li onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" aria-pressed="{{g.pressed}}" style="cursor: pointer; display: grid; grid-template-columns: 16px 1fr auto; gap: 14px; align-items: center; padding: 11px 12px; border-bottom: 1px solid #E3EBE8; border-radius: 10px; background: {{g.bg}}; font-size: 15px; color: #004D36; opacity: {{g.op}}; transform: translateX({{g.tx}}); transition: {{g.t2}}">
+<sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><li data-donut-hit="1" onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" aria-pressed="{{g.pressed}}" style="cursor: pointer; display: grid; grid-template-columns: 16px 1fr auto; gap: 14px; align-items: center; padding: 11px 12px; border-bottom: 1px solid #E3EBE8; border-radius: 10px; background: {{g.bg}}; font-size: 15px; color: #004D36; opacity: {{g.op}}; transform: translateX({{g.tx}}); transition: {{g.t2}}">
 <span style="width: 16px; height: 16px; border-radius: 50%; background: {{g.stroke}}; transition: background-color 250ms ease"></span><span style="font-weight: {{g.fw}}">{{g.label}}</span><span style="font-weight: {{g.fw}}; font-variant-numeric: tabular-nums">{{g.val}}</span>
 </li></sc-for>
 </ul>
@@ -3191,6 +3191,14 @@ class Component extends DCLogic {
       // segment mutes to one quiet tint, and the centre shows that region. Click again to clear.
       const hover = this.state && this.state.donutHover;
       const selAll = this.state && this.state.donutSel;
+      // Clicking anywhere other than a region (a segment or a row) clears the locked selection, so the piece springs back.
+      if (!this._donutAway && typeof document !== 'undefined') {
+        this._donutAway = true;
+        document.addEventListener('click', (e) => {
+          const hit = e.target && e.target.closest && e.target.closest('[data-donut-hit]');
+          if (!hit && this.state && this.state.donutSel) this.setState({ donutSel: null });
+        });
+      }
       const locked = selAll && selAll.i === idx ? selAll.k : null;
       const hov = hover && hover.i === idx ? hover.k : null;
       // Hovering previews the effect on that region; a click locks it in place until it is clicked again.
