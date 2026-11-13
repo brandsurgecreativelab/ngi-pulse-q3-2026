@@ -20,12 +20,20 @@
     return str.replace(HOLE, function (_, p) { var v = lookup(p, scope); return v == null ? '' : String(v); });
   }
 
+  // Every template node gets a stable id. A virtual node's key is that id plus its position in any
+  // enclosing <sc-for>, so an <sc-if> opening or closing never shifts its siblings onto other content.
+  var uid = 0;
+  function keyOf(node, scope) {
+    if (!node.__pk) node.__pk = ++uid;
+    return node.__pk + '@' + (scope.path || '');
+  }
+
   // Template node -> virtual nodes
   function build(node, scope, out) {
     if (node.nodeType === 3) {
       var t = node.nodeValue;
       if (t.indexOf('{{') >= 0) t = interp(t, scope);
-      out.push({ text: t });
+      out.push({ text: t, key: keyOf(node, scope) });
       return;
     }
     if (node.nodeType !== 1) return;
@@ -33,9 +41,10 @@
     if (tag === 'sc-for') {
       var list = lookup(single(node.getAttribute('list')), scope) || [];
       var as = node.getAttribute('as') || 'item';
+      var fid = keyOf(node, scope);
       for (var i = 0; i < list.length; i++) {
         var vars = {}; vars[as] = list[i];
-        var sub = { vars: vars, parent: scope };
+        var sub = { vars: vars, parent: scope, path: fid + ':' + i };
         for (var c = node.firstChild; c; c = c.nextSibling) build(c, sub, out);
       }
       return;
@@ -44,7 +53,7 @@
       if (lookup(single(node.getAttribute('value')), scope)) for (var d = node.firstChild; d; d = d.nextSibling) build(d, scope, out);
       return;
     }
-    var v = { tag: tag, ns: node.namespaceURI, attrs: {}, on: {}, ref: null, children: [] };
+    var v = { tag: tag, ns: node.namespaceURI, attrs: {}, on: {}, ref: null, children: [], key: keyOf(node, scope) };
     for (var a = 0; a < node.attributes.length; a++) {
       var at = node.attributes[a], name = at.name, val = at.value, low = name.toLowerCase();
       if (low.indexOf('hint-') === 0) continue;
@@ -97,22 +106,13 @@
     for (var i = 0; i < v.children.length; i++) destroy(v.children[i]);
     if (typeof v.el.__ref === 'function') v.el.__ref(null);
   }
-  function patch(parent, oldV, newV) {
-    if (newV.text !== undefined) {
-      if (oldV && oldV.text !== undefined && oldV.el.parentNode === parent) {
-        if (oldV.el.nodeValue !== newV.text) oldV.el.nodeValue = newV.text;
-        newV.el = oldV.el; return;
-      }
-      var tn = create(newV);
-      if (oldV && oldV.el.parentNode === parent) { destroy(oldV); parent.replaceChild(tn, oldV.el); } else parent.appendChild(tn);
-      return;
-    }
-    if (!oldV || oldV.text !== undefined || oldV.tag !== newV.tag || oldV.ns !== newV.ns || oldV.el.parentNode !== parent) {
-      var ne = create(newV);
-      if (oldV && oldV.el.parentNode === parent) { destroy(oldV); parent.replaceChild(ne, oldV.el); } else parent.appendChild(ne);
-      return;
-    }
+  // Updates a kept node in place. Only called for an old and new node with the same key, tag and namespace.
+  function patch(oldV, newV) {
     var el = newV.el = oldV.el;
+    if (newV.text !== undefined) {
+      if (el.nodeValue !== newV.text) el.nodeValue = newV.text;
+      return;
+    }
     setAttrs(el, oldV.attrs, newV.attrs);
     setEvents(el, newV.on);
     if (newV.ref !== el.__ref) {
@@ -121,6 +121,11 @@
       if (typeof newV.ref === 'function') newV.ref(el);
     }
     patchChildren(el, oldV.children, newV.children);
+  }
+  function same(o, n) {
+    if (!o || o.key !== n.key) return false;
+    if (n.text !== undefined) return o.text !== undefined;
+    return o.text === undefined && o.tag === n.tag && o.ns === n.ns;
   }
   function patchChildren(el, oldC, newC) {
     var detached = false;
@@ -132,10 +137,22 @@
       for (var k = 0; k < newC.length; k++) el.appendChild(create(newC[k]));
       return;
     }
-    var n = Math.max(oldC.length, newC.length);
-    for (var x = 0; x < n; x++) {
-      if (x >= newC.length) { destroy(oldC[x]); el.removeChild(oldC[x].el); }
-      else patch(el, x < oldC.length ? oldC[x] : null, newC[x]);
+    // Match by key, so content that stays keeps its DOM node (and the observers and animations attached to it).
+    var byKey = {}, used = {};
+    for (var a = 0; a < oldC.length; a++) byKey[oldC[a].key] = oldC[a];
+    var match = new Array(newC.length);
+    for (var b = 0; b < newC.length; b++) {
+      var o = byKey[newC[b].key];
+      if (same(o, newC[b]) && !used[o.key]) { match[b] = o; used[o.key] = true; }
+    }
+    // Release what is leaving first, so a ref handed from an old node to a new one ends on the new node.
+    for (var r = 0; r < oldC.length; r++) if (!used[oldC[r].key]) { destroy(oldC[r]); el.removeChild(oldC[r].el); }
+    var cursor = el.firstChild;
+    for (var x = 0; x < newC.length; x++) {
+      var node;
+      if (match[x]) { patch(match[x], newC[x]); node = newC[x].el; }
+      else node = create(newC[x]);
+      if (node !== cursor) el.insertBefore(node, cursor); else cursor = cursor.nextSibling;
     }
   }
 

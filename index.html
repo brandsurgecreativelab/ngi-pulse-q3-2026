@@ -2736,7 +2736,7 @@ class Component extends DCLogic {
           el._shown = true;
           if (el._rv) { el._rv.currentTime = 0; el._rv.play(); }
           // Bar-list figures are left to their chart, which counts them up in step with the bars.
-          el.querySelectorAll('[data-count]:not(.pc-hval)').forEach((n, k) => this.countUp(n, 250 + k * 120));
+          el.querySelectorAll('[data-count]:not(.pc-hval):not(.pc-vbar [data-count])').forEach((n, k) => this.countUp(n, 250 + k * 120));
           el.querySelectorAll('[data-pop]').forEach((n, k) => n.animate([{ opacity: 0, transform: 'scale(0.6)' }, { opacity: 1, transform: 'scale(1.08)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 350 + k * 140, easing: E, fill: 'backwards' }));
         } else if (!e.isIntersecting && el._shown) hide(el);
       });
