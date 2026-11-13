@@ -727,7 +727,7 @@
 </div>
 <ol class="pc-srcs" data-reveal="1" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 0 48px">
 <sc-for list="{{sources}}" as="sr" hint-placeholder-count="8">
-<li id="{{sr.id}}" style="display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: start; padding: 16px 0; border-top: 1px solid #D9E4E1; border-radius: 4px; scroll-margin-top: 120px"><span style="font-size: 15px; font-weight: 700; color: #10A867; font-variant-numeric: tabular-nums">{{sr.n}}</span><span style="min-width: 0"><span style="display: block; font-size: 15px; line-height: 1.55; color: #004D36">{{sr.t}}</span><span style="display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: #407A68">{{sr.about}}</span></span></li>
+<li id="{{sr.id}}" style="display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: start; padding: 16px 0; border-top: 1px solid #D9E4E1; border-radius: 4px; scroll-margin-top: 120px; color: var(--black-75, #414141)"><span style="font-size: 15px; font-weight: 700; color: #10A867; font-variant-numeric: tabular-nums">{{sr.n}}</span><span style="min-width: 0"><span style="display: block; font-size: 15px; line-height: 1.55; color: #004D36">{{sr.t}}</span><span style="display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--black-75, #414141)">{{sr.about}}</span></span></li>
 </sc-for>
 </ol>
 </section>
