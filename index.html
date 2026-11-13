@@ -615,7 +615,7 @@
 <h2 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0">Nedgroup Investments</h2>
 <div style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 128px)">
 
-<section id="ngi-mm" class="pc-band" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
+<section id="ngi-mm" class="{{ngiBandA}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
 <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Nedgroup Investments</p>
@@ -656,7 +656,7 @@
 </div>
 </section>
 
-<section id="ngi-about" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
+<section id="ngi-about" class="{{ngiBandB}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
 <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Nedgroup Investments</p>
@@ -687,7 +687,7 @@
 </div>
 </section>
 
-<section id="ngi-info" class="pc-band" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
+<section id="ngi-info" class="{{ngiBandA}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
 <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Nedgroup Investments</p>
@@ -2520,18 +2520,6 @@ class Component extends DCLogic {
    "img": "assets/insight-21.png",
    "alt": "Area chart of the Oceanic Niño Index from 1980 to 2026, forecast to reach +3.6 °C by December 2026",
    "source": "National Oceanic and Atmospheric Administration (NOAA)."
-  },
-  {
-   "title": "The hidden engine of the AI revolution",
-   "summary": "Emerging-market companies sit across the whole AI value chain, not just the models.",
-   "takeaway": "The AI revolution is about far more than algorithms. Behind every model sits a vast ecosystem of energy, semiconductors, data centres, networking and advanced manufacturing, with emerging-market companies embedded across this value chain.",
-   "paras": [
-    "From powering AI and producing the chips to building the infrastructure and applications that bring it to life, emerging markets are helping to enable the next wave of technological growth.",
-    "The Nedgroup Investments Global Emerging Markets Equity Fund seeks to capture opportunities across this broader ecosystem, looking beyond the obvious winners to the businesses building the foundations of an AI-powered world."
-   ],
-   "img": "assets/insight-22.png",
-   "alt": "Five-layer value chain of the AI revolution: energy, chips, infrastructure, models and applications, with emerging-market companies in each",
-   "source": "NS Partners."
   }
  ],
  "mm": {
@@ -3846,6 +3834,8 @@ class Component extends DCLogic {
       allPressed: (s.pin === undefined || s.pin === null) ? 'true' : 'false', allBg: (s.pin === undefined || s.pin === null) ? '#006341' : '#FFFFFF', allFg: (s.pin === undefined || s.pin === null) ? '#FFFFFF' : '#004D36', allLine: (s.pin === undefined || s.pin === null) ? '#004D36' : '#CFDDD8',
       clearPin: () => this.setState({ pin: null, hover: null }),
       unitTrusts: D.unitTrusts, ut: ut, utChips: utChips,
+      // insight bands alternate from the first article; the NGI sections pick up the rhythm after the last one
+      ngiBandA: list.length % 2 === 0 ? 'pc-band' : '', ngiBandB: list.length % 2 === 0 ? '' : 'pc-band',
       insAll: insAll, insCount: pad(list.length), insIndex: insIndex, art: art, prev: prev, next: next,
       mm: D.mm, mmGroups: mmGroups, about: D.about, pillars: pillars, other: D.other,
       purpose: D.other.purpose.map((t, i) => ({ t: t, n: (i < 9 ? '0' : '') + (i + 1) })), disclaimer: D.other.disclaimer.map((t) => ({ t: t })),
