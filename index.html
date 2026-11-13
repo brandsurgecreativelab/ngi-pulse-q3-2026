@@ -3258,7 +3258,7 @@ class Component extends DCLogic {
             const tag = it[3] && it[3] !== 'neg' ? it[3] : '';
             const neg = it[3] === 'neg';
             const tc = ((c.tags || []).find((t) => t[0] === tag) || [])[1] || '#004D36';
-            const d = 150 + (n++) * 55;
+            const d = 150 + k * 55; // side-by-side lists grow together, row by row
             return {
               rank: (k + 1) + '.', label: it[0], val: it[2] || (it[1].toFixed(1) + '%'), hasTag: !!tag, tag: tag, tagColor: tc,
               isEv: tag === 'EV', isHy: tag === 'Hybrid', hasPill: !!tag && tag !== 'EV' && tag !== 'Hybrid',
