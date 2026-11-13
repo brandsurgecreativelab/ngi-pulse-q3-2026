@@ -171,11 +171,11 @@
 <div style="display: flex; flex-direction: column; gap: 40px">
 <p style="margin: 0 0 -16px; display: flex; align-items: center; gap: 10px; font-size: 15px; line-height: 1.4; color: #407A68"><svg width="30" height="30" viewBox="0 -960 960 960" aria-hidden="true" style="flex: none; color: #10A867"><path d="M80-480v-80h120v80H80Zm136 222-56-58 84-84 58 56-86 86Zm28-382-84-84 56-58 86 86-58 56Zm476 480L530-350l-50 150-120-400 400 120-148 52 188 188-80 80ZM400-720v-120h80v120h-80Zm236 80-58-56 86-86 56 56-84 86Z" fill="currentColor"></path></svg>Flip for additional data &amp; commentary</p>
 <sc-for list="{{returnGroups}}" as="g" hint-placeholder-count="2">
-<div ref="{{g.vref}}" data-ret="{{g.key}}">
+<div data-ret="{{g.key}}">
 <h4 style="margin: 0 0 16px; color: #004D36; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; padding: 0">{{g.label}}</h4>
 <div class="pc-cards" style="display: grid; gap: 20px">
 <sc-for list="{{g.cards}}" as="c" hint-placeholder-count="4">
-<button class="pc-flip" onClick="{{c.toggle}}" aria-pressed="{{c.expanded}}" style="display: grid; padding: 0; margin: 0; border: 0; background: none; font-family: inherit; color: inherit; text-align: left; cursor: pointer; perspective: 1400px; -webkit-tap-highlight-color: transparent">
+<button class="pc-flip" ref="{{c.vref}}" onClick="{{c.toggle}}" aria-pressed="{{c.expanded}}" style="display: grid; padding: 0; margin: 0; border: 0; background: none; font-family: inherit; color: inherit; text-align: left; cursor: pointer; perspective: 1400px; -webkit-tap-highlight-color: transparent">
 <span style="display: grid; min-height: {{cardH}}; transform-style: preserve-3d; transform: rotateY({{c.rot}}); transition: transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1)">
 <span style="grid-area: 1 / 1; position: relative; display: flex; flex-direction: column; gap: 16px; min-height: 200px; box-sizing: border-box; padding: 24px 24px 26px; border-radius: 20px; overflow: hidden; background: #F4F8F6; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.05), 0 8px 24px rgba(0, 40, 28, 0.06); backface-visibility: hidden; -webkit-backface-visibility: hidden">
 <span style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
@@ -251,7 +251,7 @@
 </div>
 </section>
 
-<section id="mm-shares" ref="{{sharesRef}}" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
+<section id="mm-shares" style="display: flex; flex-direction: column; gap: 28px; scroll-margin-top: 110px">
 <div data-reveal="1" style="display: flex; flex-direction: column; gap: 12px; padding: 0; max-width: 880px">
 <div style="min-width: 0">
 <p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #10A867">Market Moves</p>
@@ -272,10 +272,10 @@
 <h4 style="margin: 0 0 8px; color: #004D36; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Top 10 shares</h4>
 <ol style="list-style: none; margin: 0; padding: 0">
 <sc-for list="{{sharesTop}}" as="s" hint-placeholder-count="10">
-<li style="display: grid; grid-template-columns: 28px minmax(0, 1fr) 80px; align-items: center; gap: 6px 12px; padding: 10px 0; border-bottom: 1px solid #D9E4E1; opacity: {{s.o}}; transform: translateY({{s.y}}); transition: {{s.rt}}">
+<li ref="{{s.vref}}" style="display: grid; grid-template-columns: 28px minmax(0, 1fr) 80px; align-items: center; gap: 6px 12px; padding: 10px 0; border-bottom: 1px solid #D9E4E1; opacity: {{s.o}}; transform: translateY({{s.y}}); transition: {{s.rt}}">
 <span style="font-size: 14px; font-weight: 600; color: #407A68">{{s.rank}}</span>
 <span style="font-size: 15px">{{s.name}}</span>
-<span ref="{{s.ref}}" style="font-size: 15px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums">{{s.val}}</span>
+<span ref="{{s.ref}}" class="pc-shv" data-v="{{s.v}}" style="font-size: 15px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums">{{s.val}}</span>
 <span aria-hidden="true" style="grid-column: 2 / 4; height: 6px; border-radius: 3px; overflow: hidden; background: #E3EBE8; position: relative"><span style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; width: {{s.w}}; transition: {{s.bt}}; background: #10A867"></span></span>
 </li>
 </sc-for>
@@ -285,10 +285,10 @@
 <h4 style="margin: 0 0 8px; color: #004D36; font-size: 20px; font-weight: 600; letter-spacing: -0.01em">Bottom 10 shares</h4>
 <ol style="list-style: none; margin: 0; padding: 0">
 <sc-for list="{{sharesBottom}}" as="s" hint-placeholder-count="10">
-<li style="display: grid; grid-template-columns: 28px minmax(0, 1fr) 80px; align-items: center; gap: 6px 12px; padding: 10px 0; border-bottom: 1px solid #D9E4E1; opacity: {{s.o}}; transform: translateY({{s.y}}); transition: {{s.rt}}">
+<li ref="{{s.vref}}" style="display: grid; grid-template-columns: 28px minmax(0, 1fr) 80px; align-items: center; gap: 6px 12px; padding: 10px 0; border-bottom: 1px solid #D9E4E1; opacity: {{s.o}}; transform: translateY({{s.y}}); transition: {{s.rt}}">
 <span style="font-size: 14px; font-weight: 600; color: #407A68">{{s.rank}}</span>
 <span style="font-size: 15px">{{s.name}}</span>
-<span ref="{{s.ref}}" style="font-size: 15px; font-weight: 600; text-align: right; color: #752E35; font-variant-numeric: tabular-nums">{{s.val}}</span>
+<span ref="{{s.ref}}" class="pc-shv" data-v="{{s.v}}" style="font-size: 15px; font-weight: 600; text-align: right; color: #752E35; font-variant-numeric: tabular-nums">{{s.val}}</span>
 <span aria-hidden="true" style="grid-column: 2 / 4; height: 6px; border-radius: 3px; overflow: hidden; background: #E3EBE8; position: relative"><span style="position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; width: {{s.w}}; transition: {{s.bt}}; background: #EA6759"></span></span>
 </li>
 </sc-for>
@@ -528,7 +528,7 @@
 </div></sc-if>
 <sc-if value="{{a.c.evPanel}}" hint-placeholder-val="{{ false }}"><div class="pc-evnote" style="display: flex; flex-wrap: wrap; align-items: center; gap: 18px 36px; padding: clamp(16px, 2vw, 22px) clamp(18px, 2.4vw, 32px); border: 1px solid #CFDDD8; border-radius: 18px; background: #F2F8F5; opacity: {{a.c.op}}; transform: scale({{a.c.csc}}); transform-origin: left center; transition: {{a.c.t2}}"><div style="flex: 1 1 340px; min-width: 0; display: flex; align-items: center; gap: clamp(14px, 1.6vw, 22px)"><svg class="pc-evcar" viewBox="0 0 59.09 51.58" aria-hidden="true" style="flex: none; width: clamp(54px, 5vw, 68px); height: auto; overflow: visible"><path d="M56.16,24.81c1.85-.89,2.96-2.79,2.93-4.87l-.02-1.9c-.14-1.63-1.46-3.01-3.15-3.02h-4.74s-3.53-10.59-3.53-10.59c-2.23-2.45-6.66-3.48-9.97-3.91-5.48-.7-10.99-.7-16.48.03-3.24.44-7.59,1.47-9.77,3.88l-3.53,10.58H3.28C1.46,15.01.02,16.48.01,18.28v1.78c-.03,2.04,1.11,3.88,2.91,4.75C1.3,27.85.05,31.02.04,34.46l-.03,13.83c0,1.83,1.46,3.28,3.27,3.28h7.51c1.82-.02,3.27-1.44,3.27-3.27v-4.22h6.58v4.1c-.02,1.87,1.37,3.38,3.28,3.4h11.31c1.84-.08,3.21-1.5,3.21-3.28v-4.22h6.57l.02,4.34c.01,1.78,1.51,3.13,3.25,3.16h7.52c1.81-.01,3.28-1.46,3.27-3.29l-.03-13.83c-.01-3.44-1.26-6.61-2.88-9.65ZM35.64,48.27c0,.24-.19.43-.43.5h-11.29c-.24-.01-.47-.23-.47-.5v-26.21c0-.25.25-.49.44-.49h1.91c.76,0,1.39-.64,1.39-1.39v-1.92c0-.16.28-.44.45-.44h3.8c.17,0,.45.28.45.44v1.92c0,.75.63,1.39,1.39,1.39h1.91c.19,0,.45.24.45.49v26.21ZM55.8,48.77h-7.51c-.21,0-.47-.26-.47-.47v-5.63c-.02-.77-.61-1.41-1.41-1.41h-7.96v-18.85c.06-1.09-.29-2.02-1-2.72-.72-.71-1.68-1-2.77-.93.22-1.93-1.16-3.72-3.19-3.74l-3.71-.02c-2.07-.01-3.61,1.68-3.38,3.78-2.02-.22-3.77,1.22-3.77,3.27v19.21h-7.96c-.8,0-1.39.64-1.42,1.41v5.63c0,.21-.25.47-.46.47H3.28c-.2,0-.48-.25-.48-.48l.07-13.94c.02-3.46,1.54-6.63,3.33-9.49.33-.52.51-.97.23-1.56-.21-.41-.7-.79-1.27-.79-1.31-.01-2.33-1.03-2.34-2.34v-1.91c-.01-.16.27-.44.45-.44h5.65c.49,0,1.11-.33,1.28-.84l3.68-11.05c.97-.72,1.99-1.22,3.13-1.58,5.64-1.76,13.62-1.8,19.52-1.14,2.8.31,6.5,1.03,8.67,2.73l3.65,10.96c.19.55.75.92,1.31.92h5.65c.18,0,.46.28.46.44v1.91c-.02,1.31-1.04,2.33-2.35,2.34-.57,0-1.07.38-1.27.79-.28.59-.1,1.04.23,1.56,1.79,2.86,3.31,6.03,3.33,9.49l.07,13.94c0,.23-.28.48-.48.48Z" fill="#004D36"></path><path d="M35.19,21.57h-1.91c-.76,0-1.39-.64-1.39-1.39v-1.92c0-.16-.28-.44-.45-.44h-3.8c-.17,0-.45.28-.45.44v1.92c0,.75-.63,1.39-1.39,1.39h-1.91c-.19,0-.44.24-.44.49v26.21c0,.27.23.49.47.49h11.29c.24-.06.43-.25.43-.49v-26.21c0-.25-.26-.49-.45-.49ZM32.41,45.94h-5.68c-.79.01-1.38-.64-1.4-1.34-.03-.76.57-1.46,1.4-1.46h5.62c.79,0,1.37.64,1.4,1.36.03.66-.5,1.44-1.34,1.44ZM32.41,40.32h-5.68c-.79.01-1.38-.65-1.4-1.35-.03-.75.57-1.46,1.4-1.46h5.62c.79,0,1.37.64,1.4,1.36.03.67-.5,1.45-1.34,1.45ZM32.41,34.69h-5.68c-.79.01-1.38-.64-1.4-1.34-.03-.76.57-1.46,1.4-1.46h5.62c.79,0,1.37.64,1.4,1.35.03.67-.5,1.45-1.34,1.45Z" fill="#EDFF00"></path><path class="pc-bseg" d="M33.75,33.24c.03.67-.5,1.45-1.34,1.45h-5.68c-.79.01-1.38-.64-1.4-1.34-.03-.76.57-1.46,1.4-1.46h5.62c.79,0,1.37.64,1.4,1.35Z" fill="#004D36" style="animation-name: pcChargeTop"></path><path class="pc-bseg" d="M33.75,38.87c.03.67-.5,1.45-1.34,1.45h-5.68c-.79.01-1.38-.65-1.4-1.35-.03-.75.57-1.46,1.4-1.46h5.62c.79,0,1.37.64,1.4,1.36Z" fill="#004D36" style="animation-name: pcChargeMid"></path><path class="pc-bseg" d="M33.75,44.5c.03.66-.5,1.44-1.34,1.44h-5.68c-.79.01-1.38-.64-1.4-1.34-.03-.76.57-1.46,1.4-1.46h5.62c.79,0,1.37.64,1.4,1.36Z" fill="#004D36" style="animation-name: pcChargeBot"></path></svg><p style="margin: 0; max-width: 440px; font-size: 15px; line-height: 1.45; color: #004D36"><strong style="display: block; font-weight: 700">{{a.c.noteLead}}</strong>{{a.c.noteRest}}</p></div><span class="pc-evdiv" aria-hidden="true" style="align-self: stretch; width: 1px; background: #669486"></span><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px clamp(28px, 4vw, 64px); padding-right: clamp(0px, 2vw, 24px)"><span style="display: inline-flex; align-items: center; gap: 10px; font-size: clamp(17px, 1.6vw, 22px); font-weight: 700; color: #004D36"><svg class="pc-bolt" viewBox="0 0 89.12 109.56" aria-hidden="true" style="flex: none; width: clamp(26px, 2.6vw, 36px); height: clamp(26px, 2.6vw, 36px); overflow: visible"><path d="M62.57,0c1.68.58,2.77,2.15,2.31,4.06l-9.31,37.19,30.35.02c1.47,0,2.57.96,2.99,2.11.47,1.29.11,2.46-.87,3.5l-58.26,61.56c-1.08,1.15-2.57,1.43-3.88.78-1.18-.58-2.09-2.02-1.71-3.54l9.35-37.38H3.21c-1.49,0-2.57-.98-2.99-2.12-.52-1.38-.05-2.53.98-3.62L59.76.68,61.11,0h1.46Z" fill="#EDFF00" stroke="#A2A524" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>= EV</span><span style="display: inline-flex; align-items: center; gap: 10px; font-size: clamp(17px, 1.6vw, 22px); font-weight: 700; color: #004D36"><svg viewBox="0 0 71.04 58.46" aria-hidden="true" style="flex: none; width: clamp(24px, 2.4vw, 32px); height: clamp(24px, 2.4vw, 32px); overflow: visible"><path d="M14.05,40.69c6.54-4.76,13.5-8.57,20.9-11.57.41-.17.59-.57.49-.92s-.47-.59-.91-.51c-7.63,1.41-14.91,3.87-21.85,7.3-1.16.58-2.4.45-3.49-.2-.93-.55-1.56-1.59-1.72-2.81-.32-2.56-.17-5.04.68-7.47,2.24-6.35,7.1-9.86,13.36-11.91,2.95-.96,5.85-1.64,8.92-2.19l11.66-2.06c7.85-1.39,16.23-3.73,23.11-7.7,1.35-.78,2.79-.94,4.12-.06,1.18.77,1.98,2.22,1.62,3.8-2.6,11.55-6.96,24.33-12.77,34.65-2.84,5.05-6.5,10.22-11.12,13.71-8.89,6.7-20.53,3.21-28.63-3.36-1.29-1.04-3.09-1.31-4.43-.18-2.91,2.45-5.53,5.14-8,8.03-1.3,1.51-3.49,1.63-4.89.35-1.45-1.33-1.45-3.44-.13-4.94,3.91-4.45,8.21-8.41,13.08-11.95Z" fill="#00E677" stroke="#10A867" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>= Hybrid</span></div></div></sc-if>
 <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px 40px">
-<sc-for list="{{a.c.lists}}" as="li" hint-placeholder-count="1"><div style="min-width: 0">
+<sc-for list="{{a.c.lists}}" as="li" hint-placeholder-count="1"><div ref="{{li.vref}}" style="min-width: 0">
 <sc-if value="{{li.hasTitle}}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 8px; padding-bottom: 10px; border-bottom: 2px solid #004D36; font-size: 15px; font-weight: 700; color: #004D36">{{li.title}}</p></sc-if>
 <sc-for list="{{li.items}}" as="it" hint-placeholder-count="6"><div style="display: grid; grid-template-columns: {{li.cols}}; align-items: center; gap: 12px; padding: {{li.pad}}; border-bottom: 1px solid #EEF3F1">
 <sc-if value="{{li.rank}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 600; color: #407A68; font-variant-numeric: tabular-nums">{{it.rank}}</span></sc-if>
@@ -598,7 +598,7 @@
 </div>
 </div>
 <ul style="flex: 0 1 380px; min-width: min(100%, 280px); max-width: 400px; list-style: none; margin: 0; padding: 0">
-<sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><li data-donut-hit="1" onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" aria-pressed="{{g.pressed}}" style="cursor: pointer; display: grid; grid-template-columns: 16px 1fr auto; gap: 14px; align-items: center; padding: 11px 12px; border-bottom: 1px solid #E3EBE8; border-radius: 10px; background: {{g.bg}}; font-size: 15px; color: #004D36; opacity: {{g.op}}; transform: translateX({{g.tx}}); transition: {{g.t2}}">
+<sc-for list="{{a.c.segs}}" as="g" hint-placeholder-count="10"><li ref="{{g.vref}}" data-donut-hit="1" onClick="{{g.pick}}" onMouseEnter="{{g.enter}}" onMouseLeave="{{g.leave}}" aria-pressed="{{g.pressed}}" style="cursor: pointer; display: grid; grid-template-columns: 16px 1fr auto; gap: 14px; align-items: center; padding: 11px 12px; border-bottom: 1px solid #E3EBE8; border-radius: 10px; background: {{g.bg}}; font-size: 15px; color: #004D36; opacity: {{g.op}}; transform: translateX({{g.tx}}); transition: {{g.t2}}">
 <span style="width: 16px; height: 16px; border-radius: 50%; background: {{g.stroke}}; transition: background-color 250ms ease"></span><span style="font-weight: {{g.fw}}">{{g.label}}</span><span style="font-weight: {{g.fw}}; font-variant-numeric: tabular-nums">{{g.val}}</span>
 </li></sc-for>
 </ul>
@@ -636,7 +636,7 @@
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px">
 <sc-for list="{{g.rows}}" as="r" hint-placeholder-count="4">
-<article style="background: #FFFFFF; border-radius: 20px; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06), 0 10px 30px rgba(0, 40, 28, 0.07); padding: 20px 22px; display: flex; flex-direction: column; gap: 14px">
+<article ref="{{r.vref}}" style="background: #FFFFFF; border-radius: 20px; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06), 0 10px 30px rgba(0, 40, 28, 0.07); padding: 20px 22px; display: flex; flex-direction: column; gap: 14px">
 <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
 <span style="font-size: 16px; line-height: 1.3; font-weight: 700; color: #004D36">{{r.fund}}</span>
 <span style="flex: none; font-size: 12px; color: #407A68; white-space: nowrap">Since {{r.inc}}</span>
@@ -2761,7 +2761,9 @@ class Component extends DCLogic {
     if (t.tagName === 'LI') { t.classList.add('pc-hit'); clearTimeout(this._hitT); this._hitT = setTimeout(() => t.classList.remove('pc-hit'), 2400); }
   }
 
-  // Page-wide scroll reveal: content blocks below the fold rise and fade in as they arrive; numbers marked data-count count up.
+  // Page-wide scroll reveal: content rises and fades in as it arrives on screen; numbers marked data-count count up.
+  // Only what is on screen animates. A block taller than half the screen is split into its parts (cards, rows,
+  // paragraphs, charts), and each part plays when it arrives, so nothing animates out of sight.
   setupReveal() {
     if (typeof document === 'undefined' || typeof IntersectionObserver === 'undefined') return;
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2769,32 +2771,110 @@ class Component extends DCLogic {
     const E = 'cubic-bezier(0.22, 1, 0.36, 1)';
     if (this._rvIo) this._rvIo.disconnect();
     const hide = (el) => { if (el._rv) { el._rv.pause(); el._rv.currentTime = 0; } el._shown = false; };
+    const COUNT = '[data-count]:not(.pc-hval):not(.pc-vbar [data-count])';
     this._rvIo = new IntersectionObserver((entries) => {
+      let b = 0;
       entries.forEach((e) => {
         const el = e.target;
         if (e.isIntersecting && !el._shown) {
           el._shown = true;
-          if (el._rv) { el._rv.currentTime = 0; el._rv.play(); }
+          // Parts arriving together play in turn; a part arriving on its own plays straight away.
+          const k = Math.min(b++, 6);
+          if (el._rv) { el._rv.effect.updateTiming({ delay: el._rvKind === 'zoom' ? 200 : el._rvKind === 'soft' ? 200 + k * 140 : k * 70 }); el._rv.currentTime = 0; el._rv.play(); }
           // Bar-list figures are left to their chart, which counts them up in step with the bars.
-          el.querySelectorAll('[data-count]:not(.pc-hval):not(.pc-vbar [data-count])').forEach((n, k) => this.countUp(n, 250 + k * 120));
-          el.querySelectorAll('[data-pop]').forEach((n, k) => n.animate([{ opacity: 0, transform: 'scale(0.6)' }, { opacity: 1, transform: 'scale(1.08)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 350 + k * 140, easing: E, fill: 'backwards' }));
+          const nums = Array.prototype.slice.call(el.querySelectorAll(COUNT));
+          if (el.matches(COUNT)) nums.unshift(el);
+          nums.forEach((n, j) => this.countUp(n, 250 + k * 70 + j * 120));
+          el.querySelectorAll('[data-pop]').forEach((n, j) => n.animate([{ opacity: 0, transform: 'scale(0.6)' }, { opacity: 1, transform: 'scale(1.08)', offset: 0.6 }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 350 + k * 70 + j * 140, easing: E, fill: 'backwards' }));
         } else if (!e.isIntersecting && el._shown) hide(el);
       });
-    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      const sibs = el.parentNode ? Array.prototype.filter.call(el.parentNode.children, (c) => c.hasAttribute && c.hasAttribute('data-reveal')) : [];
-      const idx = Math.min(Math.max(0, sibs.indexOf(el)), 5);
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    const MAX = Math.max(260, window.innerHeight * 0.5);
+    // Parts that always play as one piece: charts, pictures, cards, rows, headings and paragraphs.
+    const ATOM = '[data-live], .pc-quiltscroll, figure, svg, img, video, button, a, p, h1, h2, h3, h4, li, article, .ut-row, .ut-sep, .pc-legend, .pc-chiprow, [role=group]';
+    const split = (el, kind, out) => {
+      const kids = Array.prototype.filter.call(el.children, (c) => !c.hasAttribute('data-reveal') && c.getBoundingClientRect().height > 0);
+      const inline = kids.some((c) => getComputedStyle(c).display === 'inline');
+      if (el.getBoundingClientRect().height <= MAX || el.matches(ATOM) || !kids.length || inline) { out.push([el, kind]); return; }
+      kids.forEach((c) => split(c, kind, out));
+    };
+    const units = [];
+    document.querySelectorAll('[data-reveal]').forEach((el) => split(el, el.getAttribute('data-reveal'), units));
+    units.forEach(([el, kind]) => {
       if (el._rv) el._rv.cancel();
-      const kind = el.getAttribute('data-reveal');
-      // 'soft': slower fade-up with a longer stagger. 'zoom': the picture settles from a gentle zoom inside its frame.
+      el._rvKind = kind;
+      // 'soft': slower fade-up. 'zoom': the picture settles from a gentle zoom inside its frame. Effects let go once
+      // played (fill backwards), so hover lifts and other styles on the part work as normal afterwards.
       el._rv = kind === 'zoom'
-        ? el.animate([{ transform: 'scale(1.08)' }, { transform: 'none' }], { duration: 1800, easing: E, delay: 200, fill: 'both' })
+        ? el.animate([{ transform: 'scale(1.08)' }, { transform: 'none' }], { duration: 1800, easing: E, delay: 200, fill: 'backwards' })
         : kind === 'soft'
-          ? el.animate([{ opacity: 0, transform: 'translateY(36px)' }, { opacity: 1, transform: 'none' }], { duration: 1200, easing: E, delay: 200 + idx * 140, fill: 'both' })
-          : el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 900, easing: E, delay: idx * 70, fill: 'both' });
+          ? el.animate([{ opacity: 0, transform: 'translateY(36px)' }, { opacity: 1, transform: 'none' }], { duration: 1200, easing: E, delay: 200, fill: 'backwards' })
+          : el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 900, easing: E, delay: 0, fill: 'backwards' });
       hide(el);
       this._rvIo.observe(el);
     });
+  }
+
+  // Marks one element (a card, a row, a list) as seen while it is on screen, and calls onIn as it arrives.
+  // Elements arriving together get a running order, so they can play in turn.
+  seenRef(key, onIn) {
+    if (!this._seenRefs) this._seenRefs = {};
+    if (!this._seenCb) this._seenCb = {};
+    this._seenCb[key] = onIn || null;
+    if (!this._seenRefs[key]) this._seenRefs[key] = (el) => this.watchSeen(key, el);
+    return this._seenRefs[key];
+  }
+
+  watchSeen(key, el) {
+    if (!this._seenEls) { this._seenEls = {}; this._seenStag = {}; this._seenKey = new WeakMap(); }
+    const old = this._seenEls[key];
+    if (old === el) return;
+    if (old && this._seenIo) this._seenIo.unobserve(old);
+    this._seenEls[key] = el || null;
+    if (!el) return;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof IntersectionObserver === 'undefined' || reduce) {
+      const cur = (this.state && this.state.seen) || {};
+      if (!cur[key]) this.setState({ seen: Object.assign({}, cur, { [key]: true }) });
+      return;
+    }
+    if (!this._seenIo) {
+      this._seenIo = new IntersectionObserver((entries) => {
+        const cur = Object.assign({}, (this.state && this.state.seen) || {});
+        let changed = false, b = 0;
+        const arrived = [];
+        entries.forEach((e) => {
+          const k = this._seenKey.get(e.target);
+          if (!k || this._seenEls[k] !== e.target) return;
+          if (e.isIntersecting && e.intersectionRatio >= 0.25 && !cur[k]) { cur[k] = true; changed = true; this._seenStag[k] = Math.min(b++, 6); arrived.push(k); }
+          else if (!e.isIntersecting && cur[k]) { cur[k] = false; changed = true; }
+        });
+        if (changed) this.setState({ seen: cur });
+        arrived.forEach((k) => { const f = this._seenCb[k], n = this._seenEls[k]; if (f && n) f(n, this._seenStag[k]); });
+      }, { threshold: [0, 0.25], rootMargin: '0px 0px -8% 0px' });
+    }
+    this._seenKey.set(el, key);
+    this._seenIo.observe(el);
+  }
+
+  // Top and bottom 10: a row's figure counts up from 0% as its bar grows, when that row arrives on screen.
+  countShareRow(el, b) {
+    const span = el && el.querySelector('.pc-shv');
+    const to = span ? parseFloat(span.getAttribute('data-v')) : NaN;
+    if (!isFinite(to)) return;
+    if (this._reduce) { span.textContent = this.fmt(to); return; }
+    const tok = (span._tok || 0) + 1;
+    span._tok = tok;
+    const t0 = performance.now() + 160 + b * 65;
+    const ease = (p) => 1 - Math.pow(1 - p, 4);
+    span.textContent = this.fmt(0);
+    const tick = (now) => {
+      if (span._tok !== tok) return;
+      const p = Math.min(1, Math.max(0, (now - t0) / 1200));
+      span.textContent = this.fmt(to * ease(p));
+      if (p < 1) window.requestAnimationFrame(tick);
+    };
+    window.requestAnimationFrame(tick);
   }
 
   // Every scroll into view replays this, so each number counts up again.
@@ -3014,6 +3094,8 @@ class Component extends DCLogic {
     rows.forEach((r) => { r.from = fromZero ? 0 : (prev[r.k] ?? 0); });
     this._shownVals = {};
     rows.forEach((r) => { this._shownVals[r.k] = r.to; });
+    const onScreen = (this.state && this.state.seen) || {};
+    for (let q = rows.length - 1; q >= 0; q--) { const el = this._valEls[rows[q].k]; if (!onScreen['sh_' + rows[q].k]) rows.splice(q, 1); else if (el) el._tok = (el._tok || 0) + 1; }
     if (this._countFrame) window.cancelAnimationFrame(this._countFrame);
     if (this._reduce) { rows.forEach((r) => { const el = this._valEls[r.k]; if (el) el.textContent = this.fmt(r.to); }); return; }
     const ease = (p) => 1 - Math.pow(1 - p, 4);
@@ -3113,7 +3195,6 @@ class Component extends DCLogic {
               this.setState({ chOn: Object.assign({}, cur, { [k]: true }) });
               // Prices on a vehicle bar chart count up from $0 as the bars rise (timed to match the bars, at the chart pace of 1.4).
               if (!this._reduce) t.querySelectorAll('.pc-vbar [data-count]').forEach((n, j) => this.countUp(n, Math.round((200 + j * 380) * 1.4)));
-              if (!this._reduce) t.querySelectorAll('.pc-hval[data-count]').forEach((n) => this.countUp(n, parseInt(n.getAttribute('data-cdelay') || '0', 10)));
             }
             else if (!e.isIntersecting && cur[k]) this.setState({ chOn: Object.assign({}, cur, { [k]: false }) });
             return;
@@ -3154,6 +3235,8 @@ class Component extends DCLogic {
     const tr = (prop, ms, delay) => (on ? prop + ' ' + M(ms) + ' ' + E + ' ' + M(delay || 0) : 'none');
     const OE = 'cubic-bezier(0.45, 0.05, 0.25, 1)';
     const OCEAN_MS = 6200;
+    const seen = (this.state && this.state.seen) || {};
+    const stag = (k) => (this._seenStag && this._seenStag[k]) || 0;
     const pc = (n) => (Math.round(n * 1000) / 1000) + '%';
     const base = {
       title: c.title, aria: c.aria || c.title, subtitle: c.subtitle || '', hasSub: !!c.subtitle,
@@ -3293,7 +3376,11 @@ class Component extends DCLogic {
         evPanel: !!(c.note && c.tags && !c.stat), hasTopPlain: !!(c.stat || c.note || c.tags) && !(c.note && c.tags && !c.stat),
         noteLead: c.note ? c.note.split(' due ')[0] : '', noteRest: c.note && c.note.indexOf(' due ') > -1 ? 'due ' + c.note.split(' due ').slice(1).join(' due ') : '',
         hasTop: !!(c.stat || c.note || c.tags), t2: tr('opacity', 600, 100) + (on ? ', transform ' + M(600) + ' ' + E + ' ' + M(100) : ''),
-        lists: c.lists.map((L) => ({
+        lists: c.lists.map((L, li) => {
+          // Each list plays when it arrives on screen, so a list further down waits for the reader.
+          const lk = 'hl_' + idx + '_' + li, lon = !!seen[lk];
+          return {
+          vref: this.seenRef(lk, (el) => { if (!this._reduce) el.querySelectorAll('.pc-hval[data-count]').forEach((n) => this.countUp(n, parseInt(n.getAttribute('data-cdelay') || '0', 10))); }),
           title: L.title || '', hasTitle: !!L.title, rank: !!L.rank,
           cols: (L.rank ? '24px ' : '') + (L.big ? 'minmax(110px, 1fr) minmax(0, 2.4fr) auto' : 'minmax(0, 1.25fr) minmax(0, 1fr) auto'),
           pad: L.big ? '16px 0' : '9px 0', fs: L.big ? '16px' : '14px', vs: L.big ? 'clamp(18px, 2vw, 24px)' : '14px', bh: L.big ? '22px' : '14px',
@@ -3308,11 +3395,12 @@ class Component extends DCLogic {
               // the figure counts up from 0 as its bar grows, on the bar's own timing
               n: it[2] ? '' : it[1], cdur: String(Math.round(1600 * K)), cdel: String(Math.round(d * K)),
               // the fill grows its width from empty (no stretch or fade), on a steady progress-bar ease
-              w: on ? pc(Math.max(1.5, (it[1] / L.max) * 100)) : '0%', color: neg ? '#EA6759' : L.color, vc: neg ? '#752E35' : '#004D36',
-              sc: 1, op: on ? 1 : 0, t: on ? 'width ' + M(1600) + ' cubic-bezier(0.65, 0, 0.35, 1) ' + M(d) : 'none', t2: tr('opacity', 200, d)
+              w: lon ? pc(Math.max(1.5, (it[1] / L.max) * 100)) : '0%', color: neg ? '#EA6759' : L.color, vc: neg ? '#752E35' : '#004D36',
+              sc: 1, op: lon ? 1 : 0, t: lon ? 'width ' + M(1600) + ' cubic-bezier(0.65, 0, 0.35, 1) ' + M(d) : 'none', t2: lon ? 'opacity ' + M(200) + ' ' + E + ' ' + M(d) : 'none'
             };
           })
-        }))
+          };
+        })
       });
     }
     if (c.kind === 'flow') {
@@ -3533,8 +3621,9 @@ class Component extends DCLogic {
             t: on ? 'stroke-dasharray ' + M(520) + ' ' + E + ' ' + M(delay) + ', ' + fx : fx,
             bg: picked ? 'rgba(0, 230, 119, 0.16)' : locked === k ? 'rgba(0, 58, 41, 0.05)' : 'transparent', fw: picked || locked === k || k === 0 ? 700 : 500, pressed: locked === k ? 'true' : 'false',
             pick: () => this.setState({ donutSel: locked === k ? null : { i: idx, k: k } }),
-            op: on ? 1 : 0, tx: on ? '0' : '12px',
-            t2: on ? 'opacity ' + M(400) + ' ' + E + ' ' + M(300 + k * 70) + ', transform ' + M(400) + ' ' + E + ' ' + M(300 + k * 70) + ', background-color 200ms ease' : 'background-color 200ms ease',
+            // each row of the key slides in when it arrives on screen
+            vref: this.seenRef('dl_' + idx + '_' + k), op: on && seen['dl_' + idx + '_' + k] ? 1 : 0, tx: on && seen['dl_' + idx + '_' + k] ? '0' : '12px',
+            t2: on && seen['dl_' + idx + '_' + k] ? 'opacity ' + M(400) + ' ' + E + ' ' + M(150 + stag('dl_' + idx + '_' + k) * 70) + ', transform ' + M(400) + ' ' + E + ' ' + M(150 + stag('dl_' + idx + '_' + k) * 70) + ', background-color 200ms ease' : 'background-color 200ms ease',
             enter: () => this.setState({ donutHover: { i: idx, k: k } }), leave: () => this.setState({ donutHover: null })
           };
         })
@@ -3599,6 +3688,8 @@ class Component extends DCLogic {
   renderVals() {
     const D = this.content();
     const s = this.state || {};
+    const seen = s.seen || {};
+    const stag = (k) => (this._seenStag && this._seenStag[k]) || 0;
     if (!this._anchorRef) this._anchorRef = (el) => { this.anchorEl = el; };
     if (!this._heroRef) this._heroRef = (el) => this.watchHero(el);
     if (!this._heroNavRef) this._heroNavRef = (el) => this.watchHeroNav(el);
@@ -3680,13 +3771,13 @@ class Component extends DCLogic {
     const inV = s.inView || {};
     const gMax = Math.max(1, Math.ceil(Math.max.apply(null, D.returns.groups.reduce((a, g) => a.concat(g.cards.map((c) => Math.abs(c.q))), []))));
     const regauge = s.regauge || {};
-    const gauge = (q, retIn, k, phase) => {
+    const gauge = (q, retIn, dl, phase) => {
       // phase 'hold' snaps the gauge to 0 while the card shows its back; 'go' replays it as the front turns back into view.
       if (phase === 'hold') retIn = false;
       const sg = q < 0 ? -1 : 1, th = Math.min(1, Math.abs(q) / gMax) * Math.PI / 2;
       const x = (110 + sg * 90 * Math.sin(th)).toFixed(2), y = (112 - 90 * Math.cos(th)).toFixed(2);
       // Same delay, length and ease-out as the figure's count-up, so needle and number land together.
-      const tm = '1300ms cubic-bezier(0.33, 1, 0.68, 1) ' + (250 + k * 120) + 'ms';
+      const tm = '1300ms cubic-bezier(0.33, 1, 0.68, 1) ' + dl + 'ms';
       return {
         d: 'M 110 22 A 90 90 0 0 ' + (sg > 0 ? 1 : 0) + ' ' + x + ' ' + y, grad: q < 0 ? 'url(#pcGN)' : 'url(#pcGP)',
         dash: retIn ? 1 : 0, rot: (retIn ? sg * th * 180 / Math.PI : 0).toFixed(2) + 'deg',
@@ -3704,7 +3795,9 @@ class Component extends DCLogic {
           name: c.name, quarter: D.issue.quarter, tone: g.tone, val: this.fmt(c.q),
           region: g.label.split(' ')[0] + ((g.label.match(/\(([^)]+)\)/) || [])[1] ? ' · ' + g.label.match(/\(([^)]+)\)/)[1] : ''),
           numColor: c.q < 0 ? '#B8483F' : '#0E9A5E', backColor: c.q < 0 ? '#FF9384' : '#00F5A6', barColor: c.q < 0 ? '#D9675B' : '#10A867',
-          up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q, !!inV['ret' + gi], ci, regauge[c.name]), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
+          up: c.q >= 0, down: c.q < 0, n: Math.abs(c.q), pre: c.q < 0 ? '−' : '', g: gauge(c.q, !!seen['rc_' + c.name], 250 + stag('rc_' + c.name) * 120, regauge[c.name]),
+          // each card plays its needle and figure when it arrives on screen
+          vref: this.seenRef('rc_' + c.name, (el, b) => { const n = !this._reduce && el.querySelector('[data-gcount]'); if (n) this.countUp(n, 250 + b * 120); }), gaugeLabel: c.name + ' ' + this.fmt(c.q) + ' on a scale of −' + gMax + '% to +' + gMax + '%',
           y1: this.minus(c.y1), y3: this.minus(c.y3), lt: this.minus(c.lt), comment: c.comment,
           open: isOpen, expanded: isOpen ? 'true' : 'false', rot: isOpen ? '180deg' : '0deg',
           toggle: () => {
@@ -3752,14 +3845,19 @@ class Component extends DCLogic {
     const shIn = !!s.sharesIn;
     const shStill = !!this._reduce;
     if (!this._valEls) this._valEls = {};
-    const shareRow = (side) => (x, i) => ({
-      ref: (el) => { if (el) this._valEls[side + i] = el; },
-      rank: i + 1, name: x[0], val: this.fmt(x[1]),
-      w: shIn ? Math.min(Math.abs(x[1]), 100).toFixed(1) + '%' : '0%',
-      o: shIn ? '1' : '0', y: shIn ? '0' : '8px',
-      rt: shStill ? 'none' : 'opacity 550ms ease ' + (i * 65) + 'ms, transform 550ms ease ' + (i * 65) + 'ms',
-      bt: shStill ? 'none' : 'width 1200ms cubic-bezier(0.16, 1, 0.3, 1) ' + (160 + i * 65) + 'ms'
-    });
+    // Each row plays when it arrives on screen; rows arriving together play in turn.
+    const shareRow = (side) => (x, i) => {
+      const key = 'sh_' + side + i, rin = !!seen[key], st = stag(key);
+      return {
+        ref: (el) => { if (el) this._valEls[side + i] = el; },
+        vref: this.seenRef(key, (el, b) => this.countShareRow(el, b)),
+        rank: i + 1, name: x[0], val: this.fmt(x[1]), v: x[1],
+        w: rin ? Math.min(Math.abs(x[1]), 100).toFixed(1) + '%' : '0%',
+        o: rin ? '1' : '0', y: rin ? '0' : '8px',
+        rt: shStill ? 'none' : 'opacity 550ms ease ' + (st * 65) + 'ms, transform 550ms ease ' + (st * 65) + 'ms',
+        bt: shStill ? 'none' : 'width 1200ms cubic-bezier(0.16, 1, 0.3, 1) ' + (160 + st * 65) + 'ms'
+      };
+    };
     const seg = (id) => ({
       pressed: period === id ? 'true' : 'false',
       bg: period === id ? '#004D36' : '#FFFFFF', fg: period === id ? '#FFFFFF' : '#407A68',
@@ -3878,15 +3976,18 @@ class Component extends DCLogic {
 
     // Nedgroup Investments
     const mmIn = !!(s.inView && s.inView.mm);
-    const mmGroups = D.mm.groups.map((g) => {
+    const mmGroups = D.mm.groups.map((g, gi) => {
       const mx = Math.max.apply(null, g.rows.reduce((a2, r) => a2.concat([num(r[2]), num(r[3]), num(r[4])]), [0.1])) * 1.05;
       const foot = (g.bm.match(/^\*+/) || [''])[0];
       return {
         label: g.label, bm: g.bm, bmLabel: 'Benchmark' + foot,
         rows: g.rows.map((r, k) => {
           const f = num(r[2]), b = num(r[4]), d = f - b;
-          const bar = (label, v, c, j, fw) => ({ label: label, v: this.minus(v), c: c, fw: fw, w: (mmIn ? Math.max(0, (num(v) / mx) * 100) : 0).toFixed(2) + '%', t: 'width 900ms cubic-bezier(0.22, 1, 0.36, 1) ' + (mmIn ? 100 + k * 80 + j * 90 : 0) + 'ms' });
+          // each card fills its bars when it arrives on screen
+          const mk = 'mm_' + gi + '_' + k, rin = !!seen[mk], rst = stag(mk);
+          const bar = (label, v, c, j, fw) => ({ label: label, v: this.minus(v), c: c, fw: fw, w: (rin ? Math.max(0, (num(v) / mx) * 100) : 0).toFixed(2) + '%', t: 'width 900ms cubic-bezier(0.22, 1, 0.36, 1) ' + (rin ? 100 + rst * 80 + j * 90 : 0) + 'ms' });
           return {
+            vref: this.seenRef(mk),
             fund: r[0].replace(/^Nedgroup Investments\s+/i, ''), inc: r[1],
             bars: [bar('Fund', r[2], '#004D36', 0, 700), bar('Peers', r[3], '#9DB8AF', 1, 500), bar('Benchmark' + foot, r[4], '#00E677', 2, 500)],
             gap: (d >= 0 ? '+' : '−') + Math.abs(d).toFixed(1) + ' pts vs benchmark', gapBg: d >= 0 ? '#E6FBF1' : '#FDECEA', gapFg: d >= 0 ? '#0B7A4B' : '#752E35'
