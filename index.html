@@ -698,7 +698,7 @@
 <h4 style="margin: 0 0 20px; font-size: 22px; font-weight: 700; letter-spacing: -0.015em">{{other.purposeTitle}}</h4>
 <ul style="list-style: none; margin: 0 0 32px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 12px 32px">
 <sc-for list="{{purpose}}" as="b" hint-placeholder-count="8">
-<li style="display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; padding: 14px 0; border-top: 1px solid #E3EBE8; font-size: 15px; line-height: 1.55; color: #004D36"><span style="font-size: 13px; font-weight: 700; color: #10A867; font-variant-numeric: tabular-nums">{{b.n}}</span><span>{{b.t}}</span></li>
+<li style="display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; padding: 14px 0; border-top: 1px solid #E3EBE8; font-size: 15px; line-height: 1.55; color: var(--black-75, #414141)"><span style="font-size: 13px; font-weight: 700; color: #10A867; font-variant-numeric: tabular-nums">{{b.n}}</span><span>{{b.t}}</span></li>
 </sc-for>
 </ul>
 <button onClick="{{toggleDisc}}" aria-expanded="{{discExpanded}}" style="display: flex; justify-content: space-between; align-items: center; width: 100%; border: 0; border-radius: 16px; background: #FFFFFF; color: #004D36; box-shadow: 0 1px 2px rgba(0, 40, 28, 0.06); font-family: inherit; font-size: 18px; font-weight: 600; padding: 14px 20px; min-height: 52px; cursor: pointer; text-align: left">
@@ -707,7 +707,7 @@
 <sc-if value="{{discOpen}}" hint-placeholder-val="{{ false }}">
 <div class="pc-disc" style="padding: 20px 8px 0">
 <sc-for list="{{disclaimer}}" as="d" hint-placeholder-count="3">
-<p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6">{{d.t}}</p>
+<p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--black-75, #414141)">{{d.t}}</p>
 </sc-for>
 </div>
 </sc-if>
