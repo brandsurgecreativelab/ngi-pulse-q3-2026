@@ -3139,8 +3139,10 @@ class Component extends DCLogic {
           const win = (c.x[1] - c.x[0]) * (9 / cw); // about 9px either side of the arrow, whatever the screen width
           let ly = Math.max(at(n.x - win), at(n.x), at(n.x + win));
           P.forEach((q) => { if (q[0] >= n.x - win && q[0] <= n.x + win) ly = Math.max(ly, q[1]); });
+          // An annotation that points at a marker dot stops short of it, so the arrow tip never touches the dot's ring.
+          const onDot = (c.dots || []).some((d) => Math.abs(d.x - n.x) <= win && Math.abs(d.y - n.y) < (c.y[1] - c.y[0]) * 0.05);
           return {
-            left: pc(l), top: pc(Y(n.y)), h: pc(Math.max(0, Y(ly) - Y(n.y))), label: n.label, sub: n.sub || '', op: on ? 1 : 0, cls: l < 12 ? 'pc-hide-sm' : '',
+            left: pc(l), top: onDot ? 'calc(' + pc(Y(n.y)) + ' - 15px)' : pc(Y(n.y)), h: onDot ? '0%' : pc(Math.max(0, Y(ly) - Y(n.y))), label: n.label, sub: n.sub || '', op: on ? 1 : 0, cls: l < 12 ? 'pc-hide-sm' : '',
             ty: on ? '0px' : (n.pop ? '18px' : '6px'),
             t: (() => {
               if (!on) return 'none';
