@@ -2741,6 +2741,18 @@ class Component extends DCLogic {
       this.jumpTo(t);
     };
     document.addEventListener('click', this._onJump);
+    // The round button turns to point up once the reader reaches the end of the content (the footer at the screen's edge).
+    this._onEndScroll = () => {
+      if (this._endFrame) return;
+      this._endFrame = window.requestAnimationFrame(() => {
+        this._endFrame = null;
+        const f = document.querySelector('footer');
+        const at = !!f && f.getBoundingClientRect().top <= window.innerHeight + 48;
+        if (at !== !!(this.state && this.state.atBottom)) this.setState({ atBottom: at });
+      });
+    };
+    window.addEventListener('scroll', this._onEndScroll, { passive: true });
+    window.addEventListener('resize', this._onEndScroll);
   }
 
   // Scrolls so the target's heading sits just below the floating nav. Bands start with padding, so their padding is skipped
@@ -2948,6 +2960,7 @@ class Component extends DCLogic {
     if (this._views) Object.keys(this._views).forEach((k) => this._views[k] && this._views[k].disconnect());
     if (this._onResizeCards) window.removeEventListener('resize', this._onResizeCards);
     if (this._onJump) document.removeEventListener('click', this._onJump);
+    if (this._onEndScroll) { window.removeEventListener('scroll', this._onEndScroll); window.removeEventListener('resize', this._onEndScroll); }
     clearTimeout(this._jumpFix); clearTimeout(this._hitT);
     this.stopDrift();
     if (this._io) this._io.disconnect();
@@ -4048,11 +4061,14 @@ class Component extends DCLogic {
     insAll.forEach((x, i) => { x.src = cite(list[i].source, list[i].title, '#' + x.id); });
     const sources = srcList.map((e, i) => ({ n: i + 1, id: 'src-' + (i + 1), t: e.t, refs: e.refs }));
 
-    // Round button, bottom right: always points up and returns to the cover.
-    const topDown = false;
+    // Round button, bottom right: points down and takes the reader to the end of the content, just above the footer;
+    // once they are there it turns to point up and takes them back to the cover.
+    const topDown = !s.atBottom;
     const topBtn = {
-      rot: topDown ? '180deg' : '0deg', label: topDown ? 'Jump to the sources' : 'Back to the cover',
-      go: topDown ? () => { const t = typeof document !== 'undefined' && document.getElementById('sec-sources'); if (t) this.jumpTo(t); } : () => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      rot: topDown ? '180deg' : '0deg', label: topDown ? 'Go to the end of Pulse' : 'Back to the cover',
+      go: topDown
+        ? () => { const f = typeof document !== 'undefined' && document.querySelector('footer'); if (f) window.scrollTo({ top: Math.max(0, Math.round(f.getBoundingClientRect().top + window.scrollY - window.innerHeight)), behavior: this._reduce ? 'auto' : 'smooth' }); }
+        : () => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: this._reduce ? 'auto' : 'smooth' }); }
     };
 
     return {
