@@ -3502,8 +3502,9 @@ class Component extends DCLogic {
           const isHome = !!it[6], hot = k === actK, show = isHome ? on : hot;
           const q = P[it[0]];
           return {
-            name: it[0], val: it[2], flag: it[3], x: pc((it[4] / W) * 100), y: pc((it[5] / H) * 100),
-            sub: isHome ? 'exports' : '', subD: isHome ? 'block' : 'none',
+            // The China card reads as a sentence: "China exports" over the total.
+            name: isHome ? it[0] + ' exports' : it[0], val: it[2], flag: it[3], x: pc((it[4] / W) * 100), y: pc((it[5] / H) * 100),
+            sub: '', subD: 'none',
             lx: it[4], ly: it[5], qx: q[0], qy: q[1], ord: isHome ? 0 : 1, cls: isHome ? ' pc-flow-home' : '',
             op: show ? 1 : 0, sc: show ? 1 : 0.86, lop: show ? 0.9 : 0, pe: show ? 'auto' : 'none',
             ct: isHome ? (on ? 'opacity ' + M(360) + ' ease ' + M(300) + ', transform ' + M(520) + ' cubic-bezier(0.34, 1.56, 0.64, 1) ' + M(300) : 'none')
