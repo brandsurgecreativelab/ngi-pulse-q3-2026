@@ -4048,9 +4048,8 @@ class Component extends DCLogic {
     insAll.forEach((x, i) => { x.src = cite(list[i].source, list[i].title, '#' + x.id); });
     const sources = srcList.map((e, i) => ({ n: i + 1, id: 'src-' + (i + 1), t: e.t, refs: e.refs }));
 
-    // Round button, bottom right: while the reader is in the first section it points down and jumps to Sources;
-    // from the second section on it points up and returns to the cover.
-    const topDown = !s.active || s.active === D.tabs[0].id;
+    // Round button, bottom right: always points up and returns to the cover.
+    const topDown = false;
     const topBtn = {
       rot: topDown ? '180deg' : '0deg', label: topDown ? 'Jump to the sources' : 'Back to the cover',
       go: topDown ? () => { const t = typeof document !== 'undefined' && document.getElementById('sec-sources'); if (t) this.jumpTo(t); } : () => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' }); }
