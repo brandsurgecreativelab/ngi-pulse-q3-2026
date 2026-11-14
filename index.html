@@ -3466,7 +3466,7 @@ class Component extends DCLogic {
       const routes = order.map((k, r) => {
         const it = c.items[k], q = P[it[0]];
         const dx = q[0] - O[0], dy = q[1] - O[1], L = Math.hypot(dx, dy);
-        let nx = -dy / L, ny = dx / L; if (ny > 0) { nx = -nx; ny = -ny; }
+        let nx = -dy / L, ny = dx / L; if (ny > 0) { nx = -nx; ny = -ny; } if (nx > 0.7) { nx = -nx; ny = -ny; }
         const cx = (O[0] + q[0]) / 2 + nx * L * 0.28, cy = (O[1] + q[1]) / 2 + ny * L * 0.28;
         const hot = k === actK;
         return {
