@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:LF;font-weight:500;src:url(fonts/lf-500.woff2)}
+@font-face{font-family:LF;font-weight:600;src:url(fonts/lf-600.woff2)}
+@font-face{font-family:LF;font-weight:700;src:url(fonts/lf-700.woff2)}
+@font-face{font-family:LF;font-weight:400;src:url(fonts/lf-400.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
+#stage{position:relative;width:1600px;height:900px;overflow:hidden;font-family:LF,Arial,sans-serif;color:#004D36;background:linear-gradient(180deg,#FFFFFF 0%,#F2F6F5 70%)}
+.a{position:absolute}
+.sc{position:absolute;inset:0;opacity:0}
+.h{font-weight:700;letter-spacing:-0.02em;line-height:1.06}
+.pill{display:inline-block;border-radius:999px;font-weight:700;white-space:nowrap}
+.num{font-weight:700;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.card{background:#FFFFFF;border-radius:24px;box-shadow:0 18px 44px rgba(0,58,41,.10),0 2px 6px rgba(0,58,41,.06)}
+/* character recolour: Nedgroup primary + secondary */
+#man .mc-1{fill:#003A29}
+#man .mc-6{fill:#004D36}
+#man .mc-10{fill:#003A29}
+#man .mc-12{fill:#00E677}
+#man .mc-7{fill:#020202}
+#man .mc-3{fill:#8CAFA4}
+#man .cup-body{fill:#FFFFFF;stroke:#B3CAC3;stroke-width:3}
+#man .cup-lid{fill:#004D36}
+#man .cup-band{fill:#10A867}
+</style></head><body>
+<div id="stage">
+  <!-- landscape -->
+  <svg id="land" class="a" style="left:0;top:0" width="1600" height="900">
+    <g id="hillsFar"></g>
+    <g id="hillsNear"></g>
+    <rect x="0" y="846" width="1600" height="54" fill="#D9E4E1"/>
+    <rect x="0" y="844" width="1600" height="4" fill="#B3CAC3"/>
+    <g id="dashes"></g>
+  </svg>
+
+  <!-- scenes -->
+  <div id="s1" class="sc">
+    <div class="a h" style="left:720px;top:150px;font-size:88px"><div id="s1a">Small habits.</div><div id="s1b">Compounding</div><div id="s1c">outcomes.</div></div>
+    <div id="s1u" class="a" style="left:724px;top:478px;width:150px;height:9px;border-radius:5px;background:#00E677;transform-origin:left center"></div>
+    <div id="s1p" class="a" style="left:722px;top:516px;font-size:36px;line-height:1.3;width:760px;color:#004D36">The same $3.50 a day can lead to very different outcomes over time.</div>
+  </div>
+
+  <div id="s2" class="sc">
+    <svg id="bub" class="a" style="left:0;top:0" width="1600" height="900">
+      <circle class="tb" cx="555" cy="128" r="9" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
+      <circle class="tb" cx="590" cy="104" r="15" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
+      <g id="bubMain"><rect x="630" y="22" width="560" height="200" rx="100" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/></g>
+    </svg>
+    <div id="bi1" class="a" style="left:670px;top:46px"></div>
+    <div id="bi2" class="a" style="left:850px;top:46px"></div>
+    <div id="bi3" class="a" style="left:1030px;top:46px"></div>
+    <div class="a h" style="left:720px;top:300px;font-size:72px"><div id="s2a">What if you</div><div id="s2b">spend or invest</div><div id="s2c">$3.50 a day</div></div>
+    <div id="s2d" class="a" style="left:722px;top:556px;font-size:40px;font-weight:600">since January 2016 on…?</div>
+  </div>
+
+  <div id="s3" class="sc">
+    <div id="bigCup" class="a" style="left:690px;top:200px"></div>
+    <div id="s3p" class="a pill" style="left:1070px;top:178px;padding:16px 34px;background:#D9E4E1;font-size:40px">Coffee spend</div>
+    <div id="s3y" class="a" style="left:1074px;top:282px;font-size:34px;font-weight:600">After 10 years:</div>
+    <div id="s3v" class="a pill num" style="left:1070px;top:338px;padding:14px 36px;background:#004D36;color:#FFFFFF;font-size:84px">−$0</div>
+    <div id="s3c" class="a" style="left:1074px;top:500px;font-size:31px;line-height:1.3;width:440px">A daily coffee adds up to a lot of money spent.</div>
+  </div>
+
+  <div id="s4" class="sc">
+    <div id="win" class="a card" style="left:690px;top:200px;width:380px;height:360px;overflow:hidden">
+      <div class="a" style="left:0;top:0;width:380px;height:44px;background:#D9E4E1"></div>
+      <div class="a" style="left:20px;top:15px;width:14px;height:14px;border-radius:50%;background:#10A867"></div>
+      <div class="a" style="left:42px;top:15px;width:14px;height:14px;border-radius:50%;background:#8CAFA4"></div>
+      <svg class="a" style="left:0;top:44px" width="380" height="316">
+        <line x1="34" y1="280" x2="346" y2="280" stroke="#D9E4E1" stroke-width="3"/>
+        <g id="wbars"></g>
+        <path id="warr" d="M40 236 L120 196 L190 210 L322 70" fill="none" stroke="#00E677" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+        <path id="warrH" d="M290 64 L326 66 L322 102" fill="none" stroke="#00E677" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+      </svg>
+    </div>
+    <div id="s4p" class="a pill" style="left:1110px;top:182px;padding:14px 28px;background:#DBF2E7;font-size:36px">Invest in the S&amp;P 500</div>
+    <div id="s4y" class="a" style="left:1124px;top:282px;font-size:34px;font-weight:600">After 10 years:</div>
+    <div id="s4v" class="a pill num" style="left:1120px;top:338px;padding:14px 36px;background:#00E677;color:#004D36;font-size:84px">$0</div>
+    <div id="s4c" class="a" style="left:1124px;top:500px;font-size:31px;line-height:1.3;width:400px">The same $3.50 a day could have grown to <span style="white-space:nowrap">$32 763</span>.</div>
+  </div>
+
+  <div id="s5" class="sc">
+    <svg class="a" style="left:640px;top:150px" width="480" height="560">
+      <g id="stacks"></g>
+      <g id="btc" transform="translate(170 190)">
+        <circle r="120" fill="#00E677"/>
+        <circle r="96" fill="none" stroke="#004D36" stroke-width="8" opacity=".9"/>
+        <text y="56" text-anchor="middle" font-family="Arial" font-weight="700" font-size="150" fill="#004D36">₿</text>
+      </g>
+    </svg>
+    <div id="s5p" class="a pill" style="left:1120px;top:178px;padding:16px 34px;background:#00E677;font-size:40px">Invest in Bitcoin</div>
+    <div id="s5y" class="a" style="left:1124px;top:282px;font-size:34px;font-weight:600">After 10 years:</div>
+    <div id="s5v" class="a pill num" style="left:1120px;top:338px;padding:14px 36px;background:#B3F8D6;color:#004D36;font-size:84px">$0</div>
+    <div id="s5c" class="a" style="left:1124px;top:500px;font-size:31px;line-height:1.3;width:400px">The same $3.50 a day could have grown to <span style="white-space:nowrap">$279 832</span>.</div>
+  </div>
+
+  <div id="s6" class="sc">
+    <div id="rows"></div>
+    <div id="s6n" class="a" style="left:722px;top:700px;font-size:20px;color:#406A5E">Coffee is money spent. Investment values are illustrative, based on past performance.</div>
+  </div>
+
+  <div id="s7" class="sc">
+    <div id="s7p" class="a pill" style="left:700px;top:120px;padding:20px 40px;background:#00E677;font-size:42px">The formula for long-term wealth:</div>
+    <div id="f1" class="a" style="left:700px;top:270px;width:200px;text-align:center"></div>
+    <div id="x1" class="a h" style="left:906px;top:318px;font-size:64px;color:#004D36">×</div>
+    <div id="f2" class="a" style="left:960px;top:270px;width:200px;text-align:center"></div>
+    <div id="x2" class="a h" style="left:1166px;top:318px;font-size:64px;color:#004D36">×</div>
+    <div id="f3" class="a" style="left:1220px;top:270px;width:200px;text-align:center"></div>
+    <div id="eq" class="a h" style="left:1180px;top:520px;font-size:64px;color:#004D36">=</div>
+    <svg id="f4" class="a" style="left:1240px;top:470px" width="300" height="230"><g id="fbars"></g><path id="farr" d="M14 150 L110 110 L170 120 L270 26" fill="none" stroke="#10A867" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path id="farrH" d="M240 22 L274 22 L272 56" fill="none" stroke="#10A867" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0"/></svg>
+    <div id="f4l" class="a" style="left:722px;top:560px;font-size:30px;line-height:1.3;width:420px">Small amounts, given time and discipline, compound.</div>
+  </div>
+
+  <div id="s8" class="sc">
+    <div id="s8c" class="a" style="left:690px;top:190px;width:840px;height:420px;border-radius:28px;background:#004D36;box-shadow:0 24px 50px rgba(0,58,41,.22);overflow:hidden">
+      <svg class="a" style="left:0;top:0" width="840" height="420"><path id="s8w" d="M0 360 C 220 300, 420 420, 840 330 L 840 420 L 0 420 Z" fill="#006341"/><path d="M0 390 C 260 340, 470 430, 840 370 L 840 420 L 0 420 Z" fill="#003A29"/></svg>
+      <div class="a h" style="left:56px;top:62px;width:740px;font-size:60px;line-height:1.14;color:#FFFFFF"><span id="s8a">Start with what is affordable,</span> <span id="s8b">and let the <span style="color:#00E677">consistency</span></span> <span id="s8d">do the heavy lifting.</span></div>
+    </div>
+    <div id="s8n" class="a" style="left:694px;top:640px;font-size:20px;color:#406A5E">Illustrative outcomes, not forecasts. Investments can lose value.</div>
+  </div>
+
+  <!-- character -->
+  <div id="manWrap" class="a" style="left:60px;top:64px;width:564px;height:786px;transform-origin:50% 100%"></div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const eo = (p) => 1 - Math.pow(1 - p, 3);
+const eio = (p) => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const back = (p) => { const c1 = 1.6, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const prog = (t, t0, d) => clamp((t - t0) / d);
+const sp = (n) => Math.round(n).toLocaleString('en-US').replace(/,/g, ' ');
+const lerp = (a, b, p) => a + (b - a) * p;
+
+/* ---------- icons (brand greens only) ---------- */
+const CUP = (w) => `<svg width="${w}" height="${w * 1.3}" viewBox="0 0 100 130">
+  <g class="steam" fill="none" stroke="#8CAFA4" stroke-width="3.2" stroke-linecap="round"></g>
+  <path d="M14 38 L86 38 L76 126 Q75 130 70 130 L30 130 Q25 130 24 126 Z" fill="#FFFFFF" stroke="#B3CAC3" stroke-width="2.4"/>
+  <path d="M18.5 66 L81.5 66 L78 102 L22 102 Z" fill="#10A867"/>
+  <ellipse cx="50" cy="84" rx="9" ry="12" fill="#004D36"/><path d="M50 73 Q45 84 50 95" stroke="#10A867" stroke-width="2" fill="none"/>
+  <rect x="8" y="26" width="84" height="14" rx="5" fill="#004D36"/><rect x="15" y="18" width="70" height="10" rx="4" fill="#006341"/>
+</svg>`;
+const CIRC = (bg, inner) => `<div style="width:124px;height:124px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center">${inner}</div>`;
+const ICUP = `<svg width="54" height="66" viewBox="0 0 100 124"><path d="M14 32 L86 32 L76 120 Q75 124 70 124 L30 124 Q25 124 24 120 Z" fill="#FFFFFF" stroke="#004D36" stroke-width="5"/><path d="M19 60 L81 60 L78 92 L22 92 Z" fill="#10A867"/><rect x="6" y="18" width="88" height="16" rx="6" fill="#004D36"/></svg>`;
+const ICHART = `<svg width="70" height="62" viewBox="0 0 70 62"><rect x="6" y="40" width="12" height="18" rx="2" fill="#10A867"/><rect x="24" y="30" width="12" height="28" rx="2" fill="#10A867"/><rect x="42" y="18" width="12" height="40" rx="2" fill="#004D36"/><path d="M6 30 L26 16 L38 22 L62 4" fill="none" stroke="#004D36" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 4 L63 3 L62 16" fill="none" stroke="#004D36" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const IBTC = `<svg width="70" height="70" viewBox="0 0 70 70"><text x="35" y="54" text-anchor="middle" font-family="Arial" font-weight="700" font-size="58" fill="#004D36">₿</text></svg>`;
+const ICOINS = `<svg width="110" height="100" viewBox="0 0 110 100"><g fill="#10A867" stroke="#004D36" stroke-width="4">${[0,1,2,3].map(i=>`<ellipse cx="55" cy="${80-i*18}" rx="40" ry="12"/><rect x="15" y="${68-i*18}" width="80" height="12" stroke="none"/><path d="M15 ${68-i*18} V${80-i*18} M95 ${68-i*18} V${80-i*18}" fill="none"/>`).join('')}<ellipse cx="55" cy="26" rx="40" ry="12" fill="#00E677"/></g></svg>`;
+const ICAL = `<svg width="104" height="100" viewBox="0 0 104 100"><rect x="6" y="14" width="92" height="80" rx="12" fill="#FFFFFF" stroke="#004D36" stroke-width="6"/><rect x="6" y="14" width="92" height="22" rx="10" fill="#004D36"/><rect x="26" y="4" width="8" height="20" rx="4" fill="#004D36"/><rect x="70" y="4" width="8" height="20" rx="4" fill="#004D36"/><g fill="#10A867">${[0,1,2,3].map(c=>[0,1,2].map(r=>`<rect x="${18+c*19}" y="${46+r*15}" width="11" height="9" rx="2"/>`).join('')).join('')}</g></svg>`;
+const ITGT = `<svg width="104" height="100" viewBox="0 0 104 100"><circle cx="48" cy="54" r="40" fill="#FFFFFF" stroke="#004D36" stroke-width="6"/><circle cx="48" cy="54" r="26" fill="none" stroke="#10A867" stroke-width="6"/><circle cx="48" cy="54" r="11" fill="#004D36"/><path d="M48 54 L90 12" stroke="#004D36" stroke-width="6" stroke-linecap="round"/><path d="M80 6 L96 4 L94 20 Z" fill="#00E677" stroke="#004D36" stroke-width="3"/></svg>`;
+
+$('bi1').innerHTML = CIRC('#D9E4E1', ICUP);
+$('bi2').innerHTML = CIRC('#DBF2E7', ICHART);
+$('bi3').innerHTML = CIRC('#00E677', IBTC);
+$('bigCup').innerHTML = CUP(310);
+const F = [['f1', ICOINS, 'Small amount'], ['f2', ICAL, 'Time'], ['f3', ITGT, 'Discipline']];
+F.forEach(([id, ic, l]) => $(id).innerHTML = `<div style="height:110px;display:flex;align-items:flex-end;justify-content:center">${ic}</div><div style="font-size:34px;font-weight:700;margin-top:16px">${l}</div>`);
+
+const ROWS = [
+  { ic: CIRC('#D9E4E1', ICUP), lab: 'Coffee spend', v: 13688, neg: true },
+  { ic: CIRC('#DBF2E7', ICHART), lab: 'S&amp;P 500 value', v: 32763 },
+  { ic: CIRC('#00E677', IBTC), lab: 'Bitcoin value', v: 279832 }
+];
+$('rows').innerHTML = ROWS.map((r, i) => `
+  <div class="a card row" style="left:700px;top:${150 + i * 170}px;width:830px;height:144px;border-radius:72px;display:flex;align-items:center;padding:0 46px 0 12px">
+    <div style="transform:scale(.97)">${r.ic}</div>
+    <div style="font-size:36px;font-weight:600;margin-left:26px;flex:1">${r.lab}</div>
+    <div class="num rv" data-v="${r.v}" data-neg="${r.neg ? 1 : 0}" style="font-size:62px;color:${r.neg ? '#406A5E' : '#006341'}">$0</div>
+  </div>`).join('');
+
+/* coin stacks for S5 */
+(function () {
+  let s = '';
+  [[60, 9], [150, 6], [240, 12], [330, 15]].forEach(([x, n], k) => {
+    for (let i = 0; i < n; i++) s += `<g class="ck" data-k="${k}" data-i="${i}" data-n="${n}"><rect x="${x}" y="${520 - i * 22 - 18}" width="84" height="18" fill="#10A867"/><ellipse cx="${x + 42}" cy="${520 - i * 22}" rx="42" ry="10" fill="#10A867" stroke="#004D36" stroke-width="3"/><ellipse cx="${x + 42}" cy="${520 - i * 22 - 18}" rx="42" ry="10" fill="#00E677" stroke="#004D36" stroke-width="3"/></g>`;
+  });
+  $('stacks').innerHTML = s;
+})();
+/* bars */
+$('wbars').innerHTML = [60, 100, 140, 190].map((h, i) => `<rect class="wb" data-h="${h}" x="${54 + i * 72}" y="280" width="46" height="0" rx="4" fill="${i === 3 ? '#004D36' : '#10A867'}"/>`).join('');
+$('fbars').innerHTML = [50, 80, 112, 150].map((h, i) => `<rect class="fb" data-h="${h}" x="${18 + i * 64}" y="220" width="42" height="0" rx="4" fill="${i === 3 ? '#004D36' : '#10A867'}"/>`).join('');
+
+/* landscape */
+function hills(y, amp, len, col) {
+  let d = `M0 900 L0 ${y}`;
+  for (let x = 0; x <= 3200 + len; x += len / 2) d += ` Q ${x + len / 4} ${y - amp * ((x / (len / 2)) % 2 ? -0.4 : 1)} ${x + len / 2} ${y}`;
+  return `<path d="${d} L ${3200 + len} 900 Z" fill="${col}"/>`;
+}
+$('hillsFar').innerHTML = hills(730, 70, 900, '#E6FBF1');
+$('hillsNear').innerHTML = hills(790, 46, 620, '#D9FBEB');
+$('dashes').innerHTML = Array.from({ length: 24 }, (_, i) => `<rect x="${i * 140}" y="868" width="60" height="6" rx="3" fill="#B3CAC3"/>`).join('');
+
+/* ---------- character rig ---------- */
+let RIG = {};
+async function loadMan() {
+  let svg = await (await fetch('man-rig.svg')).text();
+  $('manWrap').innerHTML = svg;
+  const m = $('man'); m.setAttribute('width', 564); m.setAttribute('height', 786);
+  // cup recolour (paths in the cup group: body, lid, lid top, band)
+  const cup = m.querySelectorAll('[data-rig="farm"] path, [data-rig="farm"] polygon');
+  cup[0].setAttribute('class', 'cup-body'); cup[1].setAttribute('class', 'cup-lid'); cup[2].setAttribute('class', 'cup-lid'); cup[3].setAttribute('class', 'cup-band');
+  // excitement burst + steam inside the head / arm rig
+  const NS = 'http://www.w3.org/2000/svg';
+  const burst = document.createElementNS(NS, 'g'); burst.setAttribute('data-rig', 'head'); burst.innerHTML = `<g id="burst" stroke="#00E677" stroke-width="16" stroke-linecap="round"><line x1="1010" y1="80" x2="1060" y2="30"/><line x1="1040" y1="140" x2="1110" y2="120"/><line x1="985" y1="40" x2="1000" y2="-20"/></g>`;
+  m.querySelector('g').appendChild(burst);
+  const steam = document.createElementNS(NS, 'g'); steam.setAttribute('data-rig', 'farm'); steam.innerHTML = `<g id="msteam" fill="none" stroke="#8CAFA4" stroke-width="7" stroke-linecap="round"></g>`;
+  m.querySelector('g').appendChild(steam);
+  ['head', 'farm', 'barm', 'bshin', 'fshin'].forEach((k) => RIG[k] = [...m.querySelectorAll(`[data-rig="${k}"]`)]);
+  RIG.eyes = [...m.querySelectorAll('.eyeL, .eyeR')];
+}
+const PIV = { head: [895, 292], farm: [985, 540], barm: [565, 520], bshin: [470, 1250], fshin: [870, 1290] };
+const EYEC = [[910, 139], [972, 137]];
+function rot(k, a, dx = 0, dy = 0) { const [x, y] = PIV[k]; const tr = `translate(${dx} ${dy}) rotate(${a.toFixed(2)} ${x} ${y})`; RIG[k].forEach((g) => g.setAttribute('transform', tr)); }
+
+/* ---------- timeline ---------- */
+const S = [0, 3, 6, 10, 14, 18, 22, 27, 31];
+const T = 31;
+function sceneOp(t, i) {
+  const a = S[i], b = S[i + 1];
+  const inn = i === 0 ? 1 : eio(prog(t, a - 0.1, 0.45));
+  const out = i === 7 ? 1 - eio(prog(t, b - 0.7, 0.6)) : 1 - eio(prog(t, b - 0.35, 0.4));
+  return Math.min(inn, out);
+}
+function rise(el, t, t0, d = 0.7, dy = 30) { const p = eo(prog(t, t0, d)); el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * dy}px)`; return p; }
+function pop(el, t, t0, d = 0.6) { const p = prog(t, t0, d); el.style.opacity = clamp(p * 2); el.style.transform = `scale(${0.5 + 0.5 * back(p)})`; return p; }
+function draw(el, t, t0, d) { const p = eio(prog(t, t0, d)); el.style.strokeDashoffset = 1 - p; return p; }
+function steam(g, t, x0, top, sc = 1) {
+  if (!g) return; let s = '';
+  for (let k = 0; k < 3; k++) { const ph = (t * 0.6 + k / 3) % 1; const y0 = top - ph * 16 * sc, op = Math.sin(ph * Math.PI); const x = x0 + (k - 1) * 16 * sc; s += `<path d="M${x} ${y0} q ${6 * sc} ${-5 * sc} 0 ${-10 * sc} q ${-6 * sc} ${-5 * sc} 0 ${-10 * sc}" opacity="${(op * .9).toFixed(2)}"/>`; }
+  g.innerHTML = s;
+}
+// walking speed (strides per second) and pose per scene, eased between scenes
+const POSE = [ // [walk speed, cup-arm angle, head angle, burst]
+  [1.0, 0, 0, 1], [0.55, -4, -5, 0], [0.5, -16, -6, 0], [1.0, -3, 0, 1], [1.0, -6, -2, 1], [0.8, -10, -1, 0], [0.9, -22, -3, 1], [0.6, -2, 0, 0]
+];
+function poseAt(t) {
+  let i = 0; while (i < 7 && t >= S[i + 1]) i++;
+  const cur = POSE[i], prev = POSE[Math.max(0, i - 1)];
+  const p = eio(prog(t, S[i] - 0.3, 0.8));
+  return { i, sp: lerp(prev[0], cur[0], p), arm: lerp(prev[1], cur[1], p), head: lerp(prev[2], cur[2], p), burst: cur[3], bt: S[i] };
+}
+const STEP = 1 / 240; let phaseCache = [0];
+function phaseAt(t) { // integral of walking speed
+  const n = Math.round(t / STEP); while (phaseCache.length <= n) { const k = phaseCache.length; phaseCache.push(phaseCache[k - 1] + poseAt((k - 1) * STEP).sp * STEP); } return phaseCache[n];
+}
+
+function render(t) {
+  const P = poseAt(t), ph = phaseAt(t), w = ph * Math.PI * 2 * 1.15;
+  // landscape scroll
+  const dist = ph * 260;
+  $('hillsFar').setAttribute('transform', `translate(${-(dist * 0.25) % 900} 0)`);
+  $('hillsNear').setAttribute('transform', `translate(${-(dist * 0.55) % 620} 0)`);
+  $('dashes').setAttribute('transform', `translate(${-dist % 140} 0)`);
+
+  // character
+  const enter = eo(prog(t, 0, 1.2)), leave = eio(prog(t, T - 0.7, 0.6));
+  const bob = -Math.abs(Math.sin(w)) * 10 * clamp(P.sp * 1.3);
+  $('manWrap').style.transform = `translate(${lerp(-640, 0, enter)}px, ${bob}px)`;
+  $('manWrap').style.opacity = 1 - leave;
+  const amp = clamp(P.sp);
+  rot('bshin', 8 * Math.sin(w) * amp);
+  rot('fshin', -7 * Math.sin(w) * amp);
+  rot('barm', -7 * Math.sin(w) * amp);
+  rot('farm', P.arm + 3 * Math.sin(w + 0.6) * amp);
+  rot('head', P.head + 1.6 * Math.sin(2 * w));
+  // blink: periodic, held closed while sipping in scene 3
+  const bp = (t % 3.3) / 3.3, blink = bp > 0.94 ? Math.sin((bp - 0.94) / 0.06 * Math.PI) : 0;
+  const sip = P.i === 2 ? eio(prog(t, S[2] + 0.6, 0.3)) * (1 - eio(prog(t, S[3] - 1.4, 0.3))) : 0;
+  const sy = 1 - Math.max(blink, sip) * 0.9;
+  RIG.eyes.forEach((e, k) => { const [x, y] = EYEC[k]; e.setAttribute('transform', `translate(${x} ${y}) scale(1 ${sy.toFixed(3)}) translate(${-x} ${-y})`); });
+  const bu = $('burst'); const bk = P.burst ? eo(prog(t, P.bt + 0.2, 0.4)) * (1 - eio(prog(t, S[P.i + 1] - 0.5, 0.3))) : 0;
+  bu.setAttribute('opacity', bk.toFixed(2)); bu.setAttribute('transform', `translate(1000 80) scale(${(0.6 + 0.4 * bk).toFixed(3)}) translate(-1000 -80)`);
+  steam($('msteam'), t, 1288, 296, 2.4);
+
+  for (let i = 0; i < 8; i++) { const o = sceneOp(t, i), el = $('s' + (i + 1)); el.style.opacity = o; el.style.visibility = o > 0.001 ? 'visible' : 'hidden'; }
+
+  // S1
+  let a = S[0] + 0.5;
+  rise($('s1a'), t, a); rise($('s1b'), t, a + 0.15); rise($('s1c'), t, a + 0.3);
+  $('s1u').style.transform = `scaleX(${eio(prog(t, a + 0.7, 0.6))})`;
+  rise($('s1p'), t, a + 0.85);
+  // S2
+  a = S[1];
+  document.querySelectorAll('#s2 .tb').forEach((c, i) => c.setAttribute('opacity', eo(prog(t, a + 0.1 + i * 0.15, 0.3))));
+  const bm = prog(t, a + 0.4, 0.6); $('bubMain').setAttribute('transform', `translate(630 222) scale(${(0.4 + 0.6 * back(bm)).toFixed(3)}) translate(-630 -222)`); $('bubMain').setAttribute('opacity', clamp(bm * 2));
+  pop($('bi1'), t, a + 0.75, 0.5); pop($('bi2'), t, a + 0.9, 0.5); pop($('bi3'), t, a + 1.05, 0.5);
+  [['bi1', 0], ['bi2', 1], ['bi3', 2]].forEach(([k, j]) => $(k).style.transform += ` translateY(${Math.sin(t * 2 + j * 1.3) * 5}px)`);
+  rise($('s2a'), t, a + 0.25); rise($('s2b'), t, a + 0.4); rise($('s2c'), t, a + 0.55); rise($('s2d'), t, a + 0.9);
+  // S3
+  a = S[2];
+  pop($('bigCup'), t, a + 0.1, 0.8); steam($('bigCup').querySelector('.steam'), t, 50, 16);
+  rise($('s3p'), t, a + 0.3); rise($('s3y'), t, a + 0.5); pop($('s3v'), t, a + 0.7, 0.6); rise($('s3c'), t, a + 1.2);
+  $('s3v').textContent = '−$' + sp(13688 * eo(prog(t, a + 0.8, 1.6)));
+  // S4
+  a = S[3];
+  rise($('win'), t, a + 0.1, 0.7, 40);
+  document.querySelectorAll('.wb').forEach((b, i) => { const h = +b.dataset.h * eo(prog(t, a + 0.6 + i * 0.15, 0.7)); b.setAttribute('height', h); b.setAttribute('y', 280 - h); });
+  draw($('warr'), t, a + 1.0, 0.9); $('warrH').setAttribute('opacity', eo(prog(t, a + 1.8, 0.2)));
+  rise($('s4p'), t, a + 0.3); rise($('s4y'), t, a + 0.5); pop($('s4v'), t, a + 0.7, 0.6); rise($('s4c'), t, a + 1.2);
+  $('s4v').textContent = '$' + sp(32763 * eo(prog(t, a + 0.8, 1.6)));
+  // S5
+  a = S[4];
+  document.querySelectorAll('.ck').forEach((c) => { const k = +c.dataset.k, i = +c.dataset.i; const p = eo(prog(t, a + 0.5 + k * 0.12 + i * 0.07, 0.35)); c.setAttribute('opacity', p); c.setAttribute('transform', `translate(0 ${(1 - p) * -40})`); });
+  const cp = prog(t, a + 0.15, 0.8);
+  $('btc').setAttribute('transform', `translate(170 ${190 + Math.sin(t * 1.6) * 6}) scale(${(0.4 + 0.6 * back(cp)).toFixed(3)}) rotate(${((1 - eo(cp)) * -25).toFixed(2)})`); $('btc').setAttribute('opacity', clamp(cp * 2));
+  rise($('s5p'), t, a + 0.3); rise($('s5y'), t, a + 0.5); pop($('s5v'), t, a + 0.7, 0.6); rise($('s5c'), t, a + 1.2);
+  $('s5v').textContent = '$' + sp(279832 * eo(prog(t, a + 0.8, 1.8)));
+  // S6
+  a = S[5];
+  document.querySelectorAll('.row').forEach((r, i) => {
+    const p = eo(prog(t, a + 0.15 + i * 0.25, 0.6)); r.style.opacity = p; r.style.transform = `translateX(${(1 - p) * 80}px)`;
+    const v = r.querySelector('.rv'); v.textContent = (v.dataset.neg === '1' ? '−$' : '$') + sp(+v.dataset.v * eo(prog(t, a + 0.4 + i * 0.25, 1.4)));
+  });
+  rise($('s6n'), t, a + 1.4, 0.6, 10);
+  // S7
+  a = S[6];
+  pop($('s7p'), t, a + 0.1, 0.6);
+  rise($('f1'), t, a + 0.6, 0.6, 30); pop($('x1'), t, a + 1.0, 0.4); rise($('f2'), t, a + 1.2, 0.6, 30); pop($('x2'), t, a + 1.6, 0.4); rise($('f3'), t, a + 1.8, 0.6, 30); pop($('eq'), t, a + 2.3, 0.4);
+  document.querySelectorAll('.fb').forEach((b, i) => { const h = +b.dataset.h * eo(prog(t, a + 2.5 + i * 0.12, 0.6)); b.setAttribute('height', h); b.setAttribute('y', 220 - h); });
+  draw($('farr'), t, a + 2.8, 0.8); $('farrH').setAttribute('opacity', eo(prog(t, a + 3.5, 0.2)));
+  rise($('f4l'), t, a + 3.0, 0.6, 14);
+  // S8
+  a = S[7];
+  rise($('s8c'), t, a + 0.1, 0.8, 40);
+  rise($('s8a'), t, a + 0.5); rise($('s8b'), t, a + 0.8); rise($('s8d'), t, a + 1.1);
+  ['s8a', 's8b', 's8d'].forEach((k) => $(k).style.display = 'inline-block');
+  $('s8w').setAttribute('transform', `translate(${Math.sin(t * 0.9) * 30} 0)`);
+  rise($('s8n'), t, a + 1.6, 0.6, 10);
+}
+window.render = render; window.TOTAL = T; window.SCENES = S;
+Promise.all([document.fonts.ready, loadMan()]).then(() => { phaseAt(T); render(0); window.ready = true; });
+</script>
+</body></html>
