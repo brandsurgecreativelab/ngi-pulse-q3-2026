@@ -8,7 +8,7 @@ C = {
  'laptop':'#D9E4E1','laptopbase':'#B3CAC3','laptopbase2':'#FFFFFF','keys':'#8CAFA4',
  'desk':'#B3CAC3','deskleg':'#8CAFA4',
  'chair':'#10A867','chairside':'#006341','post':'#8CAFA4','wheel':'#004D36',
- 'coinring':'#10A867','coin':'#00E677','coinB':'#FFFFFF',
+ 'coinring':'#A2A524','coin':'#C1DB3C','coinB':'#EDFF00',
 }
 M = {
  'P03': {'jacket':[0,3,21,18],'trousers':[1,2],'skin':[4,12,9,15,27,29,31,33],'shirt':[5],'tie':[7,26],'shoe':[6,8],'sole':[13,14],
