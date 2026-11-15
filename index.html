@@ -338,7 +338,7 @@
 <div style="width: 100%; padding: 4px 0">
 <div style="display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); column-gap: clamp(3px, 0.6vw, 8px); margin-bottom: 6px">
 <sc-for list="{{years}}" as="y" hint-placeholder-count="13">
-<div class="pc-qy" style="font-size: clamp(9px, 0.95vw, 13px); font-weight: 700; text-align: center; padding: 6px 0 4px; line-height: 1.2">{{y.label}}</div>
+<div class="pc-qy" style="font-size: clamp(9px, 0.95vw, 13px); font-weight: 700; text-align: center; padding: 6px 0 4px; line-height: 1.2"><span style="white-space: nowrap">{{y.a}}</span> {{y.b}}</div>
 </sc-for>
 </div>
 <div style="position: relative">
@@ -765,7 +765,7 @@
 <a href="https://www.nedgroupinvestments.com/" target="_blank" rel="noopener" style="grid-area: logo; justify-self: end; align-self: end; display: block"><img src="assets/ngi-logo-on-dark.svg" alt="Nedgroup Investments website (opens in a new tab)" style="display: block; width: auto; height: calc((clamp(110px, 10vw, 140px) * 0.2181 + 87px) / 1.618)"></a>
 <a href="https://www.nedgroupinvestments.com/" target="_blank" rel="noopener" class="pc-foot-site" style="grid-area: site; justify-self: center; align-self: end; display: inline-flex; align-items: flex-end; line-height: 19px; gap: 8px; min-height: 44px; font-size: 15px; font-weight: 500; white-space: nowrap; letter-spacing: 0.04em">nedgroupinvestments.com<span class="pc-sr">(opens in a new tab)</span></a>
 </div>
-<div class="pc-wrap pc-updated" style="box-sizing: border-box; padding-top: 14px; padding-bottom: 16px; border-top: 1px solid rgba(255, 255, 255, 0.12); font-size: 13px; line-height: 18px; font-weight: 500; color: rgba(255, 255, 255, 0.72)"><span class="pc-upd"><span class="pc-live" aria-hidden="true"></span><span class="pc-upd-a" style="color: #FFFFFF">Live Demo</span><span class="pc-upd-sep" aria-hidden="true">·</span><span class="pc-upd-b">Last updated <time datetime="2026-11-15T18:14+02:00">15 November 2026, 18:14&nbsp;SAST</time></span></span></div>
+<div class="pc-wrap pc-updated" style="box-sizing: border-box; padding-top: 14px; padding-bottom: 16px; border-top: 1px solid rgba(255, 255, 255, 0.12); font-size: 13px; line-height: 18px; font-weight: 500; color: rgba(255, 255, 255, 0.72)"><span class="pc-upd"><span class="pc-live" aria-hidden="true"></span><span class="pc-upd-a" style="color: #FFFFFF">Live Demo</span><span class="pc-upd-sep" aria-hidden="true">·</span><span class="pc-upd-b">Last updated <time datetime="2026-11-15T18:17+02:00">15 November 2026, 18:17&nbsp;SAST</time></span></span></div>
 </footer>
 
 </div>
@@ -4218,7 +4218,7 @@ class Component extends DCLogic {
       bandColor: this.props.bandColor || '#f2f6f5',
       utViewRef: this._utViewRef, mmViewRef: this._mmViewRef, retViewRef: this._retViewRef, glance: glance, returns: D.returns, returnGroups: returnGroups, cardH: (s.cardH || 168) + 'px', fx: D.fx, fxRows: fxRows,
       shares: D.shares, sharesTop: sh.top.map(shareRow('t')), sharesBottom: sh.bottom.map(shareRow('b')), p3: seg('3m'), p12: seg('12m'), perLabel: period === '12m' ? '12 months' : '3 months', segThumb: period === '12m' ? '100%' : '0%',
-      quiltInfo: D.quiltInfo, quiltLine: quiltLine, quiltLineRef: this._quiltLineRef, quiltScrollRef: this._qsRef || (this._qsRef = (el) => this.watchQuiltScroll(el)), years: D.quilt.years.map((y) => ({ label: y })), quiltCells: quiltCells, legend: legend,
+      quiltInfo: D.quiltInfo, quiltLine: quiltLine, quiltLineRef: this._quiltLineRef, quiltScrollRef: this._qsRef || (this._qsRef = (el) => this.watchQuiltScroll(el)), years: D.quilt.years.map((y) => { const m = String(y).match(/^(.*\d{4})\s+(.+)$/); return { label: y, a: m ? m[1] : y, b: m ? m[2] : '' }; }), quiltCells: quiltCells, legend: legend,
       clearHover: () => this.setState({ hover: null, cellHover: null }), hasPin: s.pin !== undefined && s.pin !== null,
       allPressed: (s.pin === undefined || s.pin === null) ? 'true' : 'false', allBg: (s.pin === undefined || s.pin === null) ? '#006341' : '#FFFFFF', allFg: (s.pin === undefined || s.pin === null) ? '#FFFFFF' : '#004D36', allLine: (s.pin === undefined || s.pin === null) ? '#004D36' : '#CFDDD8',
       clearPin: () => this.setState({ pin: null, hover: null }),
