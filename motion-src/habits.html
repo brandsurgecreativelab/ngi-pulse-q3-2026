@@ -18,6 +18,8 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
 <div id="stage">
   <!-- landscape -->
   <svg id="land" class="a" style="left:0;top:0" width="1600" height="900">
+    
+    <g id="hillsBack"></g>
     <g id="hillsFar"></g>
     <g id="hillsNear"></g>
     
@@ -32,15 +34,15 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
 
   <div id="s2" class="sc">
     <svg id="bub" class="a" style="left:0;top:0" width="1600" height="900">
-      <circle class="tb" cx="420" cy="250" r="10" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
-      <circle class="tb" cx="455" cy="222" r="15" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
-      <g id="bubMain"><rect x="490" y="26" width="600" height="190" rx="95" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/></g>
+      <circle class="tb" cx="425" cy="300" r="11" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
+      <circle class="tb" cx="462" cy="274" r="17" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
+      <g id="bubMain" style="filter:drop-shadow(0 10px 18px rgba(0,58,41,.08))"><circle cx="560" cy="170" r="82" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="665" cy="128" r="92" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="800" cy="110" r="98" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="935" cy="122" r="92" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="1050" cy="165" r="84" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="1075" cy="220" r="62" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="965" cy="238" r="74" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="830" cy="246" r="74" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="695" cy="244" r="74" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="570" cy="236" r="66" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="505" cy="205" r="52" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="560" cy="170" r="82" fill="#FFFFFF"/><circle cx="665" cy="128" r="92" fill="#FFFFFF"/><circle cx="800" cy="110" r="98" fill="#FFFFFF"/><circle cx="935" cy="122" r="92" fill="#FFFFFF"/><circle cx="1050" cy="165" r="84" fill="#FFFFFF"/><circle cx="1075" cy="220" r="62" fill="#FFFFFF"/><circle cx="965" cy="238" r="74" fill="#FFFFFF"/><circle cx="830" cy="246" r="74" fill="#FFFFFF"/><circle cx="695" cy="244" r="74" fill="#FFFFFF"/><circle cx="570" cy="236" r="66" fill="#FFFFFF"/><circle cx="505" cy="205" r="52" fill="#FFFFFF"/></g>
     </svg>
-    <div id="bi1" class="a" style="left:540px;top:59px"></div>
-    <div id="bi2" class="a" style="left:728px;top:59px"></div>
-    <div id="bi3" class="a" style="left:916px;top:59px"></div>
-    <div class="a h" style="left:620px;top:290px;font-size:88px"><div id="s2a">What if you</div><div id="s2b">spend or invest</div><div id="s2c">$3.50 a day</div></div>
-    <div id="s2d" class="a" style="left:622px;top:600px;font-size:46px;font-weight:600">since January 2016 on…?</div>
+    <div id="bi1" class="a" style="left:600px;top:118px"></div>
+    <div id="bi2" class="a" style="left:740px;top:110px"></div>
+    <div id="bi3" class="a" style="left:880px;top:118px"></div>
+    <div class="a h" style="left:620px;top:340px;font-size:84px"><div id="s2a">What if you</div><div id="s2b">spend or invest</div><div id="s2c">$3.50 a day</div></div>
+    <div id="s2d" class="a" style="left:622px;top:635px;font-size:44px;font-weight:600">since January 2016 on…?</div>
   </div>
 
   <div id="s3" class="sc">
@@ -65,7 +67,7 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
   </div>
 
   <div id="s5" class="sc">
-    <svg class="a" style="left:560px;top:180px" width="480" height="560">
+    <div id="btcStacks" class="a" style="left:600px;top:250px;width:380px;height:320px;transform-origin:50% 100%"></div><svg class="a" style="left:560px;top:180px;display:none" width="480" height="560">
       <g id="stacks"></g>
       <g id="btc" transform="translate(170 190)">
         <circle r="120" fill="#00E677"/>
@@ -81,27 +83,27 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
 
   <div id="s6" class="sc">
     <div id="rows"></div>
-    <div id="s6n" class="a" style="left:624px;top:710px;font-size:22px;color:#406A5E">Coffee is money spent. Investment values are illustrative, based on past performance.</div>
+    <div id="s6n" class="a" style="left:624px;top:705px;width:920px;font-size:28px;line-height:1.35;color:#407A68">Coffee is money spent. Investment values are illustrative, based on past performance.</div>
   </div>
 
   <div id="s7" class="sc">
-    <div id="s7p" class="a pill" style="left:600px;top:120px;padding:20px 44px;background:#00E677;font-size:48px">The formula for long-term wealth:</div>
-    <div id="f1" class="a" style="left:590px;top:290px;width:200px;text-align:center"></div>
-    <div id="x1" class="a h" style="left:800px;top:350px;font-size:64px;color:#004D36">×</div>
-    <div id="f2" class="a" style="left:850px;top:290px;width:200px;text-align:center"></div>
-    <div id="x2" class="a h" style="left:1060px;top:350px;font-size:64px;color:#004D36">×</div>
-    <div id="f3" class="a" style="left:1110px;top:290px;width:200px;text-align:center"></div>
-    <div id="eq" class="a h" style="left:1320px;top:350px;font-size:64px;color:#004D36">=</div>
-    <div id="f4" class="a" style="left:1380px;top:268px;width:200px;height:190px"></div><svg class="a" style="display:none" width="1" height="1"><g id="fbars"></g><path id="farr" d="M14 150 L110 110 L170 120 L270 26" fill="none" stroke="#10A867" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path id="farrH" d="M240 22 L274 22 L272 56" fill="none" stroke="#10A867" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0"/></svg>
-    <div id="f4l" class="a" style="left:604px;top:590px;font-size:38px;line-height:1.3;width:900px">Small amounts, given time and discipline, compound.</div>
+    <div id="s7p" class="a pill" style="left:620px;top:130px;padding:20px 48px;background:#B2F8D6;font-size:50px">The formula for long-term wealth:</div>
+    <div id="f1" class="a" style="left:510px;top:300px;width:200px;text-align:center"></div>
+    <div id="x1" class="a h" style="left:722px;top:360px;font-size:64px;color:#004D36">×</div>
+    <div id="f2" class="a" style="left:770px;top:300px;width:200px;text-align:center"></div>
+    <div id="x2" class="a h" style="left:982px;top:360px;font-size:64px;color:#004D36">×</div>
+    <div id="f3" class="a" style="left:1030px;top:300px;width:200px;text-align:center"></div>
+    <div id="eq" class="a h" style="left:1242px;top:360px;font-size:64px;color:#004D36">=</div>
+    <div id="f4" class="a" style="left:1300px;top:280px;width:220px;height:200px"></div><svg class="a" style="display:none" width="1" height="1"><g id="fbars"></g><path id="farr" d="M14 150 L110 110 L170 120 L270 26" fill="none" stroke="#10A867" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path id="farrH" d="M240 22 L274 22 L272 56" fill="none" stroke="#10A867" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0"/></svg>
+    <div id="f4l" class="a" style="left:510px;top:620px;font-size:40px;line-height:1.3;width:1010px;text-align:center">Small amounts, given time and discipline, compound.</div>
   </div>
 
   <div id="s8" class="sc">
-    <div id="s8c" class="a" style="left:600px;top:190px;width:940px;height:420px;border-radius:28px;background:#004D36;box-shadow:0 24px 50px rgba(0,58,41,.22);overflow:hidden">
-      <svg class="a" style="left:0;top:0" width="840" height="420"><path id="s8w" d="M0 360 C 220 300, 420 420, 840 330 L 840 420 L 0 420 Z" fill="#006341"/><path d="M0 390 C 260 340, 470 430, 840 370 L 840 420 L 0 420 Z" fill="#003A29"/></svg>
-      <div class="a h" style="left:60px;top:60px;width:840px;font-size:66px;line-height:1.14;color:#FFFFFF"><span id="s8a">Start with what is affordable,</span> <span id="s8b">and let the <span style="color:#00E677">consistency</span></span> <span id="s8d">do the heavy lifting.</span></div>
+    <div id="s8c" class="a" style="left:600px;top:190px;width:940px;height:440px;border-radius:28px;background:#004D36;box-shadow:0 24px 50px rgba(0,58,41,.22);overflow:hidden">
+      <div id="s8plant" class="a" style="left:700px;top:150px;width:210px;height:210px;transform-origin:50% 100%"></div>
+      <div id="s8t" class="a h" style="left:64px;top:70px;width:620px;font-size:58px;line-height:1.18;color:#FFFFFF"><span id="s8a">Start with what is affordable,</span> <span id="s8b">and let the <span style="color:#00E677">consistency</span></span> <span id="s8d">do the heavy lifting.</span></div>
     </div>
-    <div id="s8n" class="a" style="left:604px;top:640px;font-size:20px;color:#406A5E">Illustrative outcomes, not forecasts. Investments can lose value.</div>
+    <div id="s8n" class="a" style="left:604px;top:662px;font-size:28px;color:#407A68">Illustrative outcomes, not forecasts. Investments can lose value.</div>
   </div>
 
   <!-- character -->
@@ -141,9 +143,11 @@ function buildIcons() {
   $('bi2').innerHTML = CIRC('#DBF2E8', ico('chart', 76));
   $('bi3').innerHTML = CIRC('#E3EAA5', ico('bitcoin', 104));
   $('bigCup').innerHTML = `<svg class="steamBig" width="300" height="120" style="position:absolute;left:0;top:-90px"><g class="steam" fill="none" stroke="#BAA38B" stroke-width="7" stroke-linecap="round"></g></svg>` + ico('coffee', 440);
-  [['f1', 'coins', 'Small amount'], ['f2', 'calendar', 'Time'], ['f3', 'target', 'Discipline']].forEach(([id, k, l]) => $(id).innerHTML = `<div style="height:150px;display:flex;align-items:flex-end;justify-content:center">${ico(k, 140)}</div><div style="font-size:36px;font-weight:700;margin-top:18px">${l}</div>`);
+  [['f1', 'onecoin', 'Small amount'], ['f2', 'calendar', 'Time'], ['f3', 'target', 'Discipline']].forEach(([id, k, l]) => $(id).innerHTML = `<div style="height:150px;display:flex;align-items:flex-end;justify-content:center">${ico(k, 140)}</div><div style="font-size:36px;font-weight:700;margin-top:18px">${l}</div>`);
   $('wchart').innerHTML = ico('chart', 260);
-  $('f4').innerHTML = `<div class="a" style="left:0;top:0">${ico('chart', 170)}</div><div class="a" style="left:96px;top:96px">${ico('coins', 92)}</div>`;
+  $('btcStacks').innerHTML = ico('stacks-lime', 310);
+  $('s8plant').innerHTML = ico('plant', 210);
+  $('f4').innerHTML = `<div class="a" style="left:0;top:0">${ico('chart', 170)}</div><div class="a" style="left:104px;top:86px">${ico('stacks-green', 110)}</div>`;
   document.querySelectorAll('.rowic').forEach((e) => { const k = e.dataset.k; e.innerHTML = CIRC(k === 'coffee' ? '#EFE2D4' : k === 'chart' ? '#DBF2E8' : '#E3EAA5', ico(k, k === 'bitcoin' ? 104 : k === 'chart' ? 76 : 86)); });
 }
 
@@ -177,14 +181,15 @@ function hills(y, amp, len, col) {
   for (let x = 0; x <= 3200 + len; x += len / 2) d += ` Q ${x + len / 4} ${y - amp * ((x / (len / 2)) % 2 ? -0.4 : 1)} ${x + len / 2} ${y}`;
   return `<path d="${d} L ${3200 + len} 900 Z" fill="${col}"/>`;
 }
-$('hillsFar').innerHTML = hills(730, 70, 900, '#E6FBF1');
-$('hillsNear').innerHTML = hills(790, 46, 620, '#D9FBEB');
+$('hillsBack').innerHTML = hills(660, 80, 1100, '#EEF6F2');
+$('hillsFar').innerHTML = hills(735, 70, 860, '#E3F2EA');
+$('hillsNear').innerHTML = hills(810, 52, 620, '#D7EEE2');
 
 
 /* ---------- character poses (one per scene) ---------- */
 const POSES = ['P03', 'P04', 'P08', 'P06', 'P05', 'P01', 'P09', 'P02'];
 const WALK = { P03: 1, P08: 1 };
-const LAY = { P03: [0.74, 10, 150], P04: [0.8, 80, 140], P08: [0.76, 0, 150], P06: [0.68, -110, 190], P05: [0.72, -20, 150], P01: [0.74, -50, 140], P09: [0.74, -30, 120], P02: [0.92, 70, 140] }; // [scale, left, top]
+const LAY = { P03: [0.74, 10, 150], P04: [0.8, 80, 140], P08: [0.76, 0, 150], P06: [0.68, -110, 190], P05: [0.72, -20, 150], P01: [0.74, -50, 140], P09: [0.6, -20, 230], P02: [0.92, 70, 140] }; // [scale, left, top]
 let PEL = [];
 async function loadPoses() {
   const box = $('poses');
@@ -234,7 +239,8 @@ function render(t) {
   const P = poseAt(t), ph = phaseAt(t), w = ph * Math.PI * 2 * 1.15;
   // landscape scroll
   const dist = ph * 260;
-  $('hillsFar').setAttribute('transform', `translate(${-(dist * 0.25) % 900} 0)`);
+  $('hillsBack').setAttribute('transform', `translate(${-(dist * 0.12) % 1100} 0)`);
+  $('hillsFar').setAttribute('transform', `translate(${-(dist * 0.25) % 860} 0)`);
   $('hillsNear').setAttribute('transform', `translate(${-(dist * 0.55) % 620} 0)`);
   
 
@@ -267,7 +273,7 @@ function render(t) {
   // S2
   a = S[1];
   document.querySelectorAll('#s2 .tb').forEach((c, i) => c.setAttribute('opacity', eo(prog(t, a + 0.1 + i * 0.15, 0.3))));
-  const bm = prog(t, a + 0.4, 0.6); $('bubMain').setAttribute('transform', `translate(490 216) scale(${(0.4 + 0.6 * back(bm)).toFixed(3)}) translate(-490 -216)`); $('bubMain').setAttribute('opacity', clamp(bm * 2));
+  const bm = prog(t, a + 0.4, 0.6); $('bubMain').setAttribute('transform', `translate(560 270) scale(${(0.4 + 0.6 * back(bm)).toFixed(3)}) translate(-560 -270)`); $('bubMain').setAttribute('opacity', clamp(bm * 2));
   pop($('bi1'), t, a + 0.75, 0.5); pop($('bi2'), t, a + 0.9, 0.5); pop($('bi3'), t, a + 1.05, 0.5);
   [['bi1', 0], ['bi2', 1], ['bi3', 2]].forEach(([k, j]) => $(k).style.transform += ` translateY(${Math.sin(t * 2 + j * 1.3) * 5}px)`);
   rise($('s2a'), t, a + 0.25); rise($('s2b'), t, a + 0.4); rise($('s2c'), t, a + 0.55); rise($('s2d'), t, a + 0.9);
@@ -284,7 +290,7 @@ function render(t) {
   $('s4v').textContent = '$' + sp(32763 * eo(prog(t, a + 0.8, 1.6)));
   // S5
   a = S[4];
-  document.querySelectorAll('.ck').forEach((c) => { const k = +c.dataset.k, i = +c.dataset.i; const p = eo(prog(t, a + 0.5 + k * 0.12 + i * 0.07, 0.35)); c.setAttribute('opacity', p); c.setAttribute('transform', `translate(0 ${(1 - p) * -40})`); });
+  { const p = prog(t, a + 0.5, 0.8); $('btcStacks').style.opacity = clamp(p * 2); $('btcStacks').style.transform = `scale(${(0.4 + 0.6 * back(p)).toFixed(3)})`; }
   const cp = prog(t, a + 0.15, 0.8);
   $('btc').setAttribute('transform', `translate(170 ${190 + Math.sin(t * 1.6) * 6}) scale(${(0.4 + 0.6 * back(cp)).toFixed(3)}) rotate(${((1 - eo(cp)) * -25).toFixed(2)})`); $('btc').setAttribute('opacity', 0);
   rise($('s5p'), t, a + 0.3); rise($('s5y'), t, a + 0.5); pop($('s5v'), t, a + 0.7, 0.6); rise($('s5c'), t, a + 1.2);
@@ -298,19 +304,18 @@ function render(t) {
   rise($('s6n'), t, a + 1.4, 0.6, 10);
   // S7
   a = S[6];
-  pop($('s7p'), t, a + 0.1, 0.6);
+  pop($('s7p'), t, a + 0.1, 0.6); $('s7p').style.left = (1015 - $('s7p').offsetWidth / 2) + 'px';
   rise($('f1'), t, a + 0.6, 0.6, 30); pop($('x1'), t, a + 1.0, 0.4); rise($('f2'), t, a + 1.2, 0.6, 30); pop($('x2'), t, a + 1.6, 0.4); rise($('f3'), t, a + 1.8, 0.6, 30); pop($('eq'), t, a + 2.3, 0.4);
   pop($('f4'), t, a + 2.5, 0.7);
   rise($('f4l'), t, a + 3.0, 0.6, 14);
   // S8
   a = S[7];
   rise($('s8c'), t, a + 0.1, 0.8, 40);
-  rise($('s8a'), t, a + 0.5); rise($('s8b'), t, a + 0.8); rise($('s8d'), t, a + 1.1);
-  ['s8a', 's8b', 's8d'].forEach((k) => $(k).style.display = 'inline-block');
-  $('s8w').setAttribute('transform', `translate(${Math.sin(t * 0.9) * 30} 0)`);
+  rise($('s8t'), t, a + 0.5, 0.8, 24);
+  { const p = prog(t, a + 1.0, 0.9); $('s8plant').style.opacity = clamp(p * 2); $('s8plant').style.transform = `scale(${(0.3 + 0.7 * back(p)).toFixed(3)}) rotate(${(Math.sin(t * 1.2) * 1.5).toFixed(2)}deg)`; }
   rise($('s8n'), t, a + 1.6, 0.6, 10);
 }
 window.render = render; window.TOTAL = T; window.SCENES = S;
-Promise.all([document.fonts.ready, loadPoses(), ...['coffee','chart','bitcoin','coins','calendar','target'].map(async (k) => { IC[k] = await (await fetch('icons/' + k + '.svg')).text(); })]).then(() => { buildIcons(); phaseAt(T); render(0); window.ready = true; });
+Promise.all([document.fonts.ready, loadPoses(), ...['coffee','chart','bitcoin','coins','calendar','target','onecoin','stacks-lime','stacks-green','plant'].map(async (k) => { IC[k] = await (await fetch('icons/' + k + '.svg')).text(); })]).then(() => { buildIcons(); phaseAt(T); render(0); window.ready = true; });
 </script>
 </body></html>
