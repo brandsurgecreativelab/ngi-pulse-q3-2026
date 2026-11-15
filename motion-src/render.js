@@ -4,7 +4,7 @@ const fs = require('fs');
 (async () => {
   const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome' });
   const p = await (await b.newContext({ viewport: { width: 1600, height: 900 } })).newPage();
-  await p.goto('http://localhost:8767/habits.html'); await p.waitForFunction('window.ready');
+  await p.goto('http://localhost:8768/habits.html'); await p.waitForFunction('window.ready');
   const S = await p.evaluate(() => window.SCENES), FPS = 30;
   const list = [];
   for (let i = 0; i < S.length - 1; i++) {
