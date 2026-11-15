@@ -29,6 +29,7 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
   <div id="s1" class="sc">
     <div class="a h" style="left:600px;top:140px;font-size:104px"><div id="s1a">Small habits.</div><div id="s1b">Compounding</div><div id="s1c">outcomes.</div></div>
     <div id="s1u" class="a" style="left:604px;top:500px;width:170px;height:9px;border-radius:5px;background:#00E677;transform-origin:left center"></div>
+    <div id="s1src" class="a" style="left:602px;top:770px;font-size:28px;color:#407A68">Source: CIB Weekly charts | September 2026.</div>
     <div id="s1p" class="a" style="left:602px;top:540px;font-size:42px;line-height:1.3;width:900px;color:#004D36">The same $3.50 a day can lead to very different outcomes over time.</div>
   </div>
 
@@ -38,9 +39,9 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
       <circle class="tb" cx="462" cy="274" r="17" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="3"/>
       <g id="bubMain" style="filter:drop-shadow(0 10px 18px rgba(0,58,41,.08))"><circle cx="560" cy="170" r="82" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="665" cy="128" r="92" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="800" cy="110" r="98" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="935" cy="122" r="92" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="1050" cy="165" r="84" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="1075" cy="220" r="62" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="965" cy="238" r="74" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="830" cy="246" r="74" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="695" cy="244" r="74" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="570" cy="236" r="66" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="505" cy="205" r="52" fill="#FFFFFF" stroke="#D9E4E1" stroke-width="10"/><circle cx="560" cy="170" r="82" fill="#FFFFFF"/><circle cx="665" cy="128" r="92" fill="#FFFFFF"/><circle cx="800" cy="110" r="98" fill="#FFFFFF"/><circle cx="935" cy="122" r="92" fill="#FFFFFF"/><circle cx="1050" cy="165" r="84" fill="#FFFFFF"/><circle cx="1075" cy="220" r="62" fill="#FFFFFF"/><circle cx="965" cy="238" r="74" fill="#FFFFFF"/><circle cx="830" cy="246" r="74" fill="#FFFFFF"/><circle cx="695" cy="244" r="74" fill="#FFFFFF"/><circle cx="570" cy="236" r="66" fill="#FFFFFF"/><circle cx="505" cy="205" r="52" fill="#FFFFFF"/></g>
     </svg>
-    <div id="bi1" class="a" style="left:600px;top:118px"></div>
-    <div id="bi2" class="a" style="left:740px;top:110px"></div>
-    <div id="bi3" class="a" style="left:880px;top:118px"></div>
+    <div id="bi1" class="a" style="left:598px;top:112px"></div>
+    <div id="bi2" class="a" style="left:742px;top:120px"></div>
+    <div id="bi3" class="a" style="left:898px;top:112px"></div>
     <div class="a h" style="left:620px;top:340px;font-size:84px"><div id="s2a">What if you</div><div id="s2b">spend or invest</div><div id="s2c">$3.50 a day</div></div>
     <div id="s2d" class="a" style="left:622px;top:635px;font-size:44px;font-weight:600">since January 2016 on…?</div>
   </div>
@@ -103,6 +104,7 @@ html,body{width:1600px;height:900px;overflow:hidden;background:#FFFFFF}
       <div id="s8plant" class="a" style="left:700px;top:150px;width:210px;height:210px;transform-origin:50% 100%"></div>
       <div id="s8t" class="a h" style="left:64px;top:70px;width:620px;font-size:58px;line-height:1.18;color:#FFFFFF"><span id="s8a">Start with what is affordable,</span> <span id="s8b">and let the <span style="color:#00E677">consistency</span></span> <span id="s8d">do the heavy lifting.</span></div>
     </div>
+    <div id="s8src" class="a" style="left:604px;top:708px;font-size:28px;color:#407A68">Source: CIB Weekly charts | September 2026.</div>
     <div id="s8n" class="a" style="left:604px;top:662px;font-size:28px;color:#407A68">Illustrative outcomes, not forecasts. Investments can lose value.</div>
   </div>
 
@@ -139,15 +141,15 @@ const ITGT = `<svg width="104" height="100" viewBox="0 0 104 100"><circle cx="48
 const IC = {};
 const ico = (k, h) => IC[k].replace('<svg ', `<svg style="height:${h}px;width:auto;display:block" `);
 function buildIcons() {
-  $('bi1').innerHTML = CIRC('#EFE2D4', ico('coffee', 86));
-  $('bi2').innerHTML = CIRC('#DBF2E8', ico('chart', 76));
-  $('bi3').innerHTML = CIRC('#E3EAA5', ico('bitcoin', 104));
+  $('bi1').innerHTML = ico('coffee', 132);
+  $('bi2').innerHTML = ico('chart', 116);
+  $('bi3').innerHTML = ico('bitcoin', 132);
   $('bigCup').innerHTML = `<svg class="steamBig" width="300" height="120" style="position:absolute;left:0;top:-90px"><g class="steam" fill="none" stroke="#BAA38B" stroke-width="7" stroke-linecap="round"></g></svg>` + ico('coffee', 440);
   [['f1', 'onecoin', 'Small amount'], ['f2', 'calendar', 'Time'], ['f3', 'target', 'Discipline']].forEach(([id, k, l]) => $(id).innerHTML = `<div style="height:150px;display:flex;align-items:flex-end;justify-content:center">${ico(k, 140)}</div><div style="font-size:36px;font-weight:700;margin-top:18px">${l}</div>`);
   $('wchart').innerHTML = ico('chart', 260);
   $('btcStacks').innerHTML = ico('stacks-lime', 310);
   $('s8plant').innerHTML = ico('plant', 210);
-  $('f4').innerHTML = `<div class="a" style="left:0;top:0">${ico('chart', 170)}</div><div class="a" style="left:104px;top:86px">${ico('stacks-green', 110)}</div>`;
+  $('f4').innerHTML = `<div class="a" style="left:0;top:14px">${ico('stacks-green', 168)}</div>`;
   document.querySelectorAll('.rowic').forEach((e) => { const k = e.dataset.k; e.innerHTML = CIRC(k === 'coffee' ? '#EFE2D4' : k === 'chart' ? '#DBF2E8' : '#E3EAA5', ico(k, k === 'bitcoin' ? 104 : k === 'chart' ? 76 : 86)); });
 }
 
@@ -269,7 +271,7 @@ function render(t) {
   let a = S[0] + 0.5;
   rise($('s1a'), t, a); rise($('s1b'), t, a + 0.15); rise($('s1c'), t, a + 0.3);
   $('s1u').style.transform = `scaleX(${eio(prog(t, a + 0.7, 0.6))})`;
-  rise($('s1p'), t, a + 0.85);
+  rise($('s1p'), t, a + 0.85); rise($('s1src'), t, a + 1.3, 0.6, 10);
   // S2
   a = S[1];
   document.querySelectorAll('#s2 .tb').forEach((c, i) => c.setAttribute('opacity', eo(prog(t, a + 0.1 + i * 0.15, 0.3))));
@@ -313,7 +315,7 @@ function render(t) {
   rise($('s8c'), t, a + 0.1, 0.8, 40);
   rise($('s8t'), t, a + 0.5, 0.8, 24);
   { const p = prog(t, a + 1.0, 0.9); $('s8plant').style.opacity = clamp(p * 2); $('s8plant').style.transform = `scale(${(0.3 + 0.7 * back(p)).toFixed(3)}) rotate(${(Math.sin(t * 1.2) * 1.5).toFixed(2)}deg)`; }
-  rise($('s8n'), t, a + 1.6, 0.6, 10);
+  rise($('s8n'), t, a + 1.6, 0.6, 10); rise($('s8src'), t, a + 1.8, 0.6, 10);
 }
 window.render = render; window.TOTAL = T; window.SCENES = S;
 Promise.all([document.fonts.ready, loadPoses(), ...['coffee','chart','bitcoin','coins','calendar','target','onecoin','stacks-lime','stacks-green','plant'].map(async (k) => { IC[k] = await (await fetch('icons/' + k + '.svg')).text(); })]).then(() => { buildIcons(); phaseAt(T); render(0); window.ready = true; });

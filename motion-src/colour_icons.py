@@ -19,7 +19,7 @@ paint('growth_chart_01', {'black':H,1:'#10A867',5:'#10A867',6:'#4CBE8D',7:'#93D8
 paint('small_amount_of_coins', {'black':H,'white':'#10A867',1:'#00E677',2:'#00E677',3:'#00E677'}, 'coins')
 paint('calendar', {'black':'#10A867',0:H,2:H,3:H}, 'calendar')
 paint('target_01', {'black':H,'white':'#00E677'}, 'target')
-paint('coffee_01', {'black':H,1:'#E4CFB6',2:'#EFE2D4',3:'#EFE2D4',4:'#BAA38B',5:'#BAA38B',6:H,7:'#E4CFB6',8:'#E4CFB6'}, 'coffee')
+paint('coffee_01', {'black':H,1:'#E4CFB6',2:'#FFFFFF',3:'#FFFFFF',4:'#FFFFFF',5:'#FFFFFF',6:H,7:'#E4CFB6',8:'#E4CFB6'}, 'coffee')
 # small amount: one coin, brand greens
 paint('one_coin', {'black':H,'white':'#10A867',1:'#00E677'}, 'onecoin')
 # stacks: lime for Bitcoin, greens for the formula result (tops are indices 19-23)
@@ -28,4 +28,4 @@ paint('stacks_of_coins', {'black':H,'white':'#C1DB3C', **tops}, 'stacks-lime')
 tops = {i:'#00E677' for i in range(7,12)}
 paint('stacks_of_coins', {'black':H,'white':'#10A867', **tops}, 'stacks-green')
 # growth plant for the dark takeaway card
-paint('growth_plant', {'black':'#00E677',1:'#006341',2:'#10A867',3:'#10A867',4:'#004D36'}, 'plant')
+paint('growth_plant', {'black':'#FFFFFF',1:'#E4CFB6',2:'#00E677',3:'#00E677',4:'#BAA38B'}, 'plant')
